@@ -1,4 +1,0 @@
-AuthUserFile /mnt/web004/d1/78/570381378/htdocs.htpasswd
-AuthType Basic
-AuthName "Passwortbereich"
-require valid-user
