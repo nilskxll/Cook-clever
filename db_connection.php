@@ -5,16 +5,25 @@ $passwort = 'v!9JBj4^JAcLFTvO';
 
 try {
 $dbh = new PDO($dsn, $benutzername, $passwort);
-echo "Verbindung zur Datenbank hergestellt.";
-$erg = $dbh->query("SELECT Arbeitszeit FROM Rezept");
-$rezepte = $erg->fetchAll(PDO::FETCH_ASSOC);
+// dort wird die Variable "$erg" mit einer Datenbankabfrage beschrieben
+$erg = $dbh->prepare("SELECT Kohlenhydrate FROM Naehrwerte_pro_Portion WHERE Rezept_ID = :id");
+// Die id (welches Rezept ausgewählt wird) wird hier in den wert :id geschrieben.
+$erg->bindParam(':id', $rezeptId, PDO::PARAM_INT);
 
-#    print_r($rezepte);
-#if ($erg->num_rows) {
-#    echo "<p>Daten vorhanden: Anzahl ";
-#    echo $erg->num_rows;
-#}
+// Rezept ID nach Wahl festlegen
+$rezeptId = 3;
 
+$erg->execute();
+$result = $erg->fetch(PDO::FETCH_ASSOC);
+
+// Ausgabe des Wertes
+if ($result) {
+    echo $result['Kohlenhydrate'] ;
+    echo "g Kohlenhydrate";
+} else {
+        echo "Kein Ergebnis gefunden.";
+}
+// Falls er sich nicht verbinden kann wird das ausgegeben. Muss vorhanden sein
 } catch (PDOException $e) {
 die("Fehler bei der Verbindung zur Datenbank: " . $e->getMessage());
 }
