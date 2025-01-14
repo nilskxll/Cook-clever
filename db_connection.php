@@ -15,7 +15,7 @@ $abfrage_Kohlenhydrate->execute();
 $ergebnis_kohlenhydrate = $abfrage_Kohlenhydrate->fetchAll(PDO:: FETCH_ASSOC); #(falls nur nummern dann fetch_num)
 // JSON-Antwort senden
 header('Content-Type: application/json');
-echo json_encode($ergebnis_ergebnis_kohlenhydrate);
+echo json_encode($ergebnis_kohlenhydrate);
 
 #// Ausgabe des Wertes
 #foreach($ergebnis_kohlenhydrate as $zeile) {
