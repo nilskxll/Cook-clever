@@ -10,16 +10,18 @@ function daten_aus_db() {
             Rezepte = daten.rezepte;
             Einheiten = daten.einheiten;
             Zutaten = daten.zutaten;
+            ausführen()
         })
-
         .catch(error => {
             console.error("Fehler beim Abrufen der Daten:", error);
         });
 }
 
-daten_aus_db()
+function ausführen() {
+    document.getElementById("Nährwerte").innerText = JSON.stringify(Nährwerte)
+    document.getElementById("Rezepte").innerText = JSON.stringify(Rezepte)
+    document.getElementById("Einheiten").innerText = JSON.stringify(Einheiten)
+    document.getElementById("Zutaten").innerText = JSON.stringify(Zutaten)
+}
 
-document.getElementById("Nährwerte").innerText = Nährwerte
-document.getElementById("Rezepte").innerText = Rezepte
-document.getElementById("Einheiten").innerText = Einheiten
-document.getElementById("Zutaten").innerText = Zutaten
+daten_aus_db()
