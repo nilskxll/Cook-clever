@@ -1,13 +1,15 @@
-
+let Nährwerte
+let Rezepte
+let Einheiten
+let Zutaten
 function daten_aus_db() {
     fetch('cgi-bin/db_connection.php')
         .then(response => response.json())
         .then(daten => {
-            console.log("Nährwerte:", daten.naehrwerte);
-            console.log("Rezepte:", daten.rezepte);
-            console.log("Einheiten:", daten.einheiten);
-            console.log("Zutaten:", daten.zutaten);
-            //ausführen();
+            Nährwerte = daten.naehrwerte;
+            Rezepte = daten.rezepte;
+            Einheiten = daten.einheiten;
+            Zutaten = daten.zutaten;
         })
 
         .catch(error => {
@@ -16,3 +18,8 @@ function daten_aus_db() {
 }
 
 daten_aus_db()
+
+document.getElementById("Nährwerte").innerText = Nährwerte
+document.getElementById("Rezepte").innerText = Rezepte
+document.getElementById("Einheiten").innerText = Einheiten
+document.getElementById("Zutaten").innerText = Zutaten
