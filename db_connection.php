@@ -9,16 +9,33 @@ $datenbank = new PDO($server, $benutzername, $passwort);
 } catch (PDOException $e) {
 die("Fehler bei der Verbindung zur Datenbank: " . $e->getMessage());
 }
-// dort wird die Variable "$erg" mit einer Datenbankabfrage beschrieben
-$abfrage_Kohlenhydrate = $datenbank->prepare("SELECT * FROM Naehrwerte_pro_Portion");
-$abfrage_Kohlenhydrate->execute();
-$ergebnis_kohlenhydrate = $abfrage_Kohlenhydrate->fetchAll(PDO:: FETCH_ASSOC); #(falls nur nummern dann fetch_num)
+
+// Daten aus Naehrwerte_pro_Portion
+$naehrwerteAbfrage = $datenbank->prepare("SELECT * FROM Naehrwerte_pro_Portion");
+$naehrwerteAbfrage->execute();
+$naehrwerte = $naehrwerteAbfrage->fetchAll(PDO::FETCH_ASSOC);
+
+// Daten aus Rezept
+$rezeptAbfrage = $datenbank->prepare("SELECT * FROM Rezept");
+$rezeptAbfrage->execute();
+$rezepte = $rezeptAbfrage->fetchAll(PDO::FETCH_ASSOC);
+
+// Daten aus Zutaten_Einheiten
+$einheitenAbfrage = $datenbank->prepare("SELECT * FROM Zutaten_Einheiten");
+$einheitenAbfrage->execute();
+$einheiten = $einheitenAbfrage->fetchAll(PDO::FETCH_ASSOC);
+
+// Daten aus Zutaten_pro_Portion
+$zutatenAbfrage = $datenbank->prepare("SELECT * FROM Zutaten_pro_Portion");
+$zutatenAbfrage->execute();
+$zutaten = $zutatenAbfrage->fetchAll(PDO::FETCH_ASSOC);
+
 // JSON-Antwort senden
 header('Content-Type: application/json');
-echo json_encode($ergebnis_kohlenhydrate);
-
-#// Ausgabe des Wertes
-#foreach($ergebnis_kohlenhydrate as $zeile) {
-#    echo $zeile["Kohlenhydrate"] . "<br>";
-#}
+echo json_encode([
+    'naehrwerte' => $naehrwerte,
+    'rezepte' => $rezepte,
+    'einheiten' => $einheiten,
+    'zutaten' => $zutaten
+]);
 ?>
