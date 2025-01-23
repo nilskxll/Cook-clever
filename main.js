@@ -2,7 +2,7 @@ let Nährwerte
 let Rezepte
 let Einheiten
 let Zutaten
-let aktuell_geöffnetes_Rezept = 1 //wird durch Klicken auf rezept dan definiert
+let aktuell_geöffnetes_Rezept = 3 //wird durch Klicken auf rezept dan definiert
 let aktuelle_Nährwerte
 let aktuelles_Rezept
 let aktuelle_Einheiten
@@ -21,8 +21,6 @@ function daten_aus_db() {
             Rezepte = daten.rezepte;
             Einheiten = daten.einheiten;
             Zutaten = daten.zutaten;
-            ausführen()
-            rezept_öffnen()
         })
         .catch(error => {
             console.error("Fehler beim Abrufen der Daten:", error);
@@ -36,9 +34,9 @@ function ausführen() {
     document.getElementById("Einheiten").innerText = JSON.stringify(Einheiten)
     document.getElementById("Zutaten").innerText = JSON.stringify(Zutaten)
 }
-function rezept_öffnen(){
-    if (aktuell_geöffnetes_Rezept <= Rezepte.length){ //überprüfen ob Rezept überhaupt vorhanden (eventuell unnötig)
-        aktuelle_Nährwerte= Nährwerte[aktuell_geöffnetes_Rezept - 1]
+function rezept_öffnen(aktuell){
+    if (aktuell <= Rezepte.length){ //überprüfen ob Rezept überhaupt vorhanden (eventuell unnötig)
+        aktuelle_Nährwerte= Nährwerte[aktuell - 1]
         aktuelle_Kalorien = aktuelle_Nährwerte.Kalorien;
         aktuelle_Protein = aktuelle_Nährwerte.Protein;
         aktuelles_Fett = aktuelle_Nährwerte.Fett;
@@ -46,7 +44,7 @@ function rezept_öffnen(){
         aktueller_zugesetzter_Zucken = aktuelle_Nährwerte.zugesetzer_Zucker;
         aktuelle_Ballaststoffe = aktuelle_Nährwerte.Ballaststoffe;
 
-        // Optional: Alles als Liste darstellen (nur zum test)
+        // Optional: Alles als Liste darstellen (nur zum test) (Dadurch leichter mit einmal auszugeben)
         let liste = [
             aktuelle_Kalorien,
             aktuelle_Protein,
@@ -56,6 +54,7 @@ function rezept_öffnen(){
             aktuelle_Ballaststoffe,
         ];
         console.log("Rezept " + aktuell_geöffnetes_Rezept +":", liste);
+        console.log(liste[2] + " Fett")
     }
     else{
         console.log("Fehler bei dem Rezept öffnen")
@@ -63,3 +62,10 @@ function rezept_öffnen(){
 
 }
 daten_aus_db()
+setTimeout(function () {
+
+
+        rezept_öffnen(aktuell_geöffnetes_Rezept)
+        ausführen()
+    },100
+)
