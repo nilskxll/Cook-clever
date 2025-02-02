@@ -15,7 +15,7 @@ let aktuelle_Ballaststoffe
 let aktueller_Rezept_Name
 let aktuelle_Anleitung
 let aktuelle_Essgewohnheit
-let aktuelle_Arbeitzeit
+let aktuelle_Arbeitszeit
 let aktuelle_Kochzeit
 let aktuelle_Gesamtzeit
 
@@ -66,7 +66,7 @@ function rezept_öffnen(aktuell){
         aktueller_Rezept_Name = aktuelles_Rezept.Rezeptname;
         aktuelle_Anleitung = aktuelles_Rezept.Anleitung;
         aktuelle_Essgewohnheit = aktuelles_Rezept.Essgewohnheit;
-        aktuelle_Arbeitzeit = aktuelles_Rezept.Arbeitszeit
+        aktuelle_Arbeitszeit = aktuelles_Rezept.Arbeitszeit
         aktuelle_Kochzeit = aktuelles_Rezept.Kochzeit
         aktuelle_Gesamtzeit = aktuelle_Arbeitzeit + aktuelle_Kochzeit
 
@@ -79,7 +79,7 @@ function rezept_öffnen(aktuell){
         document.getElementById("Rezept_Name").innerText = aktueller_Rezept_Name
         document.getElementById("Anleitung").innerText = aktuelle_Anleitung
         document.getElementById("Essgewohnheit").innerText = aktuelle_Essgewohnheit
-        document.getElementById("Arbeitszeit").innerText = aktuelle_Arbeitzeit
+        document.getElementById("Arbeitszeit").innerText = aktuelle_Arbeitszeit
         document.getElementById("Kochzeit").innerText = aktuelle_Kochzeit
         document.getElementById("Gesamtzeit").innerText = aktuelle_Gesamtzeit
 
