@@ -18,6 +18,12 @@ let aktuelle_Essgewohnheit
 let aktuelle_Arbeitszeit
 let aktuelle_Kochzeit
 let aktuelle_Gesamtzeit
+let Kochzeit_h
+let Kochzeit_min
+let Arbeitszeit_h
+let Arbeitszeit_min
+let Gesamtzeit_h
+let Gesamtzeit_min
 
 let button_Rezept1 = document.getElementById("ButtonRezept1")
 button_Rezept1.addEventListener("click", function (){rezept_öffnen(1)})
@@ -68,31 +74,74 @@ function rezept_öffnen(aktuell){
         aktuelle_Essgewohnheit = aktuelles_Rezept.Essgewohnheit;
         aktuelle_Arbeitszeit = aktuelles_Rezept.Arbeitszeit
         aktuelle_Kochzeit = aktuelles_Rezept.Kochzeit
-        aktuelle_Gesamtzeit = aktuelle_Arbeitzeit + aktuelle_Kochzeit
+        aktuelle_Gesamtzeit = aktuelle_Arbeitszeit + aktuelle_Kochzeit
 
-        document.getElementById("Kalorien").innerText = aktuelle_Kalorien
-        document.getElementById("Kohlenhydrate").innerText = aktuelle_Kohlenhydrate
-        document.getElementById("Fett").innerText = aktuelles_Fett
-        document.getElementById("Protein").innerText = aktuelle_Protein
-        document.getElementById("zugesetzter_Zucker").innerText = aktueller_zugesetzter_Zucker
-        document.getElementById("Ballaststoffe").innerText = aktuelle_Ballaststoffe
+        zeit_umrechnen()
+
+        document.getElementById("Kalorien").innerText = aktuelle_Kalorien + "kcal Kohlenhydrate"
+        document.getElementById("Kohlenhydrate").innerText = aktuelle_Kohlenhydrate + "g Kohlenhydrate"
+        document.getElementById("Fett").innerText = aktuelles_Fett + "g Fett"
+        document.getElementById("Protein").innerText = aktuelle_Protein + "g Protein"
+        document.getElementById("zugesetzter_Zucker").innerText = aktueller_zugesetzter_Zucker + "g Zucker"
+        document.getElementById("Ballaststoffe").innerText = aktuelle_Ballaststoffe + "g Ballaststoffe"
         document.getElementById("Rezept_Name").innerText = aktueller_Rezept_Name
         document.getElementById("Anleitung").innerText = aktuelle_Anleitung
         document.getElementById("Essgewohnheit").innerText = aktuelle_Essgewohnheit
-        document.getElementById("Arbeitszeit").innerText = aktuelle_Arbeitszeit
-        document.getElementById("Kochzeit").innerText = aktuelle_Kochzeit
-        document.getElementById("Gesamtzeit").innerText = aktuelle_Gesamtzeit
 
+        if (Arbeitszeit_h === 0){
+            document.getElementById("Arbeitszeit").innerText = Arbeitszeit_min + "min"
+        }
+        else {
+            if (Arbeitszeit_min === 0){
+                document.getElementById("Arbeitszeit").innerText = Arbeitszeit_h + "h"
+            }
+            else {
+                document.getElementById("Arbeitszeit").innerText = Arbeitszeit_h + "h " + Arbeitszeit_min + "min"
+            }
+        }
+        if (Kochzeit_h === 0){
+            document.getElementById("Kochzeit").innerText = Kochzeit_min + "min"
+        }
+        else{
+            if (Kochzeit_min === 0){
+                document.getElementById("Kochzeit").innerText = Kochzeit_h + "h"
+            }
+            else {
+                document.getElementById("Kochzeit").innerText = Kochzeit_h + "h " + Kochzeit_min + "min"
+            }
+        }
+        if (Gesamtzeit_h === 0){
+            document.getElementById("Gesamtzeit").innerText = Gesamtzeit_min + "min"
+        }
+        else{
+            if (Gesamtzeit_min === 0){
+                document.getElementById("Gesamtzeit").innerText = Gesamtzeit_h + "h"
+            }
+            else {
+                document.getElementById("Gesamtzeit").innerText = Gesamtzeit_h + "h " + Gesamtzeit_min + "min"
+            }
+        }
     }
     else{
         console.log("Fehler bei dem Rezept öffnen")
     }
 
 }
-daten_aus_db()
-setTimeout(function () { //hier muss eben alles rein, was früher als die Daten aus der Datenbank abgerufen wird, jedoch die Daten aus dieser Datenbank brauch.
+/*setTimeout(function () { //hier muss eben alles rein, was früher als die Daten aus der Datenbank abgerufen wird, jedoch die Daten aus dieser Datenbank brauch.
 
         //rezept_öffnen(aktuell_geöffnetes_Rezept)
         //ausführen()
     },300
-)
+)*/
+
+function zeit_umrechnen(){
+    Arbeitszeit_h = Math.floor(aktuelle_Arbeitszeit / 60)
+    Arbeitszeit_min = aktuelle_Arbeitszeit % 60
+
+    Kochzeit_h = Math.floor(aktuelle_Kochzeit / 60)
+    Kochzeit_min = aktuelle_Kochzeit % 60
+
+    Gesamtzeit_h = Math.floor( aktuelle_Gesamtzeit / 60)
+    Gesamtzeit_min = aktuelle_Gesamtzeit % 60
+}
+daten_aus_db()
