@@ -26,11 +26,11 @@ let Gesamtzeit_h
 let Gesamtzeit_min
 
 let button_Rezept1 = document.getElementById("ButtonRezept1")
-button_Rezept1.addEventListener("click", function (){rezept_öffnen(1)})
+button_Rezept1.addEventListener("click", function (){aktuelles_Rezept_Werte_zuweisen(1)})
 let button_Rezept2 = document.getElementById("ButtonRezept2")
-button_Rezept2.addEventListener("click", function (){rezept_öffnen(2)})
+button_Rezept2.addEventListener("click", function (){aktuelles_Rezept_Werte_zuweisen(2)})
 let button_Rezept3 = document.getElementById("ButtonRezept3")
-button_Rezept3.addEventListener("click", function (){rezept_öffnen(3)})
+button_Rezept3.addEventListener("click", function (){aktuelles_Rezept_Werte_zuweisen(3)})
 
 function daten_aus_db() {
     fetch('cgi-bin/db_connection.php')
@@ -55,12 +55,12 @@ function ausführen() {
     document.getElementById("Zutaten").innerText = JSON.stringify(Zutaten)
 }
  */
-function rezept_öffnen(aktuell){
+function aktuelles_Rezept_Werte_zuweisen(aktuell){
     if (aktuell <= Rezepte.length){ //überprüfen ob Rezept überhaupt vorhanden (eventuell unnötig)
 
         aktuelle_Nährwerte = Nährwerte[aktuell - 1]
         aktuelles_Rezept = Rezepte[aktuell - 1]
-        aktuelle_Zutaten = Rezepte[aktuell - 1]
+        aktuelle_Zutaten = Zutaten[aktuell - 1]
 
         aktuelle_Kalorien = aktuelle_Nährwerte.Kalorien;
         aktuelle_Protein = aktuelle_Nährwerte.Protein;
@@ -75,52 +75,10 @@ function rezept_öffnen(aktuell){
         aktuelle_Arbeitszeit = aktuelles_Rezept.Arbeitszeit
         aktuelle_Kochzeit = aktuelles_Rezept.Kochzeit
         aktuelle_Gesamtzeit = aktuelle_Arbeitszeit + aktuelle_Kochzeit
-
+        console.log(aktuelle_Zutaten)
         zeit_umrechnen()
+        Werte_Rezept_ausgeben()
 
-        document.getElementById("Kalorien").innerText = aktuelle_Kalorien + "kcal Kohlenhydrate"
-        document.getElementById("Kohlenhydrate").innerText = aktuelle_Kohlenhydrate + "g Kohlenhydrate"
-        document.getElementById("Fett").innerText = aktuelles_Fett + "g Fett"
-        document.getElementById("Protein").innerText = aktuelle_Protein + "g Protein"
-        document.getElementById("zugesetzter_Zucker").innerText = aktueller_zugesetzter_Zucker + "g Zucker"
-        document.getElementById("Ballaststoffe").innerText = aktuelle_Ballaststoffe + "g Ballaststoffe"
-        document.getElementById("Rezept_Name").innerText = aktueller_Rezept_Name
-        document.getElementById("Anleitung").innerText = aktuelle_Anleitung
-        document.getElementById("Essgewohnheit").innerText = aktuelle_Essgewohnheit
-
-        if (Arbeitszeit_h === 0){
-            document.getElementById("Arbeitszeit").innerText = Arbeitszeit_min + "min"
-        }
-        else {
-            if (Arbeitszeit_min === 0){
-                document.getElementById("Arbeitszeit").innerText = Arbeitszeit_h + "h"
-            }
-            else {
-                document.getElementById("Arbeitszeit").innerText = Arbeitszeit_h + "h " + Arbeitszeit_min + "min"
-            }
-        }
-        if (Kochzeit_h === 0){
-            document.getElementById("Kochzeit").innerText = Kochzeit_min + "min"
-        }
-        else{
-            if (Kochzeit_min === 0){
-                document.getElementById("Kochzeit").innerText = Kochzeit_h + "h"
-            }
-            else {
-                document.getElementById("Kochzeit").innerText = Kochzeit_h + "h " + Kochzeit_min + "min"
-            }
-        }
-        if (Gesamtzeit_h === 0){
-            document.getElementById("Gesamtzeit").innerText = Gesamtzeit_min + "min"
-        }
-        else{
-            if (Gesamtzeit_min === 0){
-                document.getElementById("Gesamtzeit").innerText = Gesamtzeit_h + "h"
-            }
-            else {
-                document.getElementById("Gesamtzeit").innerText = Gesamtzeit_h + "h " + Gesamtzeit_min + "min"
-            }
-        }
     }
     else{
         console.log("Fehler bei dem Rezept öffnen")
@@ -143,5 +101,46 @@ function zeit_umrechnen(){
 
     Gesamtzeit_h = Math.floor( aktuelle_Gesamtzeit / 60)
     Gesamtzeit_min = aktuelle_Gesamtzeit % 60
+}
+
+function Werte_Rezept_ausgeben() {
+
+    document.getElementById("Kalorien").innerText = aktuelle_Kalorien + "kcal Kalorien"
+    document.getElementById("Kohlenhydrate").innerText = aktuelle_Kohlenhydrate + "g Kohlenhydrate"
+    document.getElementById("Fett").innerText = aktuelles_Fett + "g Fett"
+    document.getElementById("Protein").innerText = aktuelle_Protein + "g Protein"
+    document.getElementById("zugesetzter_Zucker").innerText = aktueller_zugesetzter_Zucker + "g Zucker"
+    document.getElementById("Ballaststoffe").innerText = aktuelle_Ballaststoffe + "g Ballaststoffe"
+    document.getElementById("Rezept_Name").innerText = aktueller_Rezept_Name
+    document.getElementById("Anleitung").innerText = aktuelle_Anleitung
+    document.getElementById("Essgewohnheit").innerText = aktuelle_Essgewohnheit
+
+    if (Arbeitszeit_h === 0) {
+        document.getElementById("Arbeitszeit").innerText = Arbeitszeit_min + "min"
+    } else {
+        if (Arbeitszeit_min === 0) {
+            document.getElementById("Arbeitszeit").innerText = Arbeitszeit_h + "h"
+        } else {
+            document.getElementById("Arbeitszeit").innerText = Arbeitszeit_h + "h " + Arbeitszeit_min + "min"
+        }
+    }
+    if (Kochzeit_h === 0) {
+        document.getElementById("Kochzeit").innerText = Kochzeit_min + "min"
+    } else {
+        if (Kochzeit_min === 0) {
+            document.getElementById("Kochzeit").innerText = Kochzeit_h + "h"
+        } else {
+            document.getElementById("Kochzeit").innerText = Kochzeit_h + "h " + Kochzeit_min + "min"
+        }
+    }
+    if (Gesamtzeit_h === 0) {
+        document.getElementById("Gesamtzeit").innerText = Gesamtzeit_min + "min"
+    } else {
+        if (Gesamtzeit_min === 0) {
+            document.getElementById("Gesamtzeit").innerText = Gesamtzeit_h + "h"
+        } else {
+            document.getElementById("Gesamtzeit").innerText = Gesamtzeit_h + "h " + Gesamtzeit_min + "min"
+        }
+    }
 }
 daten_aus_db()
