@@ -28,6 +28,8 @@ let mengenListe = []
 let einheitenListe = []
 let zutat
 let zutatenText
+let mengenListe_plus_portionen
+let portionen = 1
 
 let button_Rezept1 = document.getElementById("ButtonRezept1")
 button_Rezept1.addEventListener("click", function (){aktuelles_Rezept_Werte_zuweisen(1)})
@@ -35,6 +37,15 @@ let button_Rezept2 = document.getElementById("ButtonRezept2")
 button_Rezept2.addEventListener("click", function (){aktuelles_Rezept_Werte_zuweisen(2)})
 let button_Rezept3 = document.getElementById("ButtonRezept3")
 button_Rezept3.addEventListener("click", function (){aktuelles_Rezept_Werte_zuweisen(3)})
+
+
+let button_Portionen = document.getElementById("button_Portionen");
+
+button_Portionen.addEventListener("click", function() {
+    portionen = document.getElementById("Portionen").value; // Der Wert des input-Feldes
+    portionenRechner(portionen)
+});
+
 
 function daten_aus_db() {
     fetch('cgi-bin/db_connection.php')
@@ -162,15 +173,37 @@ function Werte_Rezept_ausgeben() {
             document.getElementById("Gesamtzeit").innerText = Gesamtzeit_h + "h " + Gesamtzeit_min + "min"
         }
     }
+    Zutaten_ausgeben()
+}
+
+function portionenRechner(Portionen){
+    mengenListe_plus_portionen = mengenListe.map(menge => menge * Portionen)
+    Zutaten_ausgeben()
+}
+function Zutaten_ausgeben(){
     zutatenText = ""
-    for (i = 0; i < mengenListe.length; i++){
-        if (mengenListe[i] === 0){
-            zutatenText += zutatenListe[i] + "\n";
+    if (portionen === 1){
+        for (i = 0; i < mengenListe.length; i++){
+            if (mengenListe[i] === 0){
+                zutatenText += zutatenListe[i] + "\n";
+            }
+            else {
+                zutatenText += mengenListe[i] + einheitenListe[i] + " " + zutatenListe[i] + "\n";
+            }
         }
-        else {
-            zutatenText += mengenListe[i] + einheitenListe[i] + " " + zutatenListe[i] + "\n";
-        }
+        document.getElementById("Zutaten").innerText = zutatenText;
     }
-    document.getElementById("Zutaten").innerText = zutatenText;
+    else {
+        for (i = 0; i < mengenListe_plus_portionen.length; i++){
+            if (mengenListe_plus_portionen[i] === 0){
+                zutatenText += zutatenListe[i] + "\n";
+            }
+            else {
+                zutatenText += mengenListe_plus_portionen[i] + einheitenListe[i] + " " + zutatenListe[i] + "\n";
+            }
+        }
+        document.getElementById("Zutaten").innerText = zutatenText;
+    }
+
 }
 daten_aus_db()
