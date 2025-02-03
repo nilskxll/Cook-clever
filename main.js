@@ -4,7 +4,6 @@ let Einheiten
 let Zutaten
 let aktuelle_Nährwerte
 let aktuelles_Rezept
-let aktuelle_Einheiten
 let aktuelle_Zutaten
 let aktuelle_Kalorien
 let aktuelle_Protein
@@ -24,6 +23,11 @@ let Arbeitszeit_h
 let Arbeitszeit_min
 let Gesamtzeit_h
 let Gesamtzeit_min
+let zutatenListe = []
+let mengenListe = []
+let einheitenListe = []
+let zutat
+let zutatenText
 
 let button_Rezept1 = document.getElementById("ButtonRezept1")
 button_Rezept1.addEventListener("click", function (){aktuelles_Rezept_Werte_zuweisen(1)})
@@ -75,7 +79,8 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell){
         aktuelle_Arbeitszeit = aktuelles_Rezept.Arbeitszeit
         aktuelle_Kochzeit = aktuelles_Rezept.Kochzeit
         aktuelle_Gesamtzeit = aktuelle_Arbeitszeit + aktuelle_Kochzeit
-        console.log(aktuelle_Zutaten)
+
+        Zutaten_in_Listen_umwandeln()
         zeit_umrechnen()
         Werte_Rezept_ausgeben()
 
@@ -91,6 +96,21 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell){
         //ausführen()
     },300
 )*/
+function Zutaten_in_Listen_umwandeln(){
+    zutatenListe.length = 0
+    mengenListe.length = 0
+    einheitenListe.length = 0
+    for (zutat in aktuelle_Zutaten){
+        let menge = aktuelle_Zutaten[zutat]
+
+        if (menge !== null && zutat !== "Rezept_ID"){
+            zutatenListe.push(zutat)
+            mengenListe.push(menge)
+            let einheit_Objekte = Einheiten.find(Objekt_Zutat => Objekt_Zutat.Zutat === zutat); // da Einheiten eine Liste mit Objekten ist, muss dort die aktuelle zutat in den Objekten gesucht werden (find)
+            einheitenListe.push(einheit_Objekte ? einheit_Objekte.Einheit : ""); // Falls keine Einheit gefunden wird, bleibt es leer
+            }
+    }
+}
 
 function zeit_umrechnen(){
     Arbeitszeit_h = Math.floor(aktuelle_Arbeitszeit / 60)
@@ -142,5 +162,15 @@ function Werte_Rezept_ausgeben() {
             document.getElementById("Gesamtzeit").innerText = Gesamtzeit_h + "h " + Gesamtzeit_min + "min"
         }
     }
+    zutatenText = ""
+    for (i = 0; i < mengenListe.length; i++){
+        if (mengenListe[i] === 0){
+            zutatenText += zutatenListe[i] + "\n";
+        }
+        else {
+            zutatenText += mengenListe[i] + einheitenListe[i] + " " + zutatenListe[i] + "\n";
+        }
+    }
+    document.getElementById("Zutaten").innerText = zutatenText;
 }
 daten_aus_db()
