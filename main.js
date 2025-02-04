@@ -30,6 +30,12 @@ let zutat
 let zutatenText
 let mengenListe_plus_portionen
 let portionen = 1
+let aktuelle_Kalorien_plus_portionen
+let aktuelle_Protein_plus_portionen
+let aktuelles_Fett_plus_portionen
+let aktuelle_Kohlenhydrate_plus_portionen
+let aktueller_zugesetzter_Zucker_plus_portionen
+let aktuelle_Ballaststoffe_plus_portionen
 
 let button_Rezept1 = document.getElementById("ButtonRezept1")
 button_Rezept1.addEventListener("click", function (){aktuelles_Rezept_Werte_zuweisen(1)})
@@ -38,28 +44,26 @@ button_Rezept2.addEventListener("click", function (){aktuelles_Rezept_Werte_zuwe
 let button_Rezept3 = document.getElementById("ButtonRezept3")
 button_Rezept3.addEventListener("click", function (){aktuelles_Rezept_Werte_zuweisen(3)})
 
-
 let button_Portionen = document.getElementById("button_Portionen");
 
 button_Portionen.addEventListener("click", function() {
     portionen = document.getElementById("Portionen").value; // Der Wert des input-Feldes
     portionenRechner(portionen)
-});
-
+})
 
 function daten_aus_db() {
     fetch('cgi-bin/db_connection.php')
         .then(response => response.json())
         .then(daten => {
             //Daten aus der PHP Datei in die Matrizen einfügen, damit man in JS damit arbeiten kann
-            Nährwerte = daten.naehrwerte;
-            Rezepte = daten.rezepte;
-            Einheiten = daten.einheiten;
-            Zutaten = daten.zutaten;
+            Nährwerte = daten.naehrwerte
+            Rezepte = daten.rezepte
+            Einheiten = daten.einheiten
+            Zutaten = daten.zutaten
         })
         .catch(error => { //Falls irgendwo nen Fehler auftritt, sieht man gleich über den error warum
-            console.error("Fehler beim Abrufen der Daten:", error);
-        });
+            console.error("Fehler beim Abrufen der Daten:", error)
+        })
 }
 /*
 function ausführen() {
@@ -72,7 +76,7 @@ function ausführen() {
  */
 function aktuelles_Rezept_Werte_zuweisen(aktuell){
     if (aktuell <= Rezepte.length){ //überprüfen ob Rezept überhaupt vorhanden (eventuell unnötig)
-
+        portionen = 1
         aktuelle_Nährwerte = Nährwerte[aktuell - 1]
         aktuelles_Rezept = Rezepte[aktuell - 1]
         aktuelle_Zutaten = Zutaten[aktuell - 1]
@@ -93,7 +97,10 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell){
 
         Zutaten_in_Listen_umwandeln()
         zeit_umrechnen()
-        Werte_Rezept_ausgeben()
+        Werte_Rezept_ausgeben_Nährwerte()
+        Werte_Rezept_ausgeben_Beschreibung()
+        Werte_Rezept_ausgeben_Zeit()
+        Zutaten_ausgeben()
 
     }
     else{
@@ -101,12 +108,14 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell){
     }
 
 }
+
 /*setTimeout(function () { //hier muss eben alles rein, was früher als die Daten aus der Datenbank abgerufen wird, jedoch die Daten aus dieser Datenbank brauch.
 
         //rezept_öffnen(aktuell_geöffnetes_Rezept)
         //ausführen()
     },300
 )*/
+
 function Zutaten_in_Listen_umwandeln(){
     zutatenListe.length = 0
     mengenListe.length = 0
@@ -134,18 +143,32 @@ function zeit_umrechnen(){
     Gesamtzeit_min = aktuelle_Gesamtzeit % 60
 }
 
-function Werte_Rezept_ausgeben() {
+function Werte_Rezept_ausgeben_Nährwerte() {
+    if (portionen === 1) {
+        document.getElementById("Kalorien").innerText = aktuelle_Kalorien + "kcal"
+        document.getElementById("Kohlenhydrate").innerText = aktuelle_Kohlenhydrate + "g Kohlenhydrate"
+        document.getElementById("Fett").innerText = aktuelles_Fett + "g Fett"
+        document.getElementById("Protein").innerText = aktuelle_Protein + "g Protein"
+        document.getElementById("zugesetzter_Zucker").innerText = aktueller_zugesetzter_Zucker + "g Zucker"
+        document.getElementById("Ballaststoffe").innerText = aktuelle_Ballaststoffe + "g Ballaststoffe"
+    }
+    else{
+        document.getElementById("Kalorien").innerText = aktuelle_Kalorien_plus_portionen + "kcal"
+        document.getElementById("Kohlenhydrate").innerText = aktuelle_Kohlenhydrate_plus_portionen + "g Kohlenhydrate"
+        document.getElementById("Fett").innerText = aktuelles_Fett_plus_portionen + "g Fett"
+        document.getElementById("Protein").innerText = aktuelle_Protein_plus_portionen + "g Protein"
+        document.getElementById("zugesetzter_Zucker").innerText = aktueller_zugesetzter_Zucker_plus_portionen + "g Zucker"
+        document.getElementById("Ballaststoffe").innerText = aktuelle_Ballaststoffe_plus_portionen + "g Ballaststoffe"
+    }
+}
 
-    document.getElementById("Kalorien").innerText = aktuelle_Kalorien + "kcal Kalorien"
-    document.getElementById("Kohlenhydrate").innerText = aktuelle_Kohlenhydrate + "g Kohlenhydrate"
-    document.getElementById("Fett").innerText = aktuelles_Fett + "g Fett"
-    document.getElementById("Protein").innerText = aktuelle_Protein + "g Protein"
-    document.getElementById("zugesetzter_Zucker").innerText = aktueller_zugesetzter_Zucker + "g Zucker"
-    document.getElementById("Ballaststoffe").innerText = aktuelle_Ballaststoffe + "g Ballaststoffe"
+function Werte_Rezept_ausgeben_Beschreibung(){
     document.getElementById("Rezept_Name").innerText = aktueller_Rezept_Name
     document.getElementById("Anleitung").innerText = aktuelle_Anleitung
     document.getElementById("Essgewohnheit").innerText = aktuelle_Essgewohnheit
+}
 
+function Werte_Rezept_ausgeben_Zeit(){
     if (Arbeitszeit_h === 0) {
         document.getElementById("Arbeitszeit").innerText = Arbeitszeit_min + "min"
     } else {
@@ -173,13 +196,8 @@ function Werte_Rezept_ausgeben() {
             document.getElementById("Gesamtzeit").innerText = Gesamtzeit_h + "h " + Gesamtzeit_min + "min"
         }
     }
-    Zutaten_ausgeben()
 }
 
-function portionenRechner(Portionen){
-    mengenListe_plus_portionen = mengenListe.map(menge => menge * Portionen)
-    Zutaten_ausgeben()
-}
 function Zutaten_ausgeben(){
     zutatenText = ""
     if (portionen === 1){
@@ -206,4 +224,20 @@ function Zutaten_ausgeben(){
     }
 
 }
+
+function portionenRechner(Portionen){
+    if(mengenListe.length === 0) {
+        Zutaten_in_Listen_umwandeln()
+    }
+    mengenListe_plus_portionen = mengenListe.map(menge => menge * Portionen)
+    aktuelle_Kalorien_plus_portionen = aktuelle_Kalorien * Portionen
+    aktuelle_Protein_plus_portionen = aktuelle_Protein * Portionen
+    aktuelles_Fett_plus_portionen = aktuelles_Fett * Portionen
+    aktuelle_Kohlenhydrate_plus_portionen = aktuelle_Kohlenhydrate * Portionen
+    aktueller_zugesetzter_Zucker_plus_portionen = aktueller_zugesetzter_Zucker * Portionen
+    aktuelle_Ballaststoffe_plus_portionen = aktuelle_Ballaststoffe * Portionen
+    Werte_Rezept_ausgeben_Nährwerte()
+    Zutaten_ausgeben()
+}
+
 daten_aus_db()
