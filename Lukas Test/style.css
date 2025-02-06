@@ -1,0 +1,246 @@
+h1 {
+    font-family: var(--h-1-font-family);
+    font-weight: var(--h-1-font-weight);
+    font-size: var(--h-1-font-size);
+    letter-spacing: var(--h-1-letter-spacing);
+    line-height: var(--h-1-line-height);
+    font-style: var(--h-1-font-style);
+    color: var(--black);
+}
+
+h2 {
+    font-family: var(--h-2-font-family);
+    font-weight: var(--h-2-font-weight);
+    font-size: var(--h-2-font-size);
+    letter-spacing: var(--h-2-letter-spacing);
+    line-height: var(--h-2-line-height);
+    font-style: var(--h-2-font-style);
+    color: var(--black);
+}
+
+h3 {
+    font-family: var(--h-3-font-family);
+    font-weight: var(--h-3-font-weight);
+    font-size: var(--h-3-font-size);
+    letter-spacing: var(--h-3-letter-spacing);
+    line-height: var(--h-3-line-height);
+    font-style: var(--h-3-font-style);
+    color: var(--black);
+}
+
+h4 {
+    font-family: var(--h-4-font-family);
+    font-weight: var(--h-4-font-weight);
+    font-size: var(--h-4-font-size);
+    letter-spacing: var(--h-4-letter-spacing);
+    line-height: var(--h-4-line-height);
+    font-style: var(--h-4-font-style);
+    color: var(--black);
+}
+
+p {
+    font-family: var(--p-font-family);
+    font-weight: var(--p-font-weight);
+    font-size: var(--p-font-size);
+    letter-spacing: var(--p-letter-spacing);
+    line-height: var(--p-line-height);
+    font-style: var(--p-font-style);
+    color: var(--black);
+}
+
+/* Stile für mobile Geräte
+(eigentlich unnötig für uns, aber in styleguides war es dabei)
+warum da @media steht? ka*/
+@media (max-width: 768px) {
+    h1 {
+        font-family: var(--h1-mob-font-family);
+        font-weight: var(--h1-mob-font-weight);
+        font-size: var(--h1-mob-font-size);
+        letter-spacing: var(--h1-mob-letter-spacing);
+        line-height: var(--h1-mob-line-height);
+        font-style: var(--h1-mob-font-style);
+        color: var(--black);
+    }
+
+    h2 {
+        font-family: var(--h2-mob-font-family);
+        font-weight: var(--h2-mob-font-weight);
+        font-size: var(--h2-mob-font-size);
+        letter-spacing: var(--h2-mob-letter-spacing);
+        line-height: var(--h2-mob-line-height);
+        font-style: var(--h2-mob-font-style);
+        color: var(--black);
+    }
+
+    h3 {
+        font-family: var(--h3-mob-font-family);
+        font-weight: var(--h3-mob-font-weight);
+        font-size: var(--h3-mob-font-size);
+        letter-spacing: var(--h3-mob-letter-spacing);
+        line-height: var(--h3-mob-line-height);
+        font-style: var(--h3-mob-font-style);
+        color: var(--black);
+    }
+
+    h4 {
+        font-family: var(--h4-mob-font-family);
+        font-weight: var(--h4-mob-font-weight);
+        font-size: var(--h4-mob-font-size);
+        letter-spacing: var(--h4-mob-letter-spacing);
+        line-height: var(--h4-mob-line-height);
+        font-style: var(--h4-mob-font-style);
+        color: var(--black);
+    }
+
+    p {
+        font-family: var(--p-mob-font-family);
+        font-weight: var(--p-mob-font-weight);
+        font-size: var(--p-mob-font-size);
+        letter-spacing: var(--p-mob-letter-spacing);
+        line-height: var(--p-mob-line-height);
+        font-style: var(--p-mob-font-style);
+        color: var(--black);
+    }
+}
+
+.header {
+    display: flex;
+    width: 1440px;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 25px 150px;
+    position: relative;
+    background-color: var(--beige);
+}
+
+.header .frame-logo {
+    display: inline-flex;
+    gap: 10px;
+    flex: 0 0 auto;
+    align-items: flex-start;
+    position: relative;
+}
+
+.header .logo-cook-clever {
+    display: flex;
+    width: 160px;
+    height: 160px;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.header .logo-cook-clever-mit {
+    position: relative;
+    flex: 1;
+    align-self: stretch;
+    flex-grow: 1;
+    object-fit: cover;
+}
+
+.header .frame-navigation {
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px 0px;
+    align-self: stretch;
+    align-items: flex-start;
+    position: relative;
+}
+
+.header .navigation-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.header .suchleiste {
+    display: flex;
+    width: 490px;
+    align-items: center;
+    padding: 8px;
+    position: relative;
+    background-color: var(--beige-dark);
+    border-radius: 10px;
+}
+
+.header .lupe {
+    position: relative;
+    width: 28px;
+    height: 28px;
+}
+
+.header .magnifyingglass {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: -1px;
+    left: 0;
+    font-family: "SF Pro Display", Helvetica;
+    /*font-family: "Arial", sans-serif;*/
+    font-weight: 500;
+    color: var(--label-colorslc-l-secondary);
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 50px;
+    white-space: nowrap;
+}
+
+.header .placeholder-label {
+    position: relative;
+    flex: 1;
+    font-family: "Space Grotesk", Helvetica;
+    font-weight: 500;
+    color: var(--label-colorslc-l-secondary);
+    font-size: 17px;
+    letter-spacing: -0.41px;
+    line-height: 22px;
+}
+
+.header .text-wrapper {
+    position: relative;
+    width: fit-content;
+    font-family: "Space Grotesk", Helvetica;
+    font-weight: 400;
+    color: var(--black);
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 28px;
+    white-space: nowrap;
+}
+
+.header .button {
+    all: unset;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 20px 35px;
+    position: relative;
+    flex: 0 0 auto;
+    border-radius: 14px;
+    border: 1px solid;
+    border-color: var(--black);
+}
+
+.header .label {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: "Space Grotesk", Helvetica;
+    font-weight: 400;
+    color: var(--black);
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 28px;
+    white-space: nowrap;
+}
