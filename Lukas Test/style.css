@@ -49,8 +49,7 @@ p {
 }
 
 /* Stile für mobile Geräte
-(eigentlich unnötig für uns, aber in styleguides war es dabei)
-warum da @media steht? ka*/
+(eigentlich unnötig für uns, aber in styleguide war es dabei) */
 @media (max-width: 768px) {
     h1 {
         font-family: var(--h1-mob-font-family);
@@ -103,7 +102,14 @@ warum da @media steht? ka*/
     }
 }
 
-.header {
+.fullscreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+.header-big {
     display: flex;
     width: 1440px;
     align-items: flex-start;
@@ -113,7 +119,7 @@ warum da @media steht? ka*/
     background-color: var(--beige);
 }
 
-.header .frame-logo {
+.header-big .frame-logo {
     display: inline-flex;
     gap: 10px;
     flex: 0 0 auto;
@@ -121,7 +127,7 @@ warum da @media steht? ka*/
     position: relative;
 }
 
-.header .logo-cook-clever {
+.header-big .logo-cook-clever {
     display: flex;
     width: 160px;
     height: 160px;
@@ -130,7 +136,7 @@ warum da @media steht? ka*/
     position: relative;
 }
 
-.header .logo-cook-clever-mit {
+.header-big .logo-cook-clever-mit-schrift {
     position: relative;
     flex: 1;
     align-self: stretch;
@@ -138,7 +144,7 @@ warum da @media steht? ka*/
     object-fit: cover;
 }
 
-.header .frame-navigation {
+.header-big .frame-navigation {
     display: flex;
     flex-direction: column;
     width: 900px;
@@ -150,7 +156,7 @@ warum da @media steht? ka*/
     position: relative;
 }
 
-.header .navigation-bar {
+.header-big .navigation-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -161,7 +167,7 @@ warum da @media steht? ka*/
     flex: 0 0 auto;
 }
 
-.header .suchleiste {
+.header-big .suchleiste {
     display: flex;
     width: 490px;
     align-items: center;
@@ -171,30 +177,21 @@ warum da @media steht? ka*/
     border-radius: 10px;
 }
 
-.header .lupe {
+.header-big .lupe {
     position: relative;
     width: 28px;
     height: 28px;
 }
 
-.header .magnifyingglass {
+.header-big .magnifyingglass {
     position: absolute;
     width: 28px;
     height: 28px;
     top: -1px;
     left: 0;
-    font-family: "SF Pro Display", Helvetica;
-    /*font-family: "Arial", sans-serif;*/
-    font-weight: 500;
-    color: var(--label-colorslc-l-secondary);
-    font-size: 18px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: 50px;
-    white-space: nowrap;
 }
 
-.header .placeholder-label {
+.header-big .placeholder-label {
     position: relative;
     flex: 1;
     font-family: "Space Grotesk", Helvetica;
@@ -205,7 +202,7 @@ warum da @media steht? ka*/
     line-height: 22px;
 }
 
-.header .text-wrapper {
+.header-big .text-wrapper {
     position: relative;
     width: fit-content;
     font-family: "Space Grotesk", Helvetica;
@@ -217,7 +214,7 @@ warum da @media steht? ka*/
     white-space: nowrap;
 }
 
-.header .button {
+.header-big .button {
     all: unset;
     box-sizing: border-box;
     display: inline-flex;
@@ -231,7 +228,162 @@ warum da @media steht? ka*/
     border-color: var(--black);
 }
 
-.header .label {
+.header-big .label {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: "Space Grotesk", Helvetica;
+    font-weight: 400;
+    color: var(--black);
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 28px;
+    white-space: nowrap;
+}
+
+.header-small {
+    display: flex;
+    width: 1440px;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 17px 100px;
+    position: relative;
+    background-color: var(--beige);
+}
+
+.header-small .frame-logo {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 10px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.header-small .logo-cook-clever {
+    display: flex;
+    width: 131px;
+    height: 110px;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.header-small .logo-cook-clever-ohne-schrift {
+    position: relative;
+    width: 131px;
+    height: 110px;
+    object-fit: cover;
+}
+
+.header-small .frame {
+    display: inline-flex;
+    height: 113px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0px 25px 0px 0px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.header-small .text-wrapper {
+    position: relative;
+    width: fit-content;
+    font-family: "Space Grotesk", Helvetica;
+    font-weight: 700;
+    color: var(--black);
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 28px;
+    white-space: nowrap;
+}
+
+.header-small .frame-navigation {
+    display: flex;
+    flex-direction: column;
+    width: 865px;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px 0px;
+    position: relative;
+    align-self: stretch;
+}
+
+.header-small .navigation-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.header-small .suchleiste {
+    display: flex;
+    width: 470px;
+    align-items: center;
+    padding: 8px;
+    position: relative;
+    background-color: var(--beige-dark);
+    border-radius: 10px;
+}
+
+.header-small .lupe {
+    position: relative;
+    width: 28px;
+    height: 28px;
+}
+
+.header-small .magnifyingglass {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: -1px;
+    left: 0;
+}
+
+.header-small .placeholder-label {
+    position: relative;
+    flex: 1;
+    font-family: "Space Grotesk", Helvetica;
+    font-weight: 500;
+    color: var(--label-colorslc-l-secondary);
+    font-size: 17px;
+    letter-spacing: -0.41px;
+    line-height: 22px;
+}
+
+.header-small .div {
+    position: relative;
+    width: fit-content;
+    font-family: "Space Grotesk", Helvetica;
+    font-weight: 400;
+    color: var(--black);
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 28px;
+    white-space: nowrap;
+}
+
+.header-small .button {
+    all: unset;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 20px 35px;
+    position: relative;
+    flex: 0 0 auto;
+    border-radius: 14px;
+    border: 1px solid;
+    border-color: var(--black);
+}
+
+.header-small .label {
     position: relative;
     width: fit-content;
     margin-top: -1.00px;
