@@ -36,6 +36,12 @@ let aktuelles_Fett_plus_portionen
 let aktuelle_Kohlenhydrate_plus_portionen
 let aktueller_zugesetzter_Zucker_plus_portionen
 let aktuelle_Ballaststoffe_plus_portionen
+let cheatmeals_Liste = []
+let kalorienarmeRezepte = []
+let proteinreicheRezepte = []
+let vegetarische_Rezepte = []
+let vegane_Rezepte = []
+let Fleisch_Rezepte = []
 
 let button_Rezept1 = document.getElementById("ButtonRezept1")
 button_Rezept1.addEventListener("click", function (){aktuelles_Rezept_Werte_zuweisen(1)})
@@ -60,6 +66,7 @@ function daten_aus_db() {
             Rezepte = daten.rezepte
             Einheiten = daten.einheiten
             Zutaten = daten.zutaten
+            einkategorisieren()
         })
         .catch(error => { //Falls irgendwo nen Fehler auftritt, sieht man gleich über den error warum
             console.error("Fehler beim Abrufen der Daten:", error)
@@ -74,6 +81,34 @@ function ausführen() {
     document.getElementById("Zutaten").innerText = JSON.stringify(Zutaten)
 }
  */
+
+function einkategorisieren (){
+    for ( i = 0; Nährwerte[i]; i++) {
+        let Rezept_überprüfung = Nährwerte[i]
+        if (Rezept_überprüfung.Kalorien >= 350) {               //Hier kann man einstellen, ab wann es eben zu den cheatmeals gehört
+            cheatmeals_Liste.push(Rezept_überprüfung.Rezept_ID)
+        }
+        if(Rezept_überprüfung.Kalorien <= 300) {                //Hier kann man einstellen, ab wann es eben zu den Kalorienarmen gehört
+            kalorienarmeRezepte.push(Rezept_überprüfung.Rezept_ID)
+        }
+        if (Rezept_überprüfung.Protein >= 9){                   //Hier kann man einstellen, ab wann es eben zu den Eiweiß reichen Rezepten gehört
+            proteinreicheRezepte.push(Rezept_überprüfung.Rezept_ID)
+        }
+    }
+    for (i = 0; Rezepte[i]; i++){
+        Rezept_überprüfung = Rezepte[i]
+        if (Rezept_überprüfung.Essgewohnheit = "vegetarisch"){
+            vegetarische_Rezepte.push(Rezept_überprüfung.Rezept_ID)
+        }
+        if (Rezept_überprüfung.Essgewohnheit = "vegan"){
+            vegane_Rezepte.push(Rezept_überprüfung.Rezept_ID)
+        }
+        if (Rezept_überprüfung.Essgewohnheit = "mit Fleisch"){
+            Fleisch_Rezepte.push(Rezept_überprüfung.Rezept_ID)
+        }
+    }
+}
+
 function aktuelles_Rezept_Werte_zuweisen(aktuell){
     if (aktuell <= Rezepte.length){ //überprüfen ob Rezept überhaupt vorhanden (eventuell unnötig)
         portionen = 1
@@ -240,4 +275,12 @@ function portionenRechner(Portionen){
     Zutaten_ausgeben()
 }
 
+function Rezeptefidner (){
+    //Hier wird dann der RF gebaut. Mein Plan ist, nach dem Alle bedingungen gelegt wurden, halt mit den Jeweiligen Bedingungen Listen zu erstellen, welche Rezepte dazu passen. Wenn dann eben sich eine Rezept_ID in allen Listen =>
+    //überschneidet, ist es eins der gesuchten Rezepte.
+}
+
+function suchFeld(){
+    //hier soll eben dann eine Listen mit allen Namen der Rezepte erschaffen werden, dann mal schauen wie, aber wenn User dann was in das Feld eingibt, sollen Vorschläge kommen, auf die man draufklicken kann, dann wird eben genau das Rezept gesucht
+}
 daten_aus_db()
