@@ -10,6 +10,10 @@ window.addEventListener("scroll", swap_header)
 kategorie_block_link_icon_rechts.addEventListener("click", swap_kategorie_block)
 kategorie_block_link_icon_links.addEventListener("click", swap_kategorie_block)
 
+//beim Seite neu laden hochscrollen
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+}
 
 function swap_header() {
     //console.log("scroll detect: " + window.scrollY)
