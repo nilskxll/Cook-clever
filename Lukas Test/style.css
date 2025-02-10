@@ -109,13 +109,20 @@ p {
     width: 100vw;
 }
 
+.spacer50 {
+    width: 1440px;
+    height: 50px;
+}
+
 .header-big {
     display: flex;
     width: 1440px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     align-items: flex-start;
     justify-content: space-between;
     padding: 25px 150px;
-    position: relative;
     background-color: var(--beige);
 }
 
@@ -245,10 +252,12 @@ p {
 .header-small {
     display: flex;
     width: 1440px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     align-items: flex-start;
     justify-content: space-between;
     padding: 17px 100px;
-    position: relative;
     background-color: var(--beige);
 }
 
@@ -397,6 +406,11 @@ p {
     white-space: nowrap;
 }
 
+.header-small-spacer {
+    width: 1440px;
+    height: 63px;
+}
+
 .kategorie-block {
     display: flex;
     width: 1440px;
@@ -446,12 +460,22 @@ p {
     position: relative;
 }
 
-.kategorie-block .heading-link {
+.kategorie-block .heading-link-1 {
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     gap: 50px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.kategorie-block .heading-link-2 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 24px;
     position: relative;
     flex: 0 0 auto;
 }
@@ -497,22 +521,6 @@ p {
     flex: 0 0 auto;
 }
 
-.kategorie-block .icon {
-    position: relative;
-    width: 41px;
-    height: 41px;
-    background-color: var(--dark);
-    border-radius: 20.5px;
-}
-
-.kategorie-block .arrow {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 11px;
-    left: 10px;
-}
-
 .kategorie-block .div {
     font-family: "Space Grotesk", Helvetica;
     font-weight: 400;
@@ -529,6 +537,7 @@ p {
     position: relative;
     width: 165px;
     height: 130px;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -536,5 +545,11 @@ p {
 .kategorie-block .vorschaubild-container .vorschaubild {
     width: 100%;
     height: 100%;
+    object-fit: contain;
+}
+
+.kategorie-block .vorschaubild-container .vorschaubild-vegan {
+    width: 90%;
+    height: 90%;
     object-fit: contain;
 }

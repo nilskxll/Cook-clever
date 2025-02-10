@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
   <meta charset="utf-8" />
+  <title>Cook-Clever</title>
   <!-- Space Grotesk Schriftart herunterladen -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,13 +11,15 @@
   <link rel="stylesheet" href="globals.css" />
   <link rel="stylesheet" href="styleguide.css" />
   <link rel="stylesheet" href="style.css" />
+  <!-- JavaScript -->
+  <script async src="main.js"></script>
 </head>
 <body>
   <div class="fullscreen">
-    <div class="header-big">
+    <div class="header-big" id="header-big">
       <div class="frame-logo">
         <div class="logo-cook-clever">
-          <img class="logo-cook-clever-mit-schrift" src="img/logo cook-clever.png" />
+          <img class="logo-cook-clever-mit-schrift" src="img/logo-cook-clever.png" />
         </div>
       </div>
       <div class="frame-navigation">
@@ -34,10 +37,10 @@
         </div>
       </div>
     </div>
-    <div class="header-small">
+    <div class="header-small" id="header-small" style="display: none">
       <div class="frame-logo">
         <div class="logo-cook-clever">
-          <img class="logo-cook-clever-ohne-schrift" src="img/cook-clever ohne Schrift.png" />
+          <img class="logo-cook-clever-ohne-schrift" src="img/logo-cook-clever-ohne-Schrift.png" />
         </div>
       </div>
       <div class="frame">
@@ -58,94 +61,106 @@
         </div>
       </div>
     </div>
-    <div class="kategorie-block">
+    <div class="header-small-spacer" id="header-small-spacer" style="display: none"></div>
+    <div class="spacer50"></div>
+    <div class="kategorie-block" id="kategorie-block-1">
       <div class="frame-link-icon">
         <img class="link-icon" src="img/link-links-icon.png" style="visibility: hidden" />
       </div>
       <div class="kategorie-karten">
         <div class="kategorie-karte">
-          <div class="heading-link">
+          <div class="heading-link-1">
             <div class="heading">
               <div class="label"><div class="text-wrapper">Rezepte</div></div>
               <div class="label"><div class="text-wrapper">vegan</div></div>
             </div>
             <div class="link-small">
-              <div class="icon"><img class="arrow" src="img/image.svg" /></div>
+              <div class="frame-link-icon">
+                <img class="link-icon" src="img/link-rechts-oben-icon.png" />
+              </div>
               <div class="div">ansehen</div>
             </div>
           </div>
           <div class="vorschaubild-container">
-            <img class="vorschaubild" src="img/Kategorie-vegan.png">
+            <img class="vorschaubild-vegan" src="img/kategorie-vegan.png">
           </div>
         </div>
         <div class="kategorie-karte">
-          <div class="heading-link">
+          <div class="heading-link-1">
             <div class="heading">
               <div class="label"><div class="text-wrapper">Rezepte</div></div>
               <div class="label"><div class="text-wrapper">vegetarisch</div></div>
             </div>
             <div class="link-small">
-              <div class="icon"><img class="arrow" src="img/arrow-1.svg" /></div>
+              <div class="frame-link-icon">
+                <img class="link-icon" src="img/link-rechts-oben-icon.png" />
+              </div>
               <div class="div">ansehen</div>
             </div>
           </div>
           <div class="vorschaubild-container">
-            <img class="vorschaubild" src="img/Kategorie-vegetarisch.png">
+            <img class="vorschaubild" src="img/kategorie-vegetarisch.png">
           </div>
         </div>
         <div class="kategorie-karte">
-          <div class="heading-link">
+          <div class="heading-link-1">
             <div class="heading">
               <div class="label"><div class="text-wrapper">Rezepte</div></div>
               <div class="label"><div class="text-wrapper">mit Fleisch</div></div>
             </div>
             <div class="link-small">
-              <div class="icon"><img class="arrow" src="img/arrow-1-2.svg" /></div>
+              <div class="frame-link-icon">
+                <img class="link-icon" src="img/link-rechts-oben-icon.png" />
+              </div>
               <div class="div">ansehen</div>
             </div>
           </div>
           <div class="vorschaubild-container">
-            <img class="vorschaubild" src="img/Kategorie-mit-Fleisch.png">
+            <img class="vorschaubild" src="img/kategorie-mit-fleisch.png">
           </div>
         </div>
       </div>
       <div class="frame-link-icon">
-        <img class="link-icon" src="img/link-rechts-icon.png" />
+        <img class="link-icon" id="kategorie-block-link-icon-rechts" src="img/link-rechts-icon.png" />
       </div>
     </div>
-    <div class="kategorie-block">
+    <div class="kategorie-block" id="kategorie-block-2" style="display: none">
       <div class="frame-link-icon">
-        <img class="link-icon" src="img/link-links-icon.png" />
+        <img class="link-icon" id="kategorie-block-link-icon-links" src="img/link-links-icon.png" />
       </div>
       <div class="kategorie-karten">
         <div class="kategorie-karte">
-          <div class="heading-link">
+          <div class="heading-link-1">
             <div class="heading">
               <div class="label"><div class="text-wrapper">Rezepte</div></div>
               <div class="label"><div class="text-wrapper">proteinreich</div></div>
             </div>
             <div class="link-small">
-              <div class="icon"><img class="arrow" src="img/arrow-1.svg" /></div>
+              <div class="frame-link-icon">
+                <img class="link-icon" src="img/link-rechts-oben-icon.png" />
+              </div>
               <div class="div">ansehen</div>
             </div>
           </div>
           <div class="vorschaubild-container">
-            <img class="vorschaubild" src="img/Kategorie-proteinreich.png">
+            <img class="vorschaubild" src="img/kategorie-proteinreich.png">
           </div>
         </div>
         <div class="kategorie-karte">
-          <div class="heading-link">
+          <div class="heading-link-1">
             <div class="heading">
               <div class="label"><div class="text-wrapper">Rezepte</div></div>
               <div class="label"><div class="text-wrapper">kalorienarm</div></div>
             </div>
             <div class="link-small">
-              <div class="icon"><img class="arrow" src="img/image.svg" /></div>
+              <div class="frame-link-icon">
+                <img class="link-icon" src="img/link-rechts-oben-icon.png" />
+              </div>
               <div class="div">ansehen</div>
             </div>
           </div>
           <div class="vorschaubild-container">
-            <img class="vorschaubild" src="img/Kategorie-kalorienarm.png">
+            <img class="vorschaubild" src="img/kategorie-kalorienarm.png">
           </div>
         </div>
         <div class="kategorie-karte">
@@ -156,17 +171,37 @@
               <div class="label"><div class="text-wrapper">Cheat-Day</div></div>
             </div>
             <div class="link-small">
-              <div class="icon"><img class="arrow" src="img/arrow-1-2.svg" /></div>
+              <div class="frame-link-icon">
+                <img class="link-icon" src="img/link-rechts-oben-icon.png" />
+              </div>
               <div class="div">ansehen</div>
             </div>
           </div>
-          <div class="vorschaubild-3"></div>
+          <div class="vorschaubild-container">
+            <img class="vorschaubild" src="img/kategorie-für-den-cheat-day.png">
+          </div>
         </div>
       </div>
       <div class="frame-link-icon">
         <img class="link-icon" src="img/link-rechts-icon.png" style="visibility: hidden" />
       </div>
     </div>
+    <h1>TODO</h1>
+    <h2>man kann Seite minimal in x-Richtung scrollen :(</h2>
+    <h2>seitdem man in y-Richtung scrollen kann</h2>
+    <h2>wegen der Scrollbar rechts</h2>
+    <h1>asda</h1>
+    <h1>asda</h1>
+    <h1>asda</h1>
+    <h1>asda</h1>
+    <h1>asda</h1>
+    <h1>asda</h1>
+    <h1>asda</h1>
+    <h1>asda</h1>
+    <h1>asda</h1>
+    <h1>asda</h1>
+    <h1>asda</h1>
+    <h1>asda</h1>
   </div>
 </body>
 </html>
