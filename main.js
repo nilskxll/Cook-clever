@@ -30,12 +30,6 @@ let zutat
 let zutatenText
 let mengenListe_plus_portionen
 let portionen = 1
-let aktuelle_Kalorien_plus_portionen
-let aktuelle_Protein_plus_portionen
-let aktuelles_Fett_plus_portionen
-let aktuelle_Kohlenhydrate_plus_portionen
-let aktueller_zugesetzter_Zucker_plus_portionen
-let aktuelle_Ballaststoffe_plus_portionen
 let cheatmeals_Liste = []
 let kalorienarmeRezepte = []
 let proteinreicheRezepte = []
@@ -97,16 +91,18 @@ function einkategorisieren (){
     }
     for (i = 0; Rezepte[i]; i++){
         Rezept_überprüfung = Rezepte[i]
-        if (Rezept_überprüfung.Essgewohnheit = "vegetarisch"){
+        if (Rezept_überprüfung.Essgewohnheit === "vegetarisch"){
             vegetarische_Rezepte.push(Rezept_überprüfung.Rezept_ID)
         }
-        if (Rezept_überprüfung.Essgewohnheit = "vegan"){
+        if (Rezept_überprüfung.Essgewohnheit === "vegan"){
             vegane_Rezepte.push(Rezept_überprüfung.Rezept_ID)
         }
-        if (Rezept_überprüfung.Essgewohnheit = "mit Fleisch"){
+        if (Rezept_überprüfung.Essgewohnheit === "mit Fleisch"){
             Fleisch_Rezepte.push(Rezept_überprüfung.Rezept_ID)
         }
     }
+    console.log(vegane_Rezepte)
+    console.log(vegetarische_Rezepte)
 }
 
 function aktuelles_Rezept_Werte_zuweisen(aktuell){
@@ -179,22 +175,12 @@ function zeit_umrechnen(){
 }
 
 function Werte_Rezept_ausgeben_Nährwerte() {
-    if (portionen === 1) {
         document.getElementById("Kalorien").innerText = aktuelle_Kalorien + "kcal"
         document.getElementById("Kohlenhydrate").innerText = aktuelle_Kohlenhydrate + "g Kohlenhydrate"
         document.getElementById("Fett").innerText = aktuelles_Fett + "g Fett"
         document.getElementById("Protein").innerText = aktuelle_Protein + "g Protein"
         document.getElementById("zugesetzter_Zucker").innerText = aktueller_zugesetzter_Zucker + "g Zucker"
         document.getElementById("Ballaststoffe").innerText = aktuelle_Ballaststoffe + "g Ballaststoffe"
-    }
-    else{
-        document.getElementById("Kalorien").innerText = aktuelle_Kalorien_plus_portionen + "kcal"
-        document.getElementById("Kohlenhydrate").innerText = aktuelle_Kohlenhydrate_plus_portionen + "g Kohlenhydrate"
-        document.getElementById("Fett").innerText = aktuelles_Fett_plus_portionen + "g Fett"
-        document.getElementById("Protein").innerText = aktuelle_Protein_plus_portionen + "g Protein"
-        document.getElementById("zugesetzter_Zucker").innerText = aktueller_zugesetzter_Zucker_plus_portionen + "g Zucker"
-        document.getElementById("Ballaststoffe").innerText = aktuelle_Ballaststoffe_plus_portionen + "g Ballaststoffe"
-    }
 }
 
 function Werte_Rezept_ausgeben_Beschreibung(){
@@ -265,13 +251,6 @@ function portionenRechner(Portionen){
         Zutaten_in_Listen_umwandeln()
     }
     mengenListe_plus_portionen = mengenListe.map(menge => menge * Portionen)
-    aktuelle_Kalorien_plus_portionen = aktuelle_Kalorien * Portionen
-    aktuelle_Protein_plus_portionen = aktuelle_Protein * Portionen
-    aktuelles_Fett_plus_portionen = aktuelles_Fett * Portionen
-    aktuelle_Kohlenhydrate_plus_portionen = aktuelle_Kohlenhydrate * Portionen
-    aktueller_zugesetzter_Zucker_plus_portionen = aktueller_zugesetzter_Zucker * Portionen
-    aktuelle_Ballaststoffe_plus_portionen = aktuelle_Ballaststoffe * Portionen
-    Werte_Rezept_ausgeben_Nährwerte()
     Zutaten_ausgeben()
 }
 
