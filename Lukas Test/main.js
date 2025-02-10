@@ -10,13 +10,13 @@ window.addEventListener("scroll", swap_header)
 kategorie_block_link_icon_rechts.addEventListener("click", swap_kategorie_block)
 kategorie_block_link_icon_links.addEventListener("click", swap_kategorie_block)
 
-//beim Seite neu laden hochscrollen
+// beim Seite neu laden hochscrollen
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 }
 
 function swap_header() {
-    //console.log("scroll detect: " + window.scrollY)
+    // console.log("scroll detect, position: " + window.scrollY)
     if (window.scrollY >= 50) {
         if (header_big.style.display === "") {
             header_big.style.display = "none"
@@ -33,7 +33,7 @@ function swap_header() {
 }
 
 function swap_kategorie_block() {
-    console.log("Kategorie swap gedrückt")
+    // console.log("Kategorie swap gedrückt")
     if (kategorie_block_1.style.display === "") {
         kategorie_block_1.style.display = "none"
         kategorie_block_2.style.display = ""
