@@ -100,6 +100,7 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell){ //ausgewähltes Rezept (mit v
         Werte_Rezept_ausgeben_Beschreibung()
         Werte_Rezept_ausgeben_Zeit()
         Zutaten_ausgeben()
+        //suchFeld()
     }
     else{ //falls etwas falsch läuft, sie man beim Programmieren aus welchem Grund/ an welcher Stelle aktuell der Fehler aufgetreten ist
         console.log("Fehler bei dem Rezept öffnen")
@@ -220,5 +221,14 @@ function Rezeptefidner (){
 
 function suchFeld(){
     //hier soll eben dann eine Listen mit allen Namen der Rezepte erschaffen werden, dann mal schauen wie, aber wenn User dann was in das Feld eingibt, sollen Vorschläge kommen, auf die man draufklicken kann, dann wird eben genau das Rezept gesucht
+    let NamensListe = []
+    let Rezepte_ID_Liste = []
+    for (i = 0; i <= Rezepte.length; i ++ ){
+        let Rezept_überprüfung = Rezepte[i]
+        NamensListe.push(Rezept_überprüfung.Rezeptname)
+        Rezepte_ID_Liste.push(Rezept_überprüfung.Rezept_ID)
+    }
+    console.log(Rezepte_ID_Liste)
+    console.log(NamensListe)
 }
 daten_aus_db()
