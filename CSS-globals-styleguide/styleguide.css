@@ -2,6 +2,7 @@
     --white: rgba(255, 255, 255, 1);
     --grey: rgba(243, 243, 243, 1);
     --grey-dark: rgba(117, 117, 117, 1);
+    --grey-dark-085: rgba(117, 117, 117, 0.85);
     --dark: rgba(25, 26, 35, 1);
     --black: rgba(0, 0, 0, 1);
     --beige: rgba(212, 202, 177, 1);
@@ -9,7 +10,6 @@
     --mint: rgba(106, 165, 137, 1);
     --green: rgba(185, 255, 102, 1);
     --transparent: rgba(255, 255, 255, 0);
-    --label-colorslc-l-secondary: rgba(60, 60, 67, 0.6);
     --p-font-family: "Space Grotesk", Helvetica;
     --p-font-weight: 400;
     --p-font-size: 18px;

@@ -127,7 +127,7 @@
     flex: 1;
     font-family: "Space Grotesk", Helvetica;
     font-weight: 500;
-    color: var(--label-colorslc-l-secondary);
+    color: var(--grey-dark-085);
     font-size: 17px;
     letter-spacing: -0.41px;
     line-height: 22px;
@@ -302,7 +302,7 @@
     flex: 1;
     font-family: "Space Grotesk", Helvetica;
     font-weight: 500;
-    color: var(--label-colorslc-l-secondary);
+    color: var(--grey-dark-085);
     font-size: 17px;
     letter-spacing: -0.41px;
     line-height: 22px;
