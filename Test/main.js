@@ -28,6 +28,8 @@ button_Portionen.addEventListener("click", function() {
     portionenRechner(portionen)
 })
 
+
+
 function daten_aus_db() {
     fetch('cgi-bin/db_connection.php')
         .then(response => response.json())
@@ -92,7 +94,7 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell){ //ausgewähltes Rezept (mit v
         aktuelle_Arbeitszeit = aktuelles_Rezept.Arbeitszeit // gleiche wie bei den Nährwerten und den allgemeinen Informationen zu dem Rezept auch hier bei den Zeiten zu dem Rezept
         aktuelle_Kochzeit = aktuelles_Rezept.Kochzeit
         aktuelle_Gesamtzeit = aktuelle_Arbeitszeit + aktuelle_Kochzeit
-
+        console.log(Rezepte)
         //danach werden alle Funktionen aufgerufen, die die definierten Variablen ausgeben
         Zutaten_in_Listen_umwandeln()
         zeit_umrechnen()
@@ -100,6 +102,7 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell){ //ausgewähltes Rezept (mit v
         Werte_Rezept_ausgeben_Beschreibung()
         Werte_Rezept_ausgeben_Zeit()
         Zutaten_ausgeben()
+        suchFeld()
     }
     else{ //falls etwas falsch läuft, sie man beim Programmieren aus welchem Grund/ an welcher Stelle aktuell der Fehler aufgetreten ist
         console.log("Fehler bei dem Rezept öffnen")
@@ -219,6 +222,13 @@ function Rezeptefidner (){
 }
 
 function suchFeld(){
+    let Rezepte_Namen_Liste = []
+    for (i = 0; i <= Rezepte.length; i++){
+        let Rezept_überprüfung  = Rezepte[i]
+        Rezepte_Namen_Liste.push(Rezept_überprüfung.Rezeptname)
+        console.log(Rezepte_Namen_Liste)
+    }
+    console.log(Rezepte)
     //hier soll eben dann eine Listen mit allen Namen der Rezepte erschaffen werden, dann mal schauen wie, aber wenn User dann was in das Feld eingibt, sollen Vorschläge kommen, auf die man draufklicken kann, dann wird eben genau das Rezept gesucht
 }
 daten_aus_db()
