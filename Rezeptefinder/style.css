@@ -428,6 +428,10 @@
     /*flex: 0 0 auto;*/
 }
 
+.kategorie-block .link-icon:hover {
+    cursor: pointer;
+}
+
 .kategorie-block .kategorie-karten {
     width: 1240px;
     align-items: flex-start;
@@ -653,6 +657,18 @@
 }
 
 .suchkriterien-block .kontrollkaestchen {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background-color: var(--white);
+    border-radius: 4px;
+    border: 1px solid;
+    border-color: var(--grey-dark);
+}
+
+.suchkriterien-block .kontrollkaestchen-test {
+    all: unset;
+    margin: 0px;
     position: relative;
     width: 20px;
     height: 20px;
