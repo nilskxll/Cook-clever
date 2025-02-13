@@ -14,11 +14,13 @@ kategorie_block_link_icon_links.addEventListener("click", swap_kategorie_block)
 label_about_us_big.addEventListener("click", scroll_to_bottom)
 label_about_us_small.addEventListener("click", scroll_to_bottom)
 
+
 // beim Seite neu laden hochscrollen
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 }
 
+// Header gross und klein beim Scrollen wechseln
 function swap_header() {
     // console.log("scroll detect, position: " + window.scrollY)
     if (window.scrollY >= 50) {
@@ -36,6 +38,7 @@ function swap_header() {
     }
 }
 
+// angezeigte Kategorien wechseln, beim Klicken auf den Pfeil links bzw. rechts
 function swap_kategorie_block() {
     // console.log("Kategorie swap gedrückt")
     if (kategorie_block_1.style.display === "") {
@@ -47,6 +50,7 @@ function swap_kategorie_block() {
     }
 }
 
+// zum Footer scrollen, wenn man im Header auf About us klickt
 function scroll_to_bottom() {
     document.documentElement.scrollTop = document.documentElement.scrollHeight
     console.log("about us gedrückt")

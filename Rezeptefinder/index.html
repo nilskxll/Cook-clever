@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>Cook-Clever</title>
-    <!-- Space Grotesk Schriftart herunterladen -->
+    <!-- Schriftart Space Grotesk herunterladen -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../CSS-globals-styleguide/styleguide.css"/>
     <link rel="stylesheet" href="style.css"/>
     <!-- JavaScript -->
-    <script async src="main.js"></script>
+    <script src="main.js" defer></script>
 </head>
 <body>
 <div class="fullscreen">
@@ -240,9 +240,8 @@
                     </div>
                     <div class="naehrwertangaben">
                         <div class="naehrwert-suchangabe">
-                            <div class="kontrollkaestchen-text">
-<!--                                <div class="kontrollkaestchen"></div>-->
-                                <input class="kontrollkaestchen-test" type="checkbox">
+                            <div class="checkbox-text-box">
+                                <input class="checkbox" id="checkbox-energie" type="checkbox">
                                 <div class="label-suchangabe">Energie</div>
                             </div>
                             <div class="value-frame">
@@ -250,16 +249,16 @@
                                     <div class="value">... kcal</div>
                                 </div>
                             </div>
-                            <div class="schalter-feld">
-                                <div class="kontrollkaestchen-text">
-                                    <img class="switch" src="../img/image.svg" />
-                                    <div class="text-wrapper-2">min.</div>
+                            <div class="toggle-switch-text-box">
+                                <div class="toggle-switch">
+                                    <div class="toggle-slider"></div>
                                 </div>
+                                <div class="text-wrapper-2">min.</div>
                             </div>
                         </div>
                         <div class="naehrwert-suchangabe">
-                            <div class="kontrollkaestchen-text">
-                                <div class="kontrollkaestchen"></div>
+                            <div class="checkbox-text-box">
+                                <input class="checkbox" id="checkbox-eiweiss" type="checkbox">
                                 <div class="label-suchangabe">Eiweiß</div>
                             </div>
                             <div class="value-frame">
@@ -267,16 +266,16 @@
                                     <div class="value">... g</div>
                                 </div>
                             </div>
-                            <div class="schalter-feld">
-                                <div class="kontrollkaestchen-text">
-                                    <img class="img" src="../img/switch-5.svg" />
-                                    <div class="text-wrapper-2">min.</div>
+                            <div class="toggle-switch-text-box">
+                                <div class="toggle-switch">
+                                    <div class="toggle-slider"></div>
                                 </div>
+                                <div class="text-wrapper-2">min.</div>
                             </div>
                         </div>
                         <div class="naehrwert-suchangabe">
-                            <div class="kontrollkaestchen-text">
-                                <div class="kontrollkaestchen"></div>
+                            <div class="checkbox-text-box">
+                                <input class="checkbox" id="checkbox-fett" type="checkbox">
                                 <div class="label-suchangabe">Fett</div>
                             </div>
                             <div class="value-frame">
@@ -284,16 +283,16 @@
                                     <div class="value">... g</div>
                                 </div>
                             </div>
-                            <div class="schalter-feld">
-                                <div class="kontrollkaestchen-text">
-                                    <img class="switch-2" src="../img/switch-3.svg" />
-                                    <div class="text-wrapper-2">min.</div>
+                            <div class="toggle-switch-text-box">
+                                <div class="toggle-switch">
+                                    <div class="toggle-slider"></div>
                                 </div>
+                                <div class="text-wrapper-2">min.</div>
                             </div>
                         </div>
                         <div class="naehrwert-suchangabe">
-                            <div class="kontrollkaestchen-text">
-                                <div class="kontrollkaestchen"></div>
+                            <div class="checkbox-text-box">
+                                <input class="checkbox" id="checkbox-kohlenhydrate" type="checkbox">
                                 <div class="label-suchangabe">Kohlenhydrate</div>
                             </div>
                             <div class="value-frame">
@@ -301,16 +300,16 @@
                                     <div class="value">... g</div>
                                 </div>
                             </div>
-                            <div class="schalter-feld">
-                                <div class="kontrollkaestchen-text">
-                                    <img class="switch-3" src="../img/switch-2.svg" />
-                                    <div class="text-wrapper-2">min.</div>
+                            <div class="toggle-switch-text-box">
+                                <div class="toggle-switch">
+                                    <div class="toggle-slider"></div>
                                 </div>
+                                <div class="text-wrapper-2">min.</div>
                             </div>
                         </div>
                         <div class="naehrwert-suchangabe">
-                            <div class="kontrollkaestchen-text">
-                                <div class="kontrollkaestchen"></div>
+                            <div class="checkbox-text-box">
+                                <input class="checkbox" id="checkbox-zuges-zucker" type="checkbox">
                                 <div class="label-suchangabe">zuges. Zucker</div>
                             </div>
                             <div class="value-frame">
@@ -318,16 +317,16 @@
                                     <div class="value">... g</div>
                                 </div>
                             </div>
-                            <div class="schalter-feld">
-                                <div class="kontrollkaestchen-text">
-                                    <img class="switch-4" src="../img/switch.svg" />
-                                    <div class="text-wrapper-2">min.</div>
+                            <div class="toggle-switch-text-box">
+                                <div class="toggle-switch">
+                                    <div class="toggle-slider"></div>
                                 </div>
+                                <div class="text-wrapper-2">min.</div>
                             </div>
                         </div>
                         <div class="naehrwert-suchangabe">
-                            <div class="kontrollkaestchen-text">
-                                <div class="kontrollkaestchen"></div>
+                            <div class="checkbox-text-box">
+                                <input class="checkbox" id="checkbox-ballaststoffe" type="checkbox">
                                 <div class="label-suchangabe">Ballaststoffe</div>
                             </div>
                             <div class="value-frame">
@@ -335,11 +334,11 @@
                                     <div class="value">... g</div>
                                 </div>
                             </div>
-                            <div class="schalter-feld">
-                                <div class="kontrollkaestchen-text">
-                                    <img class="switch-5" src="../img/switch-4.svg" />
-                                    <div class="text-wrapper-2">min.</div>
+                            <div class="toggle-switch-text-box">
+                                <div class="toggle-switch">
+                                    <div class="toggle-slider"></div>
                                 </div>
+                                <div class="text-wrapper-2">min.</div>
                             </div>
                         </div>
                     </div>
@@ -351,42 +350,54 @@
                         </div>
                     </div>
                     <div class="kategorieangaben">
-                        <div class="kontrollkaestchen-text">
-                            <div class="kontrollkaestchen"></div>
-                            <div class="label-suchangabe">Rezepte vegan</div>
+                        <div class="kategorie-suchangabe">
+                            <div class="checkbox-text-box">
+                                <input class="checkbox" id="checkbox-vegan" type="checkbox">
+                                <div class="label-suchangabe">Rezepte vegan</div>
+                            </div>
                         </div>
-                        <div class="kontrollkaestchen-text">
-                            <div class="kontrollkaestchen"></div>
-                            <div class="label-suchangabe">Rezepte vegetarisch</div>
+                        <div class="kategorie-suchangabe">
+                            <div class="checkbox-text-box">
+                                <input class="checkbox" id="checkbox-vegetarisch" type="checkbox">
+                                <div class="label-suchangabe">Rezepte vegetarisch</div>
+                            </div>
                         </div>
-                        <div class="kontrollkaestchen-text">
-                            <div class="kontrollkaestchen"></div>
-                            <div class="label-suchangabe">Rezepte mit Fleisch</div>
+                        <div class="kategorie-suchangabe">
+                            <div class="checkbox-text-box">
+                                <input class="checkbox" id="checkbox-mit-fleisch" type="checkbox">
+                                <div class="label-suchangabe">Rezepte mit Fleisch</div>
+                            </div>
                         </div>
-                        <div class="kontrollkaestchen-text">
-                            <div class="kontrollkaestchen"></div>
-                            <div class="label-suchangabe">Rezepte proteinreich</div>
+                        <div class="kategorie-suchangabe">
+                            <div class="checkbox-text-box">
+                                <input class="checkbox" id="checkbox-proteinreich" type="checkbox">
+                                <div class="label-suchangabe">Rezepte proteinreich</div>
+                            </div>
                         </div>
-                        <div class="kontrollkaestchen-text">
-                            <div class="kontrollkaestchen"></div>
-                            <div class="label-suchangabe">Rezepte kalorienarm</div>
+                        <div class="kategorie-suchangabe">
+                            <div class="checkbox-text-box">
+                                <input class="checkbox" id="checkbox-kalorienarm" type="checkbox">
+                                <div class="label-suchangabe">Rezepte kalorienarm</div>
+                            </div>
                         </div>
-                        <div class="kontrollkaestchen-text">
-                            <div class="kontrollkaestchen"></div>
-                            <div class="label-suchangabe">Rezepte für den Cheat-Day</div>
+                        <div class="kategorie-suchangabe">
+                            <div class="checkbox-text-box">
+                                <input class="checkbox" id="checkbox-fuer-den-cheat-day" type="checkbox">
+                                <div class="label-suchangabe">Rezepte für den Cheat-Day</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="heading-wrapper">
-                <div class="label-heading"><div class="text-wrapper">Ergebnisse anzeigen</div></div>
+                <div class="label-heading" id="show-results-button"><div class="text-wrapper">Ergebnisse anzeigen</div></div>
             </div>
         </div>
     </div>
-    <h2>switch bild machen, wenn drücken anderes bild</h2>
-    <h2>kästchen vorn clickbar machen</h2>
     <h2>in wert was reinschreiben können</h2>
-    <h2>wenn man über ergebnisse anzeigen hovern, maus zu pointer machen</h2>
+    <h2>geklickte sachen herausfinden, die Angaben halt oder Nils?</h2>
+    <h2>auf Logo clicken --> auf Startseite kommen (online)</h2>
+    <h2>auf Rezeptefinder clicken --> auf Rezeptefinder kommen (online)</h2>
     <div class="spacer" style="height: 100px"></div>
     <div class="footer-block">
         <div class="footer">
