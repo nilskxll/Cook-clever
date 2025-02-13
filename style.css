@@ -385,6 +385,10 @@
     /*flex: 0 0 auto;*/
 }
 
+.kategorie-block .link-icon:hover {
+    cursor: pointer;
+}
+
 .kategorie-block .kategorie-karten {
     width: 1240px;
     align-items: flex-start;
@@ -669,6 +673,10 @@
     width: 41px;
     height: 41px;
     /*flex: 0 0 auto;*/
+}
+
+.block-rezepte .link-icon:hover {
+    cursor: pointer;
 }
 
 .block-rezepte .text-wrapper {
