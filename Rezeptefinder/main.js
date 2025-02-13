@@ -5,14 +5,22 @@ let kategorie_block_1 = document.getElementById("kategorie-block-1")
 let kategorie_block_2 = document.getElementById("kategorie-block-2")
 let kategorie_block_link_icon_rechts = document.getElementById("kategorie-block-link-icon-rechts")
 let kategorie_block_link_icon_links = document.getElementById("kategorie-block-link-icon-links")
+let label_about_us_big = document.getElementById("label-about-us-big")
+let label_about_us_small = document.getElementById("label-about-us-small")
 
 window.addEventListener("scroll", swap_header)
 kategorie_block_link_icon_rechts.addEventListener("click", swap_kategorie_block)
 kategorie_block_link_icon_links.addEventListener("click", swap_kategorie_block)
+label_about_us_big.addEventListener("click", scroll_to_bottom)
+label_about_us_small.addEventListener("click", scroll_to_bottom)
 
+// beim Seite neu laden hochscrollen
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+}
 
 function swap_header() {
-    //console.log("scroll detect: " + window.scrollY)
+    // console.log("scroll detect, position: " + window.scrollY)
     if (window.scrollY >= 50) {
         if (header_big.style.display === "") {
             header_big.style.display = "none"
@@ -29,7 +37,7 @@ function swap_header() {
 }
 
 function swap_kategorie_block() {
-    console.log("Kategorie swap gedrückt")
+    // console.log("Kategorie swap gedrückt")
     if (kategorie_block_1.style.display === "") {
         kategorie_block_1.style.display = "none"
         kategorie_block_2.style.display = ""
@@ -37,4 +45,9 @@ function swap_kategorie_block() {
         kategorie_block_2.style.display = "none"
         kategorie_block_1.style.display = ""
     }
+}
+
+function scroll_to_bottom() {
+    document.documentElement.scrollTop = document.documentElement.scrollHeight
+    console.log("about us gedrückt")
 }
