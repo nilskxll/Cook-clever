@@ -1,0 +1,172 @@
+.block-bild-details {
+    display: flex;
+    width: 1440px;
+    align-items: center;
+    gap: 75px;
+    padding: 0px 100px;
+    position: relative;
+}
+
+.block-bild-details .frame {
+    display: flex;
+    align-items: center;
+    gap: 75px;
+    position: relative;
+    flex: 1;
+    align-self: stretch;
+    flex-grow: 1;
+    background-color: var(--grey);
+    border-radius: 45px;
+}
+
+.block-bild-details .bild {
+    display: flex;
+    width: 760px;
+    height: 534px;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    border-radius: 45px;
+    overflow: hidden;
+}
+
+.block-bild-details .bircher-muesli-dish {
+    position: relative;
+    width: 760px;
+    height: 534px;
+    object-fit: cover;
+}
+
+.block-bild-details .details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 25px 0px 20px;
+    position: relative;
+    flex: 1;
+    align-self: stretch;
+    flex-grow: 1;
+}
+
+.block-bild-details .div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.block-bild-details .div-2 {
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    display: flex;
+    position: relative;
+}
+
+.block-bild-details .heading {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.block-bild-details .label {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0px 7px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--beige);
+    border-radius: 7px;
+}
+
+.block-bild-details .text-wrapper {
+    width: fit-content;
+    font-size: var(--h-3-font-size);
+    position: relative;
+    margin-top: -1.00px;
+    font-family: var(--h-3-font-family);
+    font-weight: var(--h-3-font-weight);
+    color: var(--black);
+    letter-spacing: var(--h-3-letter-spacing);
+    line-height: var(--h-3-line-height);
+    font-style: var(--h-3-font-style);
+}
+
+.block-bild-details .nhrwertangaben {
+    display: flex;
+    flex-direction: column;
+    width: 315px;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 0px 15px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.block-bild-details .label-wrapper {
+    flex-wrap: wrap;
+    width: 160px;
+    align-items: center;
+    gap: 10px 10px;
+    display: flex;
+    position: relative;
+}
+
+.block-bild-details .label-2 {
+    flex: 1;
+    font-size: var(--h-4-font-size);
+    position: relative;
+    margin-top: -1.00px;
+    font-family: var(--h-4-font-family);
+    font-weight: var(--h-4-font-weight);
+    color: var(--black);
+    letter-spacing: var(--h-4-letter-spacing);
+    line-height: var(--h-4-line-height);
+    font-style: var(--h-4-font-style);
+}
+
+.block-bild-details .wert {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    position: relative;
+    flex: 1;
+    flex-grow: 1;
+}
+
+.block-bild-details .text-wrapper-2 {
+    width: fit-content;
+    font-size: var(--h-4-font-size);
+    position: relative;
+    margin-top: -1.00px;
+    font-family: var(--h-4-font-family);
+    font-weight: var(--h-4-font-weight);
+    color: var(--black);
+    letter-spacing: var(--h-4-letter-spacing);
+    line-height: var(--h-4-line-height);
+    font-style: var(--h-4-font-style);
+}
+
+.block-bild-details .kategorieangaben {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 0px 15px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}

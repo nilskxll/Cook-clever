@@ -1,0 +1,278 @@
+.block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 35px;
+    padding: 0px 140px;
+    position: relative;
+}
+
+.block .block-zubereitung {
+    display: flex;
+    flex-direction: column;
+    width: 1160px;
+    align-items: flex-start;
+    gap: 35px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.block .div {
+    display: flex;
+    align-items: flex-start;
+    gap: 35px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.block .heading-zubereitung {
+    width: 750px;
+    gap: 40px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.block .heading {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.block .label {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0px 7px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--beige);
+    border-radius: 7px;
+}
+
+.block .text-wrapper {
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: var(--h-3-font-family);
+    font-weight: var(--h-3-font-weight);
+    font-size: var(--h-3-font-size);
+    line-height: var(--h-3-line-height);
+    position: relative;
+    color: var(--black);
+    letter-spacing: var(--h-3-letter-spacing);
+    font-style: var(--h-3-font-style);
+}
+
+.block .heading-zutaten {
+    width: 375px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.block .zeit {
+    display: flex;
+    flex-wrap: wrap;
+    width: 750px;
+    align-items: center;
+    gap: 15px 35px;
+    position: relative;
+}
+
+.block .zeitangabe {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 15px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--grey);
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.block .clock {
+    position: relative;
+    width: 19px;
+    height: 19px;
+    object-fit: cover;
+}
+
+.block .p {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: var(--p-font-family);
+    font-weight: var(--p-font-weight);
+    color: var(--black);
+    font-size: var(--p-font-size);
+    letter-spacing: var(--p-letter-spacing);
+    line-height: var(--p-line-height);
+    font-style: var(--p-font-style);
+}
+
+.block .portionsangabe {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 7px 10px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--grey);
+    border-radius: 7px;
+}
+
+.block .img {
+    position: relative;
+    width: 32px;
+    height: 32px;
+}
+
+.block .anzahl-portionen-wrapper {
+    display: flex;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+}
+
+.block .text-wrapper-2 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: var(--h-4-font-family);
+    font-weight: var(--h-4-font-weight);
+    color: var(--black);
+    font-size: var(--h-4-font-size);
+    letter-spacing: var(--h-4-letter-spacing);
+    line-height: var(--h-4-line-height);
+    font-style: var(--h-4-font-style);
+}
+
+.block .anleitung {
+    display: flex;
+    width: 750px;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 20px 25px;
+    position: relative;
+    background-color: var(--grey);
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.block .text-anleitung {
+    position: relative;
+    align-self: stretch;
+    width: 700px;
+    margin-top: -1.00px;
+    font-family: "Space Grotesk-Regular", Helvetica;
+    font-weight: 400;
+    color: var(--black);
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 27px;
+}
+
+.block .zutatenmengen {
+    display: flex;
+    flex-direction: column;
+    width: 375px;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px 25px;
+    position: relative;
+    align-self: stretch;
+    background-color: var(--grey);
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.block .zutat {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.block .label-wrapper {
+    flex-wrap: wrap;
+    width: 210px;
+    gap: 10px 10px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.block .label-2 {
+    flex: 1;
+    margin-top: -1.00px;
+    font-family: var(--h-4-font-family);
+    font-weight: var(--h-4-font-weight);
+    font-size: var(--h-4-font-size);
+    line-height: var(--h-4-line-height);
+    position: relative;
+    color: var(--black);
+    letter-spacing: var(--h-4-letter-spacing);
+    font-style: var(--h-4-font-style);
+}
+
+.block .wert {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    position: relative;
+    flex: 1;
+    flex-grow: 1;
+}
+
+.block .block-teilen {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.block .teilen {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 9px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--beige);
+    border-radius: 6px;
+}
+
+.block .label-3 {
+    width: fit-content;
+    font-family: "Space Grotesk-Regular", Helvetica;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 28px;
+    white-space: nowrap;
+    position: relative;
+    color: var(--black);
+    letter-spacing: 0;
+}
+
+.block .share {
+    position: relative;
+    flex: 0 0 auto;
+    margin-bottom: -4.00px;
+}
