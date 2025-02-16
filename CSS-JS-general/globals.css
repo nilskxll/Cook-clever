@@ -238,6 +238,12 @@ p {
     line-height: 22px;
 }
 
+/* Placeholderfarbe für Firefox festlegen */
+.header-big .placeholder-label::placeholder,
+.header-small .placeholder-label::placeholder {
+    color: var(--grey-dark-085);
+}
+
 .header-big .about-us {
     all: unset;
     position: relative;
