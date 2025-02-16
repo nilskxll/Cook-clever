@@ -289,15 +289,6 @@
     -moz-appearance: textfield;
 }
 
-/* sollten die gleich breit bleiben, können die Klassen weg */
-.suchkriterien-block .kcal {
-    width: 60px;
-}
-
-.suchkriterien-block .gram {
-    width: 60px;
-}
-
 /* Pfeile nach oben und unten in Chrome, Edge, Safari und Opera entfernen */
 .suchkriterien-block .value::-webkit-outer-spin-button,
 .suchkriterien-block .value::-webkit-inner-spin-button {

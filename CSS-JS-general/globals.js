@@ -1,6 +1,6 @@
 let header_big = document.getElementById("header-big")
-let header_big_search_bar = document.getElementById("sucheingabe-header-big")
 let header_small = document.getElementById("header-small")
+let header_big_search_bar = document.getElementById("sucheingabe-header-big")
 let header_small_search_bar = document.getElementById("sucheingabe-header-small")
 let header_small_spacer = document.getElementById("header-small-spacer")
 let label_about_us_big = document.getElementById("label-about-us-big")
