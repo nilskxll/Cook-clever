@@ -1,39 +1,8 @@
-/*let checkbox_energie = document.getElementById("checkbox-energie")
-let checkbox_eiweiss = document.getElementById("checkbox-eiweiss")
-let checkbox_fett = document.getElementById("checkbox-fett")
-let checkbox_kohlenhydrate = document.getElementById("checkbox-kohlenhydrate")
-let checkbox_zuges_zucker = document.getElementById("checkbox-zuges-zucker")
-let checkbox_ballaststoffe = document.getElementById("checkbox-ballaststoffe")*/
-let checkbox_vegan = document.getElementById("checkbox-vegan")
-let checkbox_vegetarisch = document.getElementById("checkbox-vegetarisch")
-let checkbox_mit_fleisch = document.getElementById("checkbox-mit-fleisch")
-let checkbox_proteinreich = document.getElementById("checkbox-proteinreich")
-let checkbox_kalorienarm = document.getElementById("checkbox-kalorienarm")
-let checkbox_fuer_den_cheat_day = document.getElementById("checkbox-fuer-den-cheat-day")
-let checkboxes_categories = [checkbox_vegan, checkbox_vegetarisch, checkbox_mit_fleisch, checkbox_proteinreich, checkbox_kalorienarm, checkbox_fuer_den_cheat_day]
 let show_results_button = document.getElementById("show-results-button")
 
 
-/*checkbox_energie.addEventListener("click", function () {checkbox_click("energie")})
-checkbox_eiweiss.addEventListener("click", function () {checkbox_click("eiweiss")})
-checkbox_fett.addEventListener("click", function () {checkbox_click("fett")})
-checkbox_kohlenhydrate.addEventListener("click", function () {checkbox_click("kohlenhydrate")})
-checkbox_zuges_zucker.addEventListener("click", function () {checkbox_click("zuges-zucker")})
-checkbox_ballaststoffe.addEventListener("click", function () {checkbox_click("ballaststoffe")})
-checkbox_vegan.addEventListener("click", function () {checkbox_click("vegan")})
-checkbox_vegetarisch.addEventListener("click", function () {checkbox_click("vegetarisch")})
-checkbox_mit_fleisch.addEventListener("click", function () {checkbox_click("mit-fleisch")})
-checkbox_proteinreich.addEventListener("click", function () {checkbox_click("proteinreich")})
-checkbox_kalorienarm.addEventListener("click", function () {checkbox_click("kalorienarm")})
-checkbox_fuer_den_cheat_day.addEventListener("click", function () {checkbox_click("fuer-den-cheat-day")})*/
 show_results_button.addEventListener("click", show_results)
 
-
-// TODO: wird diese Funktion gebraucht???
-function checkbox_click(box) {
-    console.log("check")
-    console.log(this)
-}
 
 // Klick auf die Checkboxen der Nährwerte pro Portion
 /* alle Elemente der Klassenkombination ".naehrwertangaben .checkbox" auswählen, folgendes für jedes der Elemente ausführen:
@@ -69,9 +38,9 @@ document.querySelectorAll(".naehrwertangaben .checkbox").forEach(function (check
 /* alle Elemente der Klasse ".toggle-switch" auswählen, folgendes für jedes der Elemente ausführen:
    click-EventListener hinzufügen, der bei Auslösung die Klasse ".active" auf das aktuelle Element hinzufügt bzw. entfernt
  */
-document.querySelectorAll(".toggle-switch").forEach(function (aktueller_switch) {
-    aktueller_switch.addEventListener("click", function () {
-        aktueller_switch.classList.toggle("active");
+document.querySelectorAll(".toggle-switch").forEach(function (toggle_switch) {
+    toggle_switch.addEventListener("click", function () {
+        toggle_switch.classList.toggle("active");
 
         let parent = this.closest(".toggle-switch-text-box")
         let min_max = parent.querySelector(".text-wrapper-2")
@@ -86,16 +55,67 @@ document.querySelectorAll(".toggle-switch").forEach(function (aktueller_switch) 
     });
 });
 
-// Idee zum Abfragen, nach welchen Kategorien gesucht werden soll
-function show_results () {
-    let required_categories = []
-    for (const i in checkboxes_categories) {
-        if (checkboxes_categories[i].checked) {
-            required_categories.push(checkboxes_categories[i].id)
+// keine negativen Eingaben bei Nährwerten zulassen
+document.querySelectorAll(".naehrwertangaben .value").forEach(function (value) {
+    value.addEventListener("input", function () {
+        this.value = this.value.replace(/-/g, "") // /-/g ist ein regulärer Ausdruck, global im String sollen dadurch alle "-" Zeichen ersetzt werden bzw. der String wird komplett leer
+    })
+})
+
+
+// Suchangaben extrahieren
+// Nährwerte
+function extract_nutrients () {
+    let required_nutrients = []
+    document.querySelectorAll(".naehrwertangaben .checkbox").forEach(function(checkbox) {
+        let parent = checkbox.closest(".naehrwert-suchangabe")
+        let nutrition_name = parent.querySelector(".label-suchangabe").textContent
+        let value = parent.querySelector(".value").value
+        let switch_min_max = parent.querySelector(".toggle-switch")
+
+        if (checkbox.checked && value !== "") {
+            if (switch_min_max.classList.contains("active")) {
+                required_nutrients.push([nutrition_name, Number(value), "max"])
+            } else {
+                required_nutrients.push([nutrition_name, Number(value), "min"])
+            }
         }
-    }
-    console.log("suche nach kategorien: " + required_categories)
+    })
+
+    return required_nutrients
 }
 
-let a = ""
-let b = ""
+// Kategorien
+function extract_categories () {
+    let required_categories = []
+    document.querySelectorAll(".kategorieangaben .checkbox").forEach(function(checkbox) {
+        if (checkbox.checked) {
+            let parent = checkbox.closest(".kategorie-suchangabe")
+            let category_name = parent.querySelector(".label-suchangabe").textContent
+
+            // "Kategorie" vom Kategorienamen entfernen
+            let words = category_name.split(" ")
+            words.shift()
+            category_name = words.join(" ")
+
+            required_categories.push(category_name)
+        }
+    })
+
+    return required_categories
+}
+
+// Suchangaben ausgeben
+function show_results () {
+    // Kategorien
+    let required_categories = extract_categories()
+
+    // Nährwerte
+    let required_nutrients = extract_nutrients()
+
+    console.log("suche Nährwerte:")
+    console.log(required_nutrients)
+
+    console.log("suche in kategorien:")
+    console.log(required_categories)
+}

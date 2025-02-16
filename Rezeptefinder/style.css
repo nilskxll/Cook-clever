@@ -273,8 +273,10 @@
 }
 
 .suchkriterien-block .value {
+    all: unset;
     position: relative;
-    width: fit-content;
+    /*width: fit-content;*/
+    width: 60px;
     margin-top: -1.00px;
     font-family: var(--h-4-font-family);
     font-weight: var(--h-4-font-weight);
@@ -283,6 +285,30 @@
     letter-spacing: var(--h-4-letter-spacing);
     line-height: var(--h-4-line-height);
     font-style: var(--h-4-font-style);
+    /* Pfeile nach oben und unten in Firefox entfernen */
+    -moz-appearance: textfield;
+}
+
+/* sollten die gleich breit bleiben, können die Klassen weg */
+.suchkriterien-block .kcal {
+    width: 60px;
+}
+
+.suchkriterien-block .gram {
+    width: 60px;
+}
+
+/* Pfeile nach oben und unten in Chrome, Edge, Safari und Opera entfernen */
+.suchkriterien-block .value::-webkit-outer-spin-button,
+.suchkriterien-block .value::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Placeholderfarbe für Firefox festlegen */
+.suchkriterien-block .value-kcal::placeholder,
+.suchkriterien-block .value-g::placeholder {
+    color: var(--grey-dark);
 }
 
 .suchkriterien-block .text-wrapper-2 {
