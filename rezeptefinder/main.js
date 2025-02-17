@@ -62,7 +62,8 @@ document.querySelectorAll(".naehrwertangaben .value").forEach(function (value) {
     })
 })
 
-
+//NILS HIER ANGUCKEN!!!!!!!!!!!!!!
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // Suchangaben extrahieren
 // Nährwerte
 function extract_nutrients () {
