@@ -1,3 +1,46 @@
+.block-heading {
+    display: flex;
+    width: 1440px;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 0px 100px;
+    position: relative;
+}
+
+.block-heading .heading {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.block-heading .label {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0px 7px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--beige);
+    border-radius: 7px;
+}
+
+.block-heading .text-wrapper {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: var(--h-2-font-family);
+    font-weight: var(--h-2-font-weight);
+    color: var(--black);
+    font-size: var(--h-2-font-size);
+    letter-spacing: var(--h-2-letter-spacing);
+    line-height: var(--h-2-line-height);
+    font-style: var(--h-2-font-style);
+}
+
 .block-bild-details {
     display: flex;
     width: 1440px;
@@ -19,21 +62,21 @@
     border-radius: 45px;
 }
 
-.block-bild-details .bild {
+.block-bild-details .bild-container {
     display: flex;
     width: 760px;
     height: 534px;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
     position: relative;
     border-radius: 45px;
     overflow: hidden;
 }
 
-.block-bild-details .bircher-muesli-dish {
+.block-bild-details .bild-container .bild {
     position: relative;
-    width: 760px;
-    height: 534px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
