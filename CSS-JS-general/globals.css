@@ -1,3 +1,26 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+* {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0px;
+    height: 100%;
+}
+
+/* a blue color as a generic focus style */
+/* keine Ahnung, was das bringt (kommt von Figma Anima) */
+button:focus-visible {
+    outline: 2px solid #4a90e2 !important;
+    outline: -webkit-focus-ring-color auto 5px !important;
+}
+
+a {
+    text-decoration: none;
+}
+
 h1 {
     font-family: var(--h-1-font-family);
     font-weight: var(--h-1-font-weight);
@@ -106,35 +129,36 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100vw;
+    width: 100%;
 }
 
-.spacer50 {
+.spacer {
     width: 1440px;
-    height: 50px;
 }
 
 .header-big {
     display: flex;
-    width: 1440px;
+    width: 100%;
     position: sticky;
     top: 0;
     z-index: 1000;
     align-items: flex-start;
-    justify-content: space-between;
-    padding: 25px 150px;
+    justify-content: center;
     background-color: var(--beige);
 }
 
-.header-big .frame-logo {
-    display: inline-flex;
-    gap: 10px;
-    flex: 0 0 auto;
+.header-big .content {
+    display: flex;
+    width: 1440px;
+    /**position: sticky;
+    top: 0;
+    z-index: 1000;*/
     align-items: flex-start;
-    position: relative;
+    justify-content: space-between;
+    padding: 25px 150px;
 }
 
-.header-big .logo-cook-clever {
+.header-big .frame-logo-cook-clever {
     display: flex;
     width: 160px;
     height: 160px;
@@ -199,17 +223,25 @@ p {
 }
 
 .header-big .placeholder-label {
+    all: unset;
     position: relative;
     flex: 1;
     font-family: "Space Grotesk", Helvetica;
     font-weight: 500;
-    color: var(--label-colorslc-l-secondary);
+    color: var(--grey-dark-085);
     font-size: 17px;
     letter-spacing: -0.41px;
     line-height: 22px;
 }
 
-.header-big .text-wrapper {
+/* Placeholderfarbe für Firefox festlegen */
+.header-big .placeholder-label::placeholder,
+.header-small .placeholder-label::placeholder {
+    color: var(--grey-dark-085);
+}
+
+.header-big .about-us {
+    all: unset;
     position: relative;
     width: fit-content;
     font-family: "Space Grotesk", Helvetica;
@@ -219,6 +251,7 @@ p {
     letter-spacing: 0;
     line-height: 28px;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .header-big .button {
@@ -233,6 +266,12 @@ p {
     border-radius: 14px;
     border: 1px solid;
     border-color: var(--black);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.header-big .button:hover, .header-small .button:hover {
+    background-color: var(--beige-dark);
 }
 
 .header-big .label {
@@ -251,25 +290,27 @@ p {
 
 .header-small {
     display: flex;
-    width: 1440px;
+    width: 100%;
     position: sticky;
     top: 0;
     z-index: 1000;
     align-items: flex-start;
-    justify-content: space-between;
-    padding: 17px 100px;
+    justify-content: center;
     background-color: var(--beige);
 }
 
-.header-small .frame-logo {
-    display: inline-flex;
+.header-small .content {
+    display: flex;
+    width: 1440px;
+    /*position: sticky;
+    top: 0;
+    z-index: 1000;*/
     align-items: flex-start;
-    gap: 10px;
-    position: relative;
-    flex: 0 0 auto;
+    justify-content: space-between;
+    padding: 17px 100px;
 }
 
-.header-small .logo-cook-clever {
+.header-small .frame-logo-cook-clever {
     display: flex;
     width: 131px;
     height: 110px;
@@ -356,17 +397,19 @@ p {
 }
 
 .header-small .placeholder-label {
+    all: unset;
     position: relative;
     flex: 1;
     font-family: "Space Grotesk", Helvetica;
     font-weight: 500;
-    color: var(--label-colorslc-l-secondary);
+    color: var(--grey-dark-085);
     font-size: 17px;
     letter-spacing: -0.41px;
     line-height: 22px;
 }
 
-.header-small .div {
+.header-small .about-us {
+    all: unset;
     position: relative;
     width: fit-content;
     font-family: "Space Grotesk", Helvetica;
@@ -376,6 +419,7 @@ p {
     letter-spacing: 0;
     line-height: 28px;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .header-small .button {
@@ -390,6 +434,8 @@ p {
     border-radius: 14px;
     border: 1px solid;
     border-color: var(--black);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .header-small .label {
@@ -404,11 +450,6 @@ p {
     letter-spacing: 0;
     line-height: 28px;
     white-space: nowrap;
-}
-
-.header-small-spacer {
-    width: 1440px;
-    height: 63px;
 }
 
 .kategorie-block {
@@ -434,6 +475,7 @@ p {
     width: 41px;
     height: 41px;
     /*flex: 0 0 auto;*/
+    cursor: pointer;
 }
 
 .kategorie-block .kategorie-karten {
@@ -521,7 +563,7 @@ p {
     flex: 0 0 auto;
 }
 
-.kategorie-block .div {
+.kategorie-block .link-description {
     font-family: "Space Grotesk", Helvetica;
     font-weight: 400;
     color: var(--black);
@@ -552,4 +594,207 @@ p {
     width: 90%;
     height: 90%;
     object-fit: contain;
+}
+
+.footer-block {
+    display: flex;
+    flex-direction: column;
+    width: 1440px;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0px 100px;
+    position: relative;
+}
+
+.footer-block .footer {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 50px;
+    padding: 40px 60px;
+    position: relative;
+    flex: 0 0 auto;
+    margin-right: -1.00px;
+    background-color: var(--beige);
+    border-radius: 45px 45px 0px 0px;
+}
+
+.footer-block .contacts {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.footer-block .logo-and-name {
+    display: flex;
+    width: 1121px;
+    align-items: center;
+    gap: 50px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.footer-block .logo-cook-clever {
+    display: flex;
+    width: 131px;
+    height: 110px;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.footer-block .cook-clever-ohne-schrift {
+    position: relative;
+    width: 131px;
+    height: 110px;
+    object-fit: cover;
+}
+
+.footer-block .name-frame {
+    display: inline-flex;
+    height: 113px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0px 25px 0px 0px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.footer-block .logo-and-name .text-wrapper {
+    position: relative;
+    width: fit-content;
+    font-family: "Space Grotesk", Helvetica;
+    font-weight: 700;
+    color: var(--black);
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 28px;
+    white-space: nowrap;
+}
+
+.footer-block .mitwirkende-frame {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 154px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.footer-block .contact-us {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 27px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.footer-block .heading {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.footer-block .label {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0px 7px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--mint);
+    border-radius: 7px;
+}
+
+.footer-block .label-text {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: var(--h-4-font-family);
+    font-weight: var(--h-4-font-weight);
+    color: var(--white);
+    font-size: var(--h-4-font-size);
+    letter-spacing: var(--h-4-letter-spacing);
+    line-height: var(--h-4-line-height);
+    font-style: var(--h-4-font-style);
+}
+
+.footer-block .info {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.footer-block .mitwirkende-frame .text-wrapper {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: var(--p-font-family);
+    font-weight: var(--p-font-weight);
+    color: var(--black);
+    font-size: var(--p-font-size);
+    letter-spacing: var(--p-letter-spacing);
+    line-height: var(--p-line-height);
+    font-style: var(--p-font-style);
+}
+
+.footer-block .mitwirkende-frame .text-wrapper-2 {
+    position: relative;
+    width: fit-content;
+    font-family: var(--p-font-family);
+    font-weight: var(--p-font-weight);
+    color: var(--black);
+    font-size: var(--p-font-size);
+    letter-spacing: var(--p-letter-spacing);
+    line-height: var(--p-line-height);
+    font-style: var(--p-font-style);
+}
+
+.footer-block .line-and-text {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.footer-block .line {
+    position: relative;
+    width: 1120px;
+    height: 1px;
+    margin-top: -1.00px;
+    object-fit: contain;
+}
+
+.footer-block .text {
+    display: flex;
+    width: 667px;
+    align-items: flex-start;
+    gap: 40px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.footer-block .element-cook-clever {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: "Space Grotesk", Helvetica;
+    font-weight: 400;
+    color: var(--black);
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 28px;
+    white-space: nowrap;
 }

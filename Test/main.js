@@ -28,6 +28,8 @@ button_Portionen.addEventListener("click", function() {
     portionenRechner(portionen)
 })
 
+
+
 function daten_aus_db() {
     fetch('cgi-bin/db_connection.php')
         .then(response => response.json())
@@ -92,7 +94,7 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell){ //ausgewähltes Rezept (mit v
         aktuelle_Arbeitszeit = aktuelles_Rezept.Arbeitszeit // gleiche wie bei den Nährwerten und den allgemeinen Informationen zu dem Rezept auch hier bei den Zeiten zu dem Rezept
         aktuelle_Kochzeit = aktuelles_Rezept.Kochzeit
         aktuelle_Gesamtzeit = aktuelle_Arbeitszeit + aktuelle_Kochzeit
-
+        console.log(Rezepte)
         //danach werden alle Funktionen aufgerufen, die die definierten Variablen ausgeben
         Zutaten_in_Listen_umwandeln()
         zeit_umrechnen()
@@ -100,7 +102,7 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell){ //ausgewähltes Rezept (mit v
         Werte_Rezept_ausgeben_Beschreibung()
         Werte_Rezept_ausgeben_Zeit()
         Zutaten_ausgeben()
-        //suchFeld()
+        suchFeld()
     }
     else{ //falls etwas falsch läuft, sie man beim Programmieren aus welchem Grund/ an welcher Stelle aktuell der Fehler aufgetreten ist
         console.log("Fehler bei dem Rezept öffnen")
@@ -220,15 +222,19 @@ function Rezeptefidner (){
 }
 
 function suchFeld(){
-    //hier soll eben dann eine Listen mit allen Namen der Rezepte erschaffen werden, dann mal schauen wie, aber wenn User dann was in das Feld eingibt, sollen Vorschläge kommen, auf die man draufklicken kann, dann wird eben genau das Rezept gesucht
-    let NamensListe = []
+    let Rezepte_Namen_Liste = []
     let Rezepte_ID_Liste = []
-    for (i = 0; i <= Rezepte.length; i ++ ){
-        let Rezept_überprüfung = Rezepte[i]
-        NamensListe.push(Rezept_überprüfung.Rezeptname)
+    for (i = 0; i <= Rezepte.length; i++){
+        let Rezept_überprüfung  = Rezepte[i]
+        Rezepte_Namen_Liste.push(Rezept_überprüfung.Rezeptname)
         Rezepte_ID_Liste.push(Rezept_überprüfung.Rezept_ID)
     }
-    console.log(Rezepte_ID_Liste)
-    console.log(NamensListe)
-}
+    for (i = 0; i <= Rezepte_Namen_Liste.length; i++){
+        if (/* das aus der html Datei, was eben durch das Suchfeld eingegeben wurde */ = Rezepte_Namen_Liste[i]){ //Teil des Wortes und dann eben eine Liste mit Rezept_ID, diese dann alle so klein  auf einer website ausgeben!
+            let Rezepte_Suchanfrage_Liste_ID = Rezepte_ID_Liste[i]    //Hier sollte jetzt eben alle Rezept_Ids in einer Liste gespeichert werden, in denen eben die reinfolge an buchstaben in dem Namen vorkommt.
+            //mit diesern Liste dann auf die nächste HTML Website gehen und dann alle Rezepte mit diesen IDs in so kleinen Vorschaukästchen ausgeben
+            }
+        }
+        console.log(Rezepte)
+    }
 daten_aus_db()

@@ -1,0 +1,337 @@
+/*hat chatgpt vorgeschlagen, weiß nicht, ob das gut ist*/
+@media (max-width: 1024px) {
+    .block-rezepte {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .rezepte-block {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    .rezept-karte {
+        width: 100%;
+        padding: 20px;
+    }
+}
+
+.checkbox-text-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.checkbox {
+    appearance: none;
+    margin: 0px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background-color: var(--white);
+    border-radius: 4px;
+    border: 1px solid;
+    border-color: var(--grey-dark);
+    cursor: pointer;
+}
+
+.checkbox:checked {
+    background-image: url("../img/checkmark.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.toggle-switch-text-box {
+    display: inline-flex;
+    /*display: none;*/
+    visibility: hidden;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    flex: 0 0 auto;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.toggle-switch {
+    box-sizing: border-box;
+    border: 1px solid var(--grey-dark);
+    width: 40px;
+    height: 24px;
+    background-color: var(--white);
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 3px;
+}
+
+.toggle-slider {
+    width: 18px;
+    height: 18px;
+    background-color: var(--grey-dark);
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* wenn der Switch aktiviert ist */
+.toggle-switch.active {
+    background-color: black;
+    border: 1px solid var(--black);
+}
+
+.toggle-switch.active .toggle-slider {
+    transform: translateX(14px); /* Slider nach rechts schieben */
+    background-color: var(--white);
+}
+
+.heading-rezeptefinder {
+    display: flex;
+    width: 1440px;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 0px 100px;
+    position: relative;
+}
+
+.heading-rezeptefinder .label-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.heading-rezeptefinder .label {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0px 7px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--beige);
+    border-radius: 7px;
+}
+
+.heading-rezeptefinder .text-wrapper {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: var(--h-2-font-family);
+    font-weight: var(--h-2-font-weight);
+    color: var(--black);
+    font-size: var(--h-2-font-size);
+    letter-spacing: var(--h-2-letter-spacing);
+    line-height: var(--h-2-line-height);
+    font-style: var(--h-2-font-style);
+}
+
+.suchkriterien-block {
+    display: flex;
+    width: 1440px;
+    align-items: center;
+    gap: 75px;
+    padding: 0px 150px;
+    position: relative;
+}
+
+.suchkriterien-block .frame-hintergrundfarbe {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 50px;
+    padding: 40px 25px;
+    position: relative;
+    flex: 1;
+    flex-grow: 1;
+    background-color: var(--grey);
+    border-radius: 45px;
+}
+
+.suchkriterien-block .heading-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.suchkriterien-block .label-heading {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0px 7px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--beige);
+    border-radius: 7px;
+}
+
+.suchkriterien-block .text-wrapper {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: var(--h-3-font-family);
+    font-weight: var(--h-3-font-weight);
+    color: var(--black);
+    font-size: var(--h-3-font-size);
+    letter-spacing: var(--h-3-letter-spacing);
+    line-height: var(--h-3-line-height);
+    font-style: var(--h-3-font-style);
+}
+
+.suchkriterien-block .details {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.suchkriterien-block .filter-angaben {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    flex: 1;
+    flex-grow: 1;
+}
+
+.suchkriterien-block .naehrwertangaben {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    align-items: flex-start;
+    gap: 15px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.suchkriterien-block .naehrwert-suchangabe {
+    display: flex;
+    width: 400px;
+    height: 30px;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.suchkriterien-block .label-suchangabe {
+    position: relative;
+    width: fit-content;
+    font-family: var(--h-4-font-family);
+    font-weight: var(--h-4-font-weight);
+    color: var(--black);
+    font-size: var(--h-4-font-size);
+    letter-spacing: var(--h-4-letter-spacing);
+    line-height: var(--h-4-line-height);
+    font-style: var(--h-4-font-style);
+}
+
+.suchkriterien-block .value-frame {
+    display: flex;
+    /*display: none;*/
+    visibility: hidden;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    position: relative;
+    flex: 1;
+    /*flex-grow: 1;*/
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.suchkriterien-block .value-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 1px 4px;
+    position: relative;
+    flex: 0 0 auto;
+    border-radius: 4px;
+    border: 1px solid;
+    border-color: var(--grey-dark);
+}
+
+.suchkriterien-block .value {
+    all: unset;
+    position: relative;
+    /*width: fit-content;*/
+    width: 60px;
+    margin-top: -1.00px;
+    font-family: var(--h-4-font-family);
+    font-weight: var(--h-4-font-weight);
+    color: var(--grey-dark);
+    font-size: var(--h-4-font-size);
+    letter-spacing: var(--h-4-letter-spacing);
+    line-height: var(--h-4-line-height);
+    font-style: var(--h-4-font-style);
+    /* Pfeile nach oben und unten in Firefox entfernen */
+    -moz-appearance: textfield;
+}
+
+/* Pfeile nach oben und unten in Chrome, Edge, Safari und Opera entfernen */
+.suchkriterien-block .value::-webkit-outer-spin-button,
+.suchkriterien-block .value::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Placeholderfarbe für Firefox festlegen */
+.suchkriterien-block .value-kcal::placeholder,
+.suchkriterien-block .value-g::placeholder {
+    color: var(--grey-dark);
+}
+
+.suchkriterien-block .text-wrapper-2 {
+    position: relative;
+    width: 47px;
+    margin-top: -1.00px;
+    font-family: var(--h-4-font-family);
+    font-weight: var(--h-4-font-weight);
+    color: var(--black);
+    font-size: var(--h-4-font-size);
+    letter-spacing: var(--h-4-letter-spacing);
+    line-height: var(--h-4-line-height);
+    font-style: var(--h-4-font-style);
+}
+
+.suchkriterien-block .kategorieangaben {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 0px 0px 0px 55px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.kategorie-suchangabe {
+    display: flex;
+    height: 30px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#show-results-button {
+    cursor: pointer;
+}
