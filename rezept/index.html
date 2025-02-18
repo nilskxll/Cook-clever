@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="style.css"/>
     <!-- JavaScript -->
     <script src="../CSS-JS-general/globals.js" defer></script>
+    <script src="main.js" defer></script>
 </head>
 <body>
 <div class="fullscreen">
@@ -66,65 +67,159 @@
     <div class="spacer" style="height: 70px"></div>
     <div class="block-heading">
         <div class="heading">
-            <div class="label"><div class="text-wrapper">Cremige Käsenudeln mit Brokkoli</div></div>
+            <div class="label">
+                <div class="text-wrapper">Rezeptname</div>
+            </div>
         </div>
     </div>
     <div class="spacer" style="height: 60px"></div>
     <div class="block-bild-details">
-        <div class="frame">
+        <div class="frame-content">
             <div class="bild-container">
                 <img class="bild" src="../img/essen-bild-test.jpeg" />
             </div>
             <div class="details">
-                <div class="div">
-                    <div class="div-2">
-                        <div class="heading">
-                            <div class="label"><div class="text-wrapper">Nährwerte pro Portion</div></div>
+                <div class="frame-angaben">
+                    <div class="heading">
+                        <div class="label">
+                            <div class="text-wrapper">Nährwerte pro Portion</div>
                         </div>
                     </div>
-                    <div class="nhrwertangaben">
-                        <div class="div-2">
-                            <div class="label-wrapper"><div class="label-2">Energie</div></div>
-                            <div class="wert"><div class="text-wrapper-2">... kcal</div></div>
+                    <div class="naehrwertangaben">
+                        <div class="angabe">
+                            <div class="name-frame"><div class="name">Energie</div></div>
+                            <div class="value-frame"><div class="value">... kcal</div></div>
                         </div>
-                        <div class="div-2">
-                            <div class="label-wrapper"><div class="label-2">Eiweiß</div></div>
-                            <div class="wert"><div class="text-wrapper-2">... g</div></div>
+                        <div class="angabe">
+                            <div class="name-frame"><div class="name">Eiweiß</div></div>
+                            <div class="value-frame"><div class="value">... g</div></div>
                         </div>
-                        <div class="div-2">
-                            <div class="label-wrapper"><div class="label-2">Fett</div></div>
-                            <div class="wert"><div class="text-wrapper-2">... g</div></div>
+                        <div class="angabe">
+                            <div class="name-frame"><div class="name">Fett</div></div>
+                            <div class="value-frame"><div class="value">... g</div></div>
                         </div>
-                        <div class="div-2">
-                            <div class="label-wrapper"><div class="label-2">Kohlenhydrate</div></div>
-                            <div class="wert"><div class="text-wrapper-2">... g</div></div>
+                        <div class="angabe">
+                            <div class="name-frame"><div class="name">Kohlenhydrate</div></div>
+                            <div class="value-frame"><div class="value">... g</div></div>
                         </div>
-                        <div class="div-2">
-                            <div class="label-wrapper"><div class="label-2">zuges. Zucker</div></div>
-                            <div class="wert"><div class="text-wrapper-2">... g</div></div>
+                        <div class="angabe">
+                            <div class="name-frame"><div class="name">zuges. Zucker</div></div>
+                            <div class="value-frame"><div class="value">... g</div></div>
                         </div>
-                        <div class="div-2">
-                            <div class="label-wrapper"><div class="label-2">Ballaststoffe</div></div>
-                            <div class="wert"><div class="text-wrapper-2">... g</div></div>
+                        <div class="angabe">
+                            <div class="name-frame"><div class="name">Ballaststoffe</div></div>
+                            <div class="value-frame"><div class="value">... g</div></div>
                         </div>
                     </div>
                 </div>
-                <div class="div">
-                    <div class="div-2">
+                <div class="frame-angaben">
                         <div class="heading">
                             <div class="label"><div class="text-wrapper">Kategorien</div></div>
                         </div>
-                    </div>
                     <div class="kategorieangaben">
-                        <div class="div-2"><div class="text-wrapper-2">Kategorie 1</div></div>
-                        <div class="div-2"><div class="text-wrapper-2">Kategorie 2</div></div>
-                        <div class="div-2"><div class="text-wrapper-2">Kategorie 3</div></div>
+                        <div class="angabe"><div class="value">Kategorie 1</div></div>
+                        <div class="angabe"><div class="value">Kategorie 2</div></div>
+                        <div class="angabe"><div class="value">Kategorie 3</div></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <div class="spacer" style="height: 40px"></div>
+    <div class="block-preparation-ingredients">
+        <div class="content">
+            <div class="row">
+                <div class="heading-preparation">
+                    <div class="heading">
+                        <div class="label"><div class="text-wrapper">Zubereitung</div></div>
+                    </div>
+                </div>
+                <div class="heading-ingredients">
+                    <div class="heading">
+                        <div class="label"><div class="text-wrapper">Zutaten</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="time">
+                    <div class="time-information">
+                        <img class="clock" src="../img/clock.png" />
+                        <p class="value">Vorbereitungszeit: 1 h 30 min</p>
+                    </div>
+                    <div class="time-information">
+                        <img class="clock" src="../img/clock.png" />
+                        <p class="value">Koch/Backzeit: 1 h 15 min</p>
+                    </div>
+                    <div class="time-information">
+                        <img class="clock" src="../img/clock.png" />
+                        <p class="value">Gesamtzeit: 2 h 45 min</p>
+                    </div>
+                </div>
+                <div class="portion-information">
+                    <img class="plus-minus-icon" id="minus-button" src="../img/minus-icon.png" />
+                    <div class="number-of-portions-frame">
+                        <div class="value">1 Portion</div>
+                    </div>
+                    <img class="plus-minus-icon" id="plus-button" src="../img/plus-icon.png" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="anleitung">
+                    <p class="text-anleitung">
+                        1. Hokkaido waschen, putzen, halbieren, entkernen und in Stücke schneiden. 4 EL der Hokkaido-Würfel
+                        beiseite legen. Schalotten, Knoblauch und Ingwer schälen und hacken. 2 EL Öl in einem großen Topf erhitzen
+                        und Kürbis, Schalotten, Knoblauch und Ingwer darin bei mittlerer Hitze 5 Minuten dünsten.<br /><br />2.
+                        Brühe und Kokosmilch angießen und mit Salz und Pfeffer würzen. Bei kleiner bis mittlerer Hitze 15–20
+                        Minuten köcheln lassen. <br /><br />3. Inzwischen restliches Öl in einer Pfanne erhitzen und restliche
+                        Hokkaido-Würfel darin bei mittlerer Hitze 5–7 Minuten braten. Orange halbieren und den Saft auspressen.
+                        <br /><br />4. Kürbissuppe mit einem Stabmixer fein pürieren und mit Orangensaft, Sojasauce und Muskat
+                        würzen. <br /><br />5. Kürbissuppe mit Hokkaido auf vier Teller verteilen. Gebratene Kürbiswürfel,
+                        Kürbiskerne und Kürbiskernöl darüber verteilen und nach Belieben mit Petersilie oder Koriander garniert
+                        servieren.
+                    </p>
+                </div>
+                <div class="zutatenmengen">
+                    <div class="zutat">
+                        <div class="label-wrapper"><div class="label-2">Gemüsebrühe</div></div>
+                        <div class="wert"><div class="text-wrapper-2">10000 ml</div></div>
+                    </div>
+                    <div class="zutat">
+                        <div class="label-wrapper"><div class="label-2">Hokkaido Kürbis</div></div>
+                        <div class="wert"><div class="text-wrapper-2">700 g</div></div>
+                    </div>
+                    <div class="zutat">
+                        <div class="label-wrapper"><div class="label-2">Knoblauchzehen</div></div>
+                        <div class="wert"><div class="text-wrapper-2">6</div></div>
+                    </div>
+                    <div class="zutat">
+                        <div class="label-wrapper"><div class="label-2">Champignons</div></div>
+                        <div class="wert"><div class="text-wrapper-2">10000 g</div></div>
+                    </div>
+                    <div class="zutat">
+                        <div class="label-wrapper">
+                            <div class="label-2">lange Zutat ........................................</div>
+                        </div>
+                        <div class="wert"><div class="text-wrapper-2">10000 ml</div></div>
+                    </div>
+                    <div class="zutat">
+                        <div class="label-wrapper"><div class="label-2">kurze Zutat</div></div>
+                        <div class="wert"><div class="text-wrapper-2">10000 ml</div></div>
+                    </div>
+                    <div class="zutat">
+                        <div class="label-wrapper"><div class="label-2">lange Zutat ....................</div></div>
+                        <div class="wert"><div class="text-wrapper-2">10000 ml</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="spacer" style="height: 35px"></div>
+    <div class="block-teilen">
+        <div class="share-frame">
+            <div class="label">Teilen</div>
+            <img class="share-icon" src="../img/share-icon.png" />
+        </div>
+    </div>
     <div class="spacer" style="height: 100px"></div>
     <div class="footer-block">
         <div class="footer">
