@@ -1,4 +1,3 @@
-let Nährwerte, Rezepte, Einheiten, Zutaten //Sind Matrizen die alle informationen der DB enthalten
 let aktuelle_Nährwerte, aktuelle_Zutaten, aktuelles_Rezept // ist das aktuelle Rezept welches ausgewählt ist. Sozusagen dann eine Liste mit eben allen Informationen zu diesem einen konkreten rezept. So zu sagen jedes von denen hat dann eine Zeile der Tabelle aus der Db (da mehrere Tabellen, werden auch mehrere Variablen benötigt
 let aktuelle_Protein, aktuelles_Fett, aktuelle_Kohlenhydrate, aktueller_zugesetzter_Zucker, aktuelle_Ballaststoffe // werden aus den Nährwerten die einzelnen Werte gespeichert für aktuelles Rezept
 let aktueller_Rezept_Name, aktuelle_Anleitung, aktuelle_Essgewohnheit // werden die grundlegenden Informationen des Rezeptes ausgegeben
@@ -10,7 +9,6 @@ let zutatenListe = [], mengenListe = [], einheitenListe = [] //
 let zutat // ist wie i in der dann verwendeten for-schleife. So aber verständlicher mit dem Namen
 let mengenListe_plus_portionen // einfach die Liste, in der die Mengenangaben multipliziert stehen (im Vergleich zu der mengenListe wo nur für eine Person gerechnet ist)
 let portionen = 1 // Anzahl aktuell ausgewählter Portionen
-let cheatmeals_Liste = [], kalorienarmeRezepte = [], proteinreicheRezepte = [], vegetarische_Rezepte = [], vegane_Rezepte = [], Fleisch_Rezepte = [] // Sind Listen in den die Rezept_ID der jeweiligen Rezepte gespeichert werden, in welche Kategorie sie eben gerade passen
 
 
 //abhören der Buttons aus HTML (ist nur bis Lukas fertig ist)
@@ -28,50 +26,6 @@ button_Portionen.addEventListener("click", function() {
     portionenRechner(portionen)
 })
 
-
-
-function daten_aus_db() {
-    fetch('cgi-bin/db_connection.php')
-        .then(response => response.json())
-        .then(daten => {
-            //Daten aus der PHP Datei in die Matrizen einfügen, damit man in JS damit arbeiten kann
-            Nährwerte = daten.naehrwerte
-            Rezepte = daten.rezepte
-            Einheiten = daten.einheiten
-            Zutaten = daten.zutaten
-            einkategorisieren()
-        })
-        .catch(error => { //Falls irgendwo nen Fehler auftritt, sieht man gleich über den error warum
-            console.error("Fehler beim Abrufen der Daten:", error)
-        })
-}
-
-function einkategorisieren (){ // hier wird jeweils ein Objekt (eine Reihe von einem Rezept mit bestimmter ID überprüft, ob sie bestimmte Voraussetzungen hat. Wenn ja, wird sie mit der Rezept_ID hinzugefügt. Falls nein passiert nichts. (alles nur im Hintergrund)
-    for ( i = 0; Nährwerte[i]; i++) {
-        let Rezept_überprüfung = Nährwerte[i]
-        if (Rezept_überprüfung.Kalorien >= 350) {               //Hier kann man einstellen, ab wann es eben zu den cheatmeals gehört
-            cheatmeals_Liste.push(Rezept_überprüfung.Rezept_ID)
-        }
-        if(Rezept_überprüfung.Kalorien <= 300) {                //Hier kann man einstellen, ab wann es eben zu den Kalorienarmen gehört
-            kalorienarmeRezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-        if (Rezept_überprüfung.Protein >= 9){                   //Hier kann man einstellen, ab wann es eben zu den Eiweiß reichen Rezepten gehört
-            proteinreicheRezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-    }
-    for (i = 0; Rezepte[i]; i++){
-        Rezept_überprüfung = Rezepte[i]
-        if (Rezept_überprüfung.Essgewohnheit === "vegetarisch"){
-            vegetarische_Rezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-        if (Rezept_überprüfung.Essgewohnheit === "vegan"){
-            vegane_Rezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-        if (Rezept_überprüfung.Essgewohnheit === "mit Fleisch"){
-            Fleisch_Rezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-    }
-}
 
 function aktuelles_Rezept_Werte_zuweisen(aktuell){ //ausgewähltes Rezept (mit variable "aktuell" übergeben, wird in die einzelnen Variablen definiert, um diese dann in folgenden Schritten aufrufen zu können
     if (aktuell <= Rezepte.length){ //überprüfen ob Rezept überhaupt vorhanden (eventuell unnötig)
@@ -215,26 +169,3 @@ function portionenRechner(Portionen){
     mengenListe_plus_portionen = mengenListe.map(menge => menge * Portionen) //hier wird einfach nur die aktuelle mengenListe mal die eingegeben Portionen gerechnet und gespeichert
     Zutaten_ausgeben()
 }
-
-function Rezeptefidner (){
-    //Hier wird dann der RF gebaut. Mein Plan ist, nach dem Alle bedingungen gelegt wurden, halt mit den Jeweiligen Bedingungen Listen zu erstellen, welche Rezepte dazu passen. Wenn dann eben sich eine Rezept_ID in allen Listen =>
-    //überschneidet, ist es eins der gesuchten Rezepte.
-}
-
-function suchFeld(){
-    let Rezepte_Namen_Liste = []
-    let Rezepte_ID_Liste = []
-    for (i = 0; i <= Rezepte.length; i++){
-        let Rezept_überprüfung  = Rezepte[i]
-        Rezepte_Namen_Liste.push(Rezept_überprüfung.Rezeptname)
-        Rezepte_ID_Liste.push(Rezept_überprüfung.Rezept_ID)
-    }
-    for (i = 0; i <= Rezepte_Namen_Liste.length; i++){
-        if (/* das aus der html Datei, was eben durch das Suchfeld eingegeben wurde */ = Rezepte_Namen_Liste[i]){ //Teil des Wortes und dann eben eine Liste mit Rezept_ID, diese dann alle so klein  auf einer website ausgeben!
-            let Rezepte_Suchanfrage_Liste_ID = Rezepte_ID_Liste[i]    //Hier sollte jetzt eben alle Rezept_Ids in einer Liste gespeichert werden, in denen eben die reinfolge an buchstaben in dem Namen vorkommt.
-            //mit diesern Liste dann auf die nächste HTML Website gehen und dann alle Rezepte mit diesen IDs in so kleinen Vorschaukästchen ausgeben
-            }
-        }
-        console.log(Rezepte)
-    }
-daten_aus_db()
