@@ -62,8 +62,7 @@ document.querySelectorAll(".naehrwertangaben .value").forEach(function (value) {
     })
 })
 
-//NILS HIER ANGUCKEN!!!!!!!!!!!!!!
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 // Suchangaben extrahieren
 // Nährwerte
 function extract_nutrients () {
@@ -119,4 +118,7 @@ function show_results () {
 
     console.log("suche in kategorien:")
     console.log(required_categories)
+    console.log(window.Nährwerte)
 }
+
+//Nährwerte checken und schauen auf welche Rezepte die aktuell ausgewählten Nährwerte Anforderungen passen:
