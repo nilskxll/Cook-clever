@@ -8,10 +8,10 @@
     position: relative;
 }
 
-.block-heading .heading {
+.block-heading .heading-frame {
     display: inline-flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
     position: relative;
     flex: 0 0 auto;
@@ -370,7 +370,7 @@
     cursor: pointer;
 }
 
-.block-preparation-ingredients .number-of-portions-frame{
+.block-preparation-ingredients .number-of-portions-frame {
     display: flex;
     width: 124px;
     overflow: hidden;
@@ -383,6 +383,7 @@
 .block-preparation-ingredients .portion-information .value {
     position: relative;
     width: fit-content;
+    max-width: 100%;
     margin-top: -1.00px;
     white-space: nowrap;
     font-family: var(--h-4-font-family);
@@ -394,11 +395,10 @@
     font-style: var(--h-4-font-style);
 }
 
-.block-preparation-ingredients .anleitung {
+.block-preparation-ingredients .preparation-frame {
     display: flex;
     width: 750px;
     align-items: flex-start;
-    justify-content: space-around;
     gap: 10px;
     padding: 20px 25px;
     position: relative;
@@ -407,20 +407,20 @@
     overflow: hidden;
 }
 
-.block-preparation-ingredients .text-anleitung {
+.block-preparation-ingredients .text-preparation {
     position: relative;
     align-self: stretch;
-    width: 700px;
+    width: 100%;
     margin-top: -1.00px;
-    font-family: "Space Grotesk", Helvetica;
-    font-weight: 400;
+    font-family: var(--p-font-family);
+    font-weight: var(--p-font-weight);
     color: var(--black);
-    font-size: 18px;
-    letter-spacing: 0;
+    font-size: var(--p-font-size);
+    letter-spacing: var(--p-letter-spacing);
     line-height: 27px;
 }
 
-.block-preparation-ingredients .zutatenmengen {
+.block-preparation-ingredients .ingredients-frame {
     display: flex;
     flex-direction: column;
     width: 375px;
@@ -428,13 +428,12 @@
     gap: 15px;
     padding: 20px 25px;
     position: relative;
-    align-self: stretch;
     background-color: var(--grey);
     border-radius: 25px;
     overflow: hidden;
 }
 
-.block-preparation-ingredients .zutat {
+.block-preparation-ingredients .ingredient {
     display: flex;
     align-items: flex-start;
     gap: 10px;
@@ -444,7 +443,7 @@
     flex: 0 0 auto;
 }
 
-.block-preparation-ingredients .label-wrapper {
+.block-preparation-ingredients .ingredients-frame .name-frame {
     flex-wrap: wrap;
     width: 210px;
     gap: 10px 10px;
@@ -453,9 +452,14 @@
     position: relative;
 }
 
-.block-preparation-ingredients .label-2 {
+.block-preparation-ingredients .ingredients-frame .name {
     flex: 1;
+    max-width: 100%;
     margin-top: -1.00px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word; /* für veraltete Browser anstelle von overflow-wrap */
+    hyphens: auto; /*für automatische Bindestriche der Silbentrentung */
     font-family: var(--h-4-font-family);
     font-weight: var(--h-4-font-weight);
     font-size: var(--h-4-font-size);
@@ -466,17 +470,35 @@
     font-style: var(--h-4-font-style);
 }
 
-.block-preparation-ingredients .wert {
+.block-preparation-ingredients .ingredients-frame .value-frame {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    width: 105px;
     gap: 10px;
     position: relative;
     flex: 1;
     flex-grow: 1;
 }
 
-.block-teilen {
+.block-preparation-ingredients .ingredients-frame .value{
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: -1.00px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    font-family: var(--h-4-font-family);
+    font-weight: var(--h-4-font-weight);
+    color: var(--black);
+    font-size: var(--h-4-font-size);
+    letter-spacing: var(--h-4-letter-spacing);
+    line-height: var(--h-4-line-height);
+    font-style: var(--h-4-font-style);
+}
+
+.block-share {
     display: flex;
     align-items: center;
     position: relative;
@@ -486,7 +508,7 @@
     flex: 0 0 auto;
 }
 
-.block-teilen .share-frame {
+.block-share .share-frame {
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -497,7 +519,7 @@
     border-radius: 6px;
 }
 
-.block-teilen .label {
+.block-share .label {
     width: fit-content;
     font-family: var(--p-font-family);
     font-weight: var(--p-font-weight);
@@ -509,7 +531,7 @@
     letter-spacing: 0;
 }
 
-.block-teilen .share-icon {
+.block-share .share-icon {
     position: relative;
     flex: 0 0 auto;
     height: 23px;

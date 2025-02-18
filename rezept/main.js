@@ -34,3 +34,6 @@ function change_number_of_portions (direction) {
         number_of_portions.textContent = `${value} Portionen`
     }
 }
+
+// TODO: Lupe ist in allen Suchleisten zu weit oben platziert
+// TODO: ausporbieren, wie man eine gewünschte Anzahl an Zutaten durch JS in HTML hinzufügen kann
