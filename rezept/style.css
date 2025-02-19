@@ -347,7 +347,7 @@
     font-style: var(--p-font-style);
 }
 
-.block-preparation-ingredients .portion-information {
+.block-preparation-ingredients .number-of-portions-frame {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -370,7 +370,7 @@
     cursor: pointer;
 }
 
-.block-preparation-ingredients .number-of-portions-frame {
+.block-preparation-ingredients .number-of-portions-frame .value-frame {
     display: flex;
     width: 124px;
     overflow: hidden;
@@ -380,7 +380,7 @@
     position: relative;
 }
 
-.block-preparation-ingredients .portion-information .value {
+.block-preparation-ingredients .number-of-portions-frame .value {
     position: relative;
     width: fit-content;
     max-width: 100%;
@@ -486,6 +486,7 @@
     width: fit-content;
     max-width: 100%;
     margin-top: -1.00px;
+    text-align: end;
     white-space: normal;
     overflow-wrap: break-word;
     hyphens: auto;
