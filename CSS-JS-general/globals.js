@@ -5,18 +5,12 @@ let header_small_search_bar = document.getElementById("sucheingabe-header-small"
 let header_small_spacer = document.getElementById("header-small-spacer")
 let label_about_us_big = document.getElementById("label-about-us-big")
 let label_about_us_small = document.getElementById("label-about-us-small")
-let kategorie_block_1 = document.getElementById("kategorie-block-1")
-let kategorie_block_2 = document.getElementById("kategorie-block-2")
-let kategorie_block_link_icon_rechts = document.getElementById("kategorie-block-link-icon-rechts")
-let kategorie_block_link_icon_links = document.getElementById("kategorie-block-link-icon-links")
 window.Nährwerte, window.Rezepte, window.Einheiten, window.Zutaten //Sind Matrizen die alle informationen der DB enthalten
 window.cheatmeals_Liste = [], window.kalorienarmeRezepte = [], window.proteinreicheRezepte = [], window.vegetarische_Rezepte = [], window.vegane_Rezepte = [], window.Fleisch_Rezepte = [] // Sind Listen in den die Rezept_ID der jeweiligen Rezepte gespeichert werden, in welche Kategorie sie eben gerade passen
 
 window.addEventListener("scroll", swap_header)
 label_about_us_big.addEventListener("click", scroll_to_bottom)
 label_about_us_small.addEventListener("click", scroll_to_bottom)
-kategorie_block_link_icon_rechts.addEventListener("click", swap_kategorie_block)
-kategorie_block_link_icon_links.addEventListener("click", swap_kategorie_block)
 
 
 // beim Seite neu laden hochscrollen
@@ -48,18 +42,6 @@ function swap_header() {
 function scroll_to_bottom() {
     document.documentElement.scrollTop = document.documentElement.scrollHeight
     console.log("about us gedrückt")
-}
-
-// angezeigte Kategorien wechseln, beim Klicken auf den Pfeil links bzw. rechts
-function swap_kategorie_block() {
-    // console.log("Kategorie swap gedrückt")
-    if (kategorie_block_1.style.display === "") {
-        kategorie_block_1.style.display = "none"
-        kategorie_block_2.style.display = ""
-    } else {
-        kategorie_block_2.style.display = "none"
-        kategorie_block_1.style.display = ""
-    }
 }
 
 
