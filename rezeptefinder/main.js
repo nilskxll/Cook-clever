@@ -13,24 +13,29 @@ show_results_button.addEventListener("click", show_results)
 */
 document.querySelectorAll(".naehrwertangaben .checkbox").forEach(function (checkbox) {
     checkbox.addEventListener("click", function () {
-
         let parent = this.closest(".naehrwert-suchangabe")
         let value_frame = parent.querySelector(".value-frame")
-        let toggle_switch = parent.querySelector(".toggle-switch-text-box")
+        let value = parent.querySelector(".value")
+        let toggle_switch_text_box = parent.querySelector(".toggle-switch-text-box")
+        let toggle_switch = parent.querySelector(".toggle-switch")
 
         // visibility, dass bei hidden nicht geklickt werden kann
         // opacity für die transition
         if (this.checked) {
             value_frame.style.visibility="visible"
-            toggle_switch.style.visibility="visible"
+            toggle_switch_text_box.style.visibility="visible"
             value_frame.style.opacity="1"
-            toggle_switch.style.opacity="1"
+            toggle_switch_text_box.style.opacity="1"
         } else {
             value_frame.style.opacity="0"
-            toggle_switch.style.opacity="0"
+            toggle_switch_text_box.style.opacity="0"
             setTimeout(function () {
                 value_frame.style.visibility="hidden"
-                toggle_switch.style.visibility="hidden"
+                toggle_switch_text_box.style.visibility="hidden"
+                value.value = ""
+                if (toggle_switch.classList.contains("active")) {
+                    toggle_switch.classList.remove("active")
+                }
             }, 300)
         }
     })

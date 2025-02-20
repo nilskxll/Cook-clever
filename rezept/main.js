@@ -81,6 +81,5 @@ function insert_ingredients() {
 
 insert_ingredients()
 
-// TODO Rezeptefinder: Wählt man beim Filtern eine Nährwertangabe ab und wieder an, soll der reingeschriebene Wert dabei gelöscht werden
 // TODO überall margin-top entfernen, wenn es unnötig ist
 // TODO anfangen, Suchergebnisse Seite in HTML zu machen
