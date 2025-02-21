@@ -5,13 +5,24 @@ let header_small_search_bar = document.getElementById("sucheingabe-header-small"
 let header_small_spacer = document.getElementById("header-small-spacer")
 let label_about_us_big = document.getElementById("label-about-us-big")
 let label_about_us_small = document.getElementById("label-about-us-small")
+let search_bar_big = document.getElementById("sucheingabe-header-big")
+let search_bar_small = document.getElementById("sucheingabe-header-small")
 window.Nährwerte, window.Rezepte, window.Einheiten, window.Zutaten //Sind Matrizen die alle informationen der DB enthalten
 window.cheatmeals_Liste = [], window.kalorienarmeRezepte = [], window.proteinreicheRezepte = [], window.vegetarische_Rezepte = [], window.vegane_Rezepte = [], window.Fleisch_Rezepte = [] // Sind Listen in den die Rezept_ID der jeweiligen Rezepte gespeichert werden, in welche Kategorie sie eben gerade passen
 
 window.addEventListener("scroll", swap_header)
 label_about_us_big.addEventListener("click", scroll_to_bottom)
 label_about_us_small.addEventListener("click", scroll_to_bottom)
-
+search_bar_big.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        suchFeld("sucheingabe-header-big")
+    }
+})
+search_bar_small.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        suchFeld("sucheingabe-header-small")
+    }
+})
 
 // beim Seite neu laden hochscrollen
 window.onbeforeunload = function () {
@@ -93,22 +104,17 @@ function einkategorisieren (){
         }
     }
 }
-/*
-function suchFeld(){
-    let Rezepte_Namen_Liste = []
-    let Rezepte_ID_Liste = []
-    for (i = 0; i <= Rezepte.length; i++){
-        let Rezept_überprüfung  = Rezepte[i]
-        Rezepte_Namen_Liste.push(Rezept_überprüfung.Rezeptname)
-        Rezepte_ID_Liste.push(Rezept_überprüfung.Rezept_ID)
-    }
-    for (i = 0; i <= Rezepte_Namen_Liste.length; i++){
-        if ( (((das aus der html Datei, was eben durch das Suchfeld eingegeben wurde)))  = Rezepte_Namen_Liste[i]){ //Teil des Wortes und dann eben eine Liste mit Rezept_ID, diese dann alle so klein  auf einer website ausgeben!
-            let Rezepte_Suchanfrage_Liste_ID = Rezepte_ID_Liste[i]    //Hier sollte jetzt eben alle Rezept_Ids in einer Liste gespeichert werden, in denen eben die reinfolge an buchstaben in dem Namen vorkommt.
-            //mit diesern Liste dann auf die nächste HTML Website gehen und dann alle Rezepte mit diesen IDs in so kleinen Vorschaukästchen ausgeben
+function suchFeld(big_small) {
+    let input = document.getElementById(big_small).value.toLowerCase(); // Eingabe aus dem HTML-Input holen
+    let Rezepte_Suchanfrage_Liste_ID = []; // Liste für gefilterte Rezept-IDs
+
+    for (let i = 0; i < Rezepte.length; i++) {
+        let rezeptName = Rezepte[i].Rezeptname.toLowerCase(); // Rezeptname in Kleinbuchstaben umwandeln
+
+        if (rezeptName.includes(input)) { // Prüfen, ob die Eingabe ein Teil des Namens ist
+            Rezepte_Suchanfrage_Liste_ID.push(Rezepte[i].Rezept_ID); // Passende Rezept-ID speichern
         }
     }
-    console.log(Rezepte)
+    console.log(Rezepte_Suchanfrage_Liste_ID); // Testausgabe der gefundenen Rezept-IDs
 }
-*/
 daten_aus_db(einkategorisieren)
