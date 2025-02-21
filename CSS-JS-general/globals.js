@@ -104,8 +104,10 @@ function einkategorisieren (){
         }
     }
 }
-function suchFeld(big_small) {
-    let input = document.getElementById(big_small).value.toLowerCase(); // Eingabe aus dem HTML-Input holen
+
+// wenn man im Suchfeld Enter drückt
+function suchFeld(big_small_header) {
+    let input = document.getElementById(big_small_header).value.toLowerCase(); // Eingabe aus dem HTML-Input holen
     let Rezepte_Suchanfrage_Liste_ID = []; // Liste für gefilterte Rezept-IDs
 
     for (let i = 0; i < Rezepte.length; i++) {
@@ -116,5 +118,7 @@ function suchFeld(big_small) {
         }
     }
     console.log(Rezepte_Suchanfrage_Liste_ID); // Testausgabe der gefundenen Rezept-IDs
+    sessionStorage.setItem("valid_IDs", Rezepte_Suchanfrage_Liste_ID) // sessionStorage, dann Werte an Suchergebnisse-Seite übergeben werden können
+    window.location.href = "../suchergebnisse"
 }
 daten_aus_db(einkategorisieren)

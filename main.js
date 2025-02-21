@@ -1,6 +1,7 @@
 let number_of_recipes = 10
 let number_of_recipe_blocks = Math.round(number_of_recipes / 2)
 
+// Rezepte-Rows (nach gewünschter Anzahl) erstellen
 function insert_recipes_blocks() {
     // Rezepte-Rows einfügen (2 Rezepte-Karten pro Row)
     let recipes_block = document.querySelector(".block-recipes")
