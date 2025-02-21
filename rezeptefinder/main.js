@@ -266,15 +266,15 @@ function Nährwerte_mit_Rezept_überprüfen (){
         }
         //Hier die jeweiligen Listen miteinander Vergleichen. Die ID die in der jeder Liste vorhanden ist, kann in eine (halb) Finale Liste mit denen die der Suche entsprechen
 
-        gefilterte_Rezepte_Nährwerte = alle_Rezept_IDs
-        gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id => Kalorien_akzeptiert.includes(id))
+        gefilterte_Rezepte_Nährwerte = alle_Rezept_IDs //hier wird erstmal die Liste voll mit allen
+        gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id => Kalorien_akzeptiert.includes(id)) //in den folgenden Zeilen wird geschaut ob eben gefilterte_Rezepte_Nährwerte und Kalorien_akzeptiert gleiche Elemente haben. Die werden dann wieder in der gefilterte_Rezepte_Nährwerte geschrieben und mit der nächsten Liste verglichen
         gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id => Protein_akzeptiert.includes(id))
         gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id => Fett_akzeptiert.includes(id))
         gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id=> Kohlenhydrate_akzeptiert.includes(id))
         gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id=> zugesetzer_Zucker_akzeptiert.includes(id))
         gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id => Ballaststoffe_akzeptiert.includes(id))
         console.log(gefilterte_Rezepte_Nährwerte)
-        Kategorien_mit_Rezept_überprüfen()
+        Kategorien_mit_Rezept_überprüfen() //nun ist er hiermit fertig und soll die Kategorien überprüfen
     }
     else{
         gefilterte_Rezepte_Nährwerte = alle_Rezept_IDs
@@ -286,20 +286,20 @@ function Nährwerte_mit_Rezept_überprüfen (){
 function Kategorien_mit_Rezept_überprüfen() {
     let vegan_angeklickt = 0, vegetarisch_angeklickt = 0, mit_Fleisch_angeklickt = 0,cheat_meals_angeklickt = 0, proteinreich_angeklickt = 0, kalorienarm_angeklickt = 0
     let vegan_akzeptiert =[], vegetarisch_akzeptiert = [], mit_Fleisch_akzeptiert = [], cheat_meals_akzeptiert = [], proteinreich_akzeptiert = [], kalorienarm_akzeptiert = []
-    if(required_categories.length != 0){
-        for (let i = 0; i < required_categories.length; i++) {
+    if(required_categories.length != 0){ //schaut wieder ob es überhaupt ausgewählte Kategorien gibt die nachgefragt werden
+        for (let i = 0; i < required_categories.length; i++) { //geht jedes Element aus der Liste durch
             if (required_categories[i] === "vegan"){
-                gefilterte_Rezepte_Kategorien = window.vegane_Rezepte
+                gefilterte_Rezepte_Kategorien = window.vegane_Rezepte //falls vegan angeklickt wurde dann soll er einfach
             }
             else if (required_categories[i] === "vegetarisch"){
-                for(let j = 0; j < window.vegetarische_Rezepte.length; j++){
-                    if (!gefilterte_Rezepte_Kategorien.includes(window.vegetarische_Rezepte[j])){
+                for(let j = 0; j < window.vegetarische_Rezepte.length; j++){ //falls eben vegetarisch, durchläuft er alle elemente von den vegetarischen Rezepten
+                    if (!gefilterte_Rezepte_Kategorien.includes(window.vegetarische_Rezepte[j])){ //falls es noch nicht in der aktuellen gefilterte_Rezepte_Kategorien vorhanden ist, fügt er es hinzu, falls nicht überprüft er das nächste Objekt
                         gefilterte_Rezepte_Kategorien.push(window.vegetarische_Rezepte[j])
                     }
                 }
             }
             else if (required_categories[i] === "mit Fleisch"){
-                for(let j = 0; j < window.Fleisch_Rezepte.length; j++){
+                for(let j = 0; j < window.Fleisch_Rezepte.length; j++){ //das gleiche wie bei vegetarisch ...
                     if (!gefilterte_Rezepte_Kategorien.includes(window.Fleisch_Rezepte[j])){
                         gefilterte_Rezepte_Kategorien.push(window.Fleisch_Rezepte[j])
                     }
@@ -327,12 +327,13 @@ function Kategorien_mit_Rezept_überprüfen() {
                 }
             }
         }
-        for (let i = 0; i < gefilterte_Rezepte_Nährwerte.length; i++)
+        for (let i = 0; i < gefilterte_Rezepte_Nährwerte.length; i++) //Beide listen werden miteinander verbunden und überprüft. Wenn diese ein gleiches Element haben, dann wird es in die endgültige Liste geschrieben
             if (gefilterte_Rezepte_Kategorien.includes(gefilterte_Rezepte_Nährwerte[i])){
                 gefilterte_Rezepte_fertig.push(gefilterte_Rezepte_Nährwerte[i])
         }
     }
-    else{
+    else{ //Falls es keine einschränkungen gibt, dann werden einfach die Nährwert einschränkungen übernommen
         gefilterte_Rezepte_fertig = gefilterte_Rezepte_Nährwerte
     }
+    console.log(gefilterte_Rezepte_fertig)
 }
