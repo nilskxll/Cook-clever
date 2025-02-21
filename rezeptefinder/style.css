@@ -91,7 +91,7 @@
     background-color: var(--white);
 }
 
-.heading-rezeptefinder {
+.heading-recipe-finder {
     display: flex;
     width: 1440px;
     align-items: center;
@@ -101,7 +101,7 @@
     position: relative;
 }
 
-.heading-rezeptefinder .label-wrapper {
+.heading-recipe-finder .label-wrapper {
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
@@ -109,7 +109,7 @@
     flex: 0 0 auto;
 }
 
-.heading-rezeptefinder .label {
+.heading-recipe-finder .label {
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
@@ -121,7 +121,7 @@
     border-radius: 7px;
 }
 
-.heading-rezeptefinder .text-wrapper {
+.heading-recipe-finder .text-wrapper {
     position: relative;
     width: fit-content;
     margin-top: -1.00px;
@@ -134,7 +134,7 @@
     font-style: var(--h-2-font-style);
 }
 
-.suchkriterien-block {
+.filters-block {
     display: flex;
     width: 1440px;
     align-items: center;
@@ -143,7 +143,7 @@
     position: relative;
 }
 
-.suchkriterien-block .frame-hintergrundfarbe {
+.filters-block .frame-background-color {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -157,7 +157,7 @@
     border-radius: 45px;
 }
 
-.suchkriterien-block .heading-wrapper {
+.filters-block .heading-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -168,7 +168,7 @@
     flex: 0 0 auto;
 }
 
-.suchkriterien-block .label-heading {
+.filters-block .label-heading {
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
@@ -180,7 +180,7 @@
     border-radius: 7px;
 }
 
-.suchkriterien-block .text-wrapper {
+.filters-block .text-wrapper {
     position: relative;
     width: fit-content;
     margin-top: -1.00px;
@@ -193,7 +193,7 @@
     font-style: var(--h-3-font-style);
 }
 
-.suchkriterien-block .details {
+.filters-block .details {
     display: flex;
     align-items: flex-start;
     gap: 25px;
@@ -203,7 +203,7 @@
     flex: 0 0 auto;
 }
 
-.suchkriterien-block .filter-angaben {
+.filters-block .filter-specification {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -213,7 +213,7 @@
     flex-grow: 1;
 }
 
-.suchkriterien-block .naehrwertangaben {
+.filters-block .nutritional-filters-frame {
     display: flex;
     flex-direction: column;
     width: 400px;
@@ -223,7 +223,7 @@
     flex: 0 0 auto;
 }
 
-.suchkriterien-block .naehrwert-suchangabe {
+.filters-block .nutritional-filter {
     display: flex;
     width: 400px;
     height: 30px;
@@ -233,7 +233,7 @@
     flex: 0 0 auto;
 }
 
-.suchkriterien-block .label-suchangabe {
+.filters-block .label-filter-name {
     position: relative;
     width: fit-content;
     font-family: var(--h-4-font-family);
@@ -245,7 +245,7 @@
     font-style: var(--h-4-font-style);
 }
 
-.suchkriterien-block .value-frame {
+.filters-block .value-frame {
     display: flex;
     /*display: none;*/
     visibility: hidden;
@@ -259,7 +259,7 @@
     transition: opacity 0.3s ease-in-out;
 }
 
-.suchkriterien-block .value-box {
+.filters-block .value-box {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -272,7 +272,7 @@
     border-color: var(--grey-dark);
 }
 
-.suchkriterien-block .value {
+.filters-block .value {
     all: unset;
     position: relative;
     /*width: fit-content;*/
@@ -290,19 +290,19 @@
 }
 
 /* Pfeile nach oben und unten in Chrome, Edge, Safari und Opera entfernen */
-.suchkriterien-block .value::-webkit-outer-spin-button,
-.suchkriterien-block .value::-webkit-inner-spin-button {
+.filters-block .value::-webkit-outer-spin-button,
+.filters-block .value::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
 /* Placeholderfarbe für Firefox festlegen */
-.suchkriterien-block .value-kcal::placeholder,
-.suchkriterien-block .value-g::placeholder {
+.filters-block .value-kcal::placeholder,
+.filters-block .value-g::placeholder {
     color: var(--grey-dark);
 }
 
-.suchkriterien-block .text-wrapper-2 {
+.filters-block .text-wrapper-2 {
     position: relative;
     width: 47px;
     margin-top: -1.00px;
@@ -315,7 +315,7 @@
     font-style: var(--h-4-font-style);
 }
 
-.suchkriterien-block .kategorieangaben {
+.filters-block .category-filters-frame {
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
@@ -325,7 +325,7 @@
     flex: 0 0 auto;
 }
 
-.kategorie-suchangabe {
+.category-filter {
     display: flex;
     height: 30px;
     justify-content: flex-start;

@@ -1,4 +1,4 @@
-.kategorie-block {
+.category-block {
     display: flex;
     width: 1440px;
     align-items: flex-start;
@@ -7,7 +7,7 @@
     position: relative;
 }
 
-.kategorie-block .frame-link-icon {
+.category-block .frame-link-icon {
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -16,7 +16,7 @@
     flex: 0 0 auto;
 }
 
-.kategorie-block .link-icon {
+.category-block .link-icon {
     position: relative;
     width: 41px;
     height: 41px;
@@ -24,7 +24,7 @@
     cursor: pointer;
 }
 
-.kategorie-block .kategorie-karten {
+.category-block .category-cards {
     width: 1240px;
     align-items: flex-start;
     display: flex;
@@ -32,7 +32,7 @@
     position: relative;
 }
 
-.kategorie-block .kategorie-karte {
+.category-block .category-card {
     width: 386px;
     height: 200px;
     align-items: center;
@@ -48,7 +48,7 @@
     position: relative;
 }
 
-.kategorie-block .heading-link {
+.category-block .heading-link {
     display: inline-flex;
     flex-direction: column;
     height: 100%;
@@ -58,7 +58,7 @@
     flex: 0 0 auto;
 }
 
-.kategorie-block .heading {
+.category-block .heading {
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
@@ -66,7 +66,7 @@
     flex: 0 0 auto;
 }
 
-.kategorie-block .label {
+.category-block .label {
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
@@ -78,7 +78,7 @@
     border-radius: 7px;
 }
 
-.kategorie-block .text-wrapper {
+.category-block .text-wrapper {
     margin-top: -1.00px;
     font-family: var(--h-4-font-family);
     font-weight: var(--h-4-font-weight);
@@ -91,7 +91,7 @@
     font-style: var(--h-4-font-style);
 }
 
-.kategorie-block .link-small {
+.category-block .link-small {
     display: inline-flex;
     align-items: center;
     gap: 12px;
@@ -99,7 +99,7 @@
     flex: 0 0 auto;
 }
 
-.kategorie-block .link-description {
+.category-block .link-description {
     font-family: "Space Grotesk", Helvetica;
     font-weight: 400;
     color: var(--black);
@@ -111,7 +111,7 @@
     letter-spacing: 0;
 }
 
-.kategorie-block .vorschaubild-container {
+.category-block .image-container {
     position: relative;
     width: 165px;
     height: 130px;
@@ -120,13 +120,13 @@
     align-items: center;
 }
 
-.kategorie-block .vorschaubild-container .vorschaubild {
+.category-block .image-container .image {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.kategorie-block .vorschaubild-container .vorschaubild-vegan {
+.category-block .image-container .image-vegan {
     width: 90%;
     height: 90%;
     object-fit: contain;
