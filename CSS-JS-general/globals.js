@@ -67,16 +67,16 @@ function daten_aus_db(callback) {
 }
 
 function einkategorisieren (){
-    console.log("Einkategoriesieren begonnen")// hier wird jeweils ein Objekt (eine Reihe von einem Rezept mit bestimmter ID überprüft, ob sie bestimmte Voraussetzungen hat. Wenn ja, wird sie mit der Rezept_ID hinzugefügt. Falls nein passiert nichts. (alles nur im Hintergrund)
+    // hier wird jeweils ein Objekt (eine Reihe von einem Rezept mit bestimmter ID überprüft, ob sie bestimmte Voraussetzungen hat. Wenn ja, wird sie mit der Rezept_ID hinzugefügt. Falls nein passiert nichts. (alles nur im Hintergrund)
     for ( let i = 0; i < window.Nährwerte.length; i++) {
         let Rezept_überprüfung = window.Nährwerte[i]
-        if (Rezept_überprüfung.Kalorien >= 350) {               //Hier kann man einstellen, ab wann es eben zu den cheatmeals gehört
+        if (Rezept_überprüfung.Kalorien >= 800) {               //Hier kann man einstellen, ab wann es eben zu den cheatmeals gehört
             window.cheatmeals_Liste.push(Rezept_überprüfung.Rezept_ID)
         }
         if(Rezept_überprüfung.Kalorien <= 300) {                //Hier kann man einstellen, ab wann es eben zu den Kalorienarmen gehört
             window.kalorienarmeRezepte.push(Rezept_überprüfung.Rezept_ID)
         }
-        if (Rezept_überprüfung.Protein >= 9){                   //Hier kann man einstellen, ab wann es eben zu den Eiweiß reichen Rezepten gehört
+        if (Rezept_überprüfung.Protein >= 40){                   //Hier kann man einstellen, ab wann es eben zu den Eiweiß reichen Rezepten gehört
             window.proteinreicheRezepte.push(Rezept_überprüfung.Rezept_ID)
         }
     }
@@ -92,7 +92,6 @@ function einkategorisieren (){
             window.Fleisch_Rezepte.push(Rezept_überprüfung.Rezept_ID)
         }
     }
-    console.log("Einkategoriesieren beendet")
 }
 /*
 function suchFeld(){
