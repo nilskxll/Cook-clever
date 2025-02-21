@@ -327,11 +327,12 @@ function Kategorien_mit_Rezept_überprüfen() {
                 }
             }
         }
-        console.log(gefilterte_Rezepte_Kategorien)
+        for (let i = 0; i < gefilterte_Rezepte_Nährwerte.length; i++)
+            if (gefilterte_Rezepte_Kategorien.includes(gefilterte_Rezepte_Nährwerte[i])){
+                gefilterte_Rezepte_fertig.push(gefilterte_Rezepte_Nährwerte[i])
+        }
     }
     else{
         gefilterte_Rezepte_fertig = gefilterte_Rezepte_Nährwerte
     }
-    console.log(gefilterte_Rezepte_Kategorien)
-    console.log(gefilterte_Rezepte_fertig)
 }
