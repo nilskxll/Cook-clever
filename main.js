@@ -1,4 +1,4 @@
-let number_of_recipes = 9
+let number_of_recipes = 10
 let number_of_recipe_blocks = Math.round(number_of_recipes / 2)
 
 function insert_recipes_blocks() {
