@@ -167,7 +167,7 @@ p {
     position: relative;
 }
 
-.header-big .logo-cook-clever-mit-schrift {
+.header-big .logo-cook-clever-with-title {
     position: relative;
     flex: 1;
     align-self: stretch;
@@ -198,7 +198,7 @@ p {
     flex: 0 0 auto;
 }
 
-.header-big .suchleiste {
+.header-big .search-bar {
     display: flex;
     width: 490px;
     align-items: center;
@@ -208,13 +208,13 @@ p {
     border-radius: 10px;
 }
 
-.header-big .lupe {
+.header-big .magnifying-glass {
     position: relative;
     width: 28px;
     height: 28px;
 }
 
-.header-big .magnifyingglass {
+.header-big .image-magnifying-glass {
     position: absolute;
     width: 28px;
     height: 28px;
@@ -318,7 +318,7 @@ p {
     position: relative;
 }
 
-.header-small .logo-cook-clever-ohne-schrift {
+.header-small .logo-cook-clever-without-title {
     position: relative;
     width: 131px;
     height: 110px;
@@ -371,7 +371,7 @@ p {
     flex: 0 0 auto;
 }
 
-.header-small .suchleiste {
+.header-small .search-bar {
     display: flex;
     width: 470px;
     align-items: center;
@@ -381,13 +381,13 @@ p {
     border-radius: 10px;
 }
 
-.header-small .lupe {
+.header-small .magnifying-glass {
     position: relative;
     width: 28px;
     height: 28px;
 }
 
-.header-small .magnifyingglass {
+.header-small .image-magnifying-glass {
     position: absolute;
     width: 28px;
     height: 28px;
@@ -501,7 +501,7 @@ p {
     position: relative;
 }
 
-.footer-block .cook-clever-ohne-schrift {
+.footer-block .cook-clever-without-title {
     position: relative;
     width: 131px;
     height: 110px;
@@ -531,7 +531,7 @@ p {
     white-space: nowrap;
 }
 
-.footer-block .mitwirkende-frame {
+.footer-block .contributors-frame {
     display: inline-flex;
     align-items: flex-start;
     gap: 154px;
@@ -590,7 +590,7 @@ p {
     flex: 0 0 auto;
 }
 
-.footer-block .mitwirkende-frame .text-wrapper {
+.footer-block .contributors-frame .text-wrapper {
     position: relative;
     width: fit-content;
     margin-top: -1.00px;
@@ -603,7 +603,7 @@ p {
     font-style: var(--p-font-style);
 }
 
-.footer-block .mitwirkende-frame .text-wrapper-2 {
+.footer-block .contributors-frame .text-wrapper-2 {
     position: relative;
     width: fit-content;
     font-family: var(--p-font-family);

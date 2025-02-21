@@ -10,13 +10,13 @@ show_results_button.addEventListener("click", show_results)
 
 
 // Klick auf die Checkboxen der Nährwerte pro Portion
-/* alle Elemente der Klassenkombination ".naehrwertangaben .checkbox" auswählen, folgendes für jedes der Elemente ausführen:
+/* alle Elemente der Klassenkombination ".nutritional-filters-frame .checkbox" auswählen, folgendes für jedes der Elemente ausführen:
    wenn die ausgewählte checkbox geklickt wird, werden der dazugehörige value-frame und toggle-switch-text-box angezeigt bzw. versteckt
    um nicht endlos IDs zu vergeben, geht es so mit den Klassen einfacher (mit closest und so)
 */
-document.querySelectorAll(".naehrwertangaben .checkbox").forEach(function (checkbox) {
+document.querySelectorAll(".nutritional-filters-frame .checkbox").forEach(function (checkbox) {
     checkbox.addEventListener("click", function () {
-        let parent = this.closest(".naehrwert-suchangabe")
+        let parent = this.closest(".nutritional-filter")
         let value_frame = parent.querySelector(".value-frame")
         let value = parent.querySelector(".value")
         let toggle_switch_text_box = parent.querySelector(".toggle-switch-text-box")
@@ -66,7 +66,7 @@ document.querySelectorAll(".toggle-switch").forEach(function (toggle_switch) {
 });
 
 // keine negativen Eingaben bei Nährwerten zulassen
-document.querySelectorAll(".naehrwertangaben .value").forEach(function (value) {
+document.querySelectorAll(".nutritional-filters-frame .value").forEach(function (value) {
     value.addEventListener("input", function () {
         this.value = this.value.replace(/-/g, "") // /-/g ist ein regulärer Ausdruck, global im String sollen dadurch alle "-" Zeichen ersetzt werden bzw. der String wird komplett leer
     })
@@ -76,9 +76,9 @@ document.querySelectorAll(".naehrwertangaben .value").forEach(function (value) {
 // Suchangaben extrahieren
 // Nährwerte
 function extract_nutrients () {
-    document.querySelectorAll(".naehrwertangaben .checkbox").forEach(function(checkbox) {
-        let parent = checkbox.closest(".naehrwert-suchangabe")
-        let nutrition_name = parent.querySelector(".label-suchangabe").textContent
+    document.querySelectorAll(".nutritional-filters-frame .checkbox").forEach(function(checkbox) {
+        let parent = checkbox.closest(".nutritional-filter")
+        let nutrition_name = parent.querySelector(".label-filter-name").textContent
         let value = parent.querySelector(".value").value
         let switch_min_max = parent.querySelector(".toggle-switch")
 
@@ -96,10 +96,10 @@ function extract_nutrients () {
 
 // Kategorien
 function extract_categories () {
-    document.querySelectorAll(".kategorieangaben .checkbox").forEach(function(checkbox) {
+    document.querySelectorAll(".category-filters-frame .checkbox").forEach(function(checkbox) {
         if (checkbox.checked) {
-            let parent = checkbox.closest(".kategorie-suchangabe")
-            let category_name = parent.querySelector(".label-suchangabe").textContent
+            let parent = checkbox.closest(".category-filter")
+            let category_name = parent.querySelector(".label-filter-name").textContent
 
             // "Kategorie" vom Kategorienamen entfernen
             let words = category_name.split(" ")

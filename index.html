@@ -15,19 +15,20 @@
     <!-- JavaScript -->
     <script src="CSS-JS-general/globals.js" defer></script>
     <script src="CSS-JS-general/category_block.js" defer></script>
+    <script src="main.js" defer></script>
 </head>
 <body>
 <div class="fullscreen">
     <div class="header-big" id="header-big">
         <div class="content">
             <a class="frame-logo-cook-clever" href="https://www.cook-clever.info">
-                <img class="logo-cook-clever-mit-schrift" src="img/logo-cook-clever.png"/>
+                <img class="logo-cook-clever-with-title" src="img/logo-cook-clever.png"/>
             </a>
             <div class="frame-navigation">
                 <div class="navigation-bar">
-                    <div class="suchleiste">
-                        <div class="lupe">
-                            <img class="magnifyingglass" src="img/magnifyingglass.png">
+                    <div class="search-bar">
+                        <div class="magnifying-glass">
+                            <img class="image-magnifying-glass" src="img/magnifyingglass.png">
                         </div>
                         <input class="placeholder-label" id="sucheingabe-header-big" type="text" placeholder="Suchen" value="">
                     </div>
@@ -42,19 +43,18 @@
     <div class="header-small" id="header-small" style="display: none">
         <div class="content">
             <a class="frame-logo-cook-clever" href="https://www.cook-clever.info">
-                <img class="logo-cook-clever-ohne-schrift" src="img/logo-cook-clever-ohne-Schrift.png"/>
+                <img class="logo-cook-clever-without-title" src="img/logo-cook-clever-ohne-Schrift.png"/>
             </a>
             <a class="frame" href="https://www.cook-clever.info">
                 <div class="text-wrapper">Cook-Clever</div>
             </a>
             <div class="frame-navigation">
                 <div class="navigation-bar">
-                    <div class="suchleiste">
-                        <div class="lupe">
-                            <img class="magnifyingglass" src="img/magnifyingglass.png">
+                    <div class="search-bar">
+                        <div class="magnifying-glass">
+                            <img class="image-magnifying-glass" src="img/magnifyingglass.png">
                         </div>
-                        <input class="placeholder-label" id="sucheingabe-header-small" type="text" placeholder="Suchen"
-                               value="">
+                        <input class="placeholder-label" id="sucheingabe-header-small" type="text" placeholder="Suchen" value="">
                     </div>
                     <button class="about-us" id="label-about-us-small">About us</button>
                     <a class="button" href="https://www.cook-clever.info/rezeptefinder">
@@ -66,12 +66,12 @@
     </div>
     <div class="spacer" id="header-small-spacer" style="display: none; height: 63px"></div>
     <div class="spacer" style="height: 50px"></div>
-    <div class="kategorie-block" id="kategorie-block-1">
+    <div class="category-block" id="category-block-1">
         <div class="frame-link-icon">
             <img class="link-icon" src="img/link-links-icon.png" style="visibility: hidden"/>
         </div>
-        <div class="kategorie-karten">
-            <div class="kategorie-karte">
+        <div class="category-cards">
+            <div class="category-card">
                 <div class="heading-link">
                     <div class="heading">
                         <div class="label">
@@ -88,11 +88,11 @@
                         <div class="link-description">ansehen</div>
                     </div>
                 </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild-vegan" src="img/kategorie-vegan.png">
+                <div class="image-container">
+                    <img class="image-vegan" src="img/kategorie-vegan.png">
                 </div>
             </div>
-            <div class="kategorie-karte">
+            <div class="category-card">
                 <div class="heading-link">
                     <div class="heading">
                         <div class="label">
@@ -109,11 +109,11 @@
                         <div class="link-description">ansehen</div>
                     </div>
                 </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/kategorie-vegetarisch.png">
+                <div class="image-container">
+                    <img class="image" src="img/kategorie-vegetarisch.png">
                 </div>
             </div>
-            <div class="kategorie-karte">
+            <div class="category-card">
                 <div class="heading-link">
                     <div class="heading">
                         <div class="label">
@@ -130,21 +130,21 @@
                         <div class="link-description">ansehen</div>
                     </div>
                 </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/kategorie-mit-fleisch.png">
+                <div class="image-container">
+                    <img class="image" src="img/kategorie-mit-fleisch.png">
                 </div>
             </div>
         </div>
         <div class="frame-link-icon">
-            <img class="link-icon" id="kategorie-block-link-icon-rechts" src="img/link-rechts-icon.png"/>
+            <img class="link-icon" id="category-block-link-icon-right" src="img/link-rechts-icon.png"/>
         </div>
     </div>
-    <div class="kategorie-block" id="kategorie-block-2" style="display: none">
+    <div class="category-block" id="category-block-2" style="display: none">
         <div class="frame-link-icon">
-            <img class="link-icon" id="kategorie-block-link-icon-links" src="img/link-links-icon.png"/>
+            <img class="link-icon" id="category-block-link-icon-left" src="img/link-links-icon.png"/>
         </div>
-        <div class="kategorie-karten">
-            <div class="kategorie-karte">
+        <div class="category-cards">
+            <div class="category-card">
                 <div class="heading-link">
                     <div class="heading">
                         <div class="label">
@@ -161,11 +161,11 @@
                         <div class="link-description">ansehen</div>
                     </div>
                 </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/kategorie-proteinreich.png">
+                <div class="image-container">
+                    <img class="image" src="img/kategorie-proteinreich.png">
                 </div>
             </div>
-            <div class="kategorie-karte">
+            <div class="category-card">
                 <div class="heading-link">
                     <div class="heading">
                         <div class="label">
@@ -182,11 +182,11 @@
                         <div class="link-description">ansehen</div>
                     </div>
                 </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/kategorie-kalorienarm.png">
+                <div class="image-container">
+                    <img class="image" src="img/kategorie-kalorienarm.png">
                 </div>
             </div>
-            <div class="kategorie-karte">
+            <div class="category-card">
                 <div class="heading-link">
                     <div class="heading">
                         <div class="label">
@@ -206,8 +206,8 @@
                         <div class="link-description">ansehen</div>
                     </div>
                 </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/kategorie-für-den-cheat-day.png">
+                <div class="image-container">
+                    <img class="image" src="img/kategorie-für-den-cheat-day.png">
                 </div>
             </div>
         </div>
@@ -225,9 +225,10 @@
         <p class="subheading">Hier findest du ausgewählte Rezepte aller Art.</p>
     </div>
     <div class="spacer" style="height: 50px"></div>
-    <div class="block-rezepte">
-        <div class="rezepte-block">
-            <div class="rezept-karte">
+    <div class="block-recipes">
+        <!-- Hier werden die Rezepte-Rows mit JS eingefügt. -->
+        <div class="recipes-row">
+            <div class="recipe-card">
                 <div class="heading-link">
                     <div class="heading">
                         <div class="label">
@@ -241,11 +242,11 @@
                         <div class="text-wrapper">Learn more</div>
                     </div>
                 </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/dish.png"/>
+                <div class="image-container">
+                    <img class="image" src="img/dish.png"/>
                 </div>
             </div>
-            <div class="rezept-karte">
+            <div class="recipe-card">
                 <div class="heading-link">
                     <div class="heading">
                         <div class="label">
@@ -259,160 +260,8 @@
                         <div class="text-wrapper">Learn more</div>
                     </div>
                 </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/dish.png"/>
-                </div>
-            </div>
-        </div>
-        <div class="rezepte-block">
-            <div class="rezept-karte">
-                <div class="heading-link">
-                    <div class="heading">
-                        <div class="label">
-                            <div class="label-text">Rezeptname</div>
-                        </div>
-                    </div>
-                    <div class="link">
-                        <div class="frame-link-icon">
-                            <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
-                        </div>
-                        <div class="text-wrapper">Learn more</div>
-                    </div>
-                </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/dish.png"/>
-                </div>
-            </div>
-            <div class="rezept-karte">
-                <div class="heading-link">
-                    <div class="heading">
-                        <div class="label">
-                            <div class="label-text">Rezeptname</div>
-                        </div>
-                    </div>
-                    <div class="link">
-                        <div class="frame-link-icon">
-                            <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
-                        </div>
-                        <div class="text-wrapper">Learn more</div>
-                    </div>
-                </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/dish.png"/>
-                </div>
-            </div>
-        </div>
-        <div class="rezepte-block">
-            <div class="rezept-karte">
-                <div class="heading-link">
-                    <div class="heading">
-                        <div class="label">
-                            <div class="label-text">Rezeptname</div>
-                        </div>
-                    </div>
-                    <div class="link">
-                        <div class="frame-link-icon">
-                            <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
-                        </div>
-                        <div class="text-wrapper">Learn more</div>
-                    </div>
-                </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/dish.png"/>
-                </div>
-            </div>
-            <div class="rezept-karte">
-                <div class="heading-link">
-                    <div class="heading">
-                        <div class="label">
-                            <div class="label-text">Rezeptname</div>
-                        </div>
-                    </div>
-                    <div class="link">
-                        <div class="frame-link-icon">
-                            <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
-                        </div>
-                        <div class="text-wrapper">Learn more</div>
-                    </div>
-                </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/dish.png"/>
-                </div>
-            </div>
-        </div>
-        <div class="rezepte-block">
-            <div class="rezept-karte">
-                <div class="heading-link">
-                    <div class="heading">
-                        <div class="label">
-                            <div class="label-text">Rezeptname</div>
-                        </div>
-                    </div>
-                    <div class="link">
-                        <div class="frame-link-icon">
-                            <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
-                        </div>
-                        <div class="text-wrapper">Learn more</div>
-                    </div>
-                </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/dish.png"/>
-                </div>
-            </div>
-            <div class="rezept-karte">
-                <div class="heading-link">
-                    <div class="heading">
-                        <div class="label">
-                            <div class="label-text">Rezeptname</div>
-                        </div>
-                    </div>
-                    <div class="link">
-                        <div class="frame-link-icon">
-                            <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
-                        </div>
-                        <div class="text-wrapper">Learn more</div>
-                    </div>
-                </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/dish.png"/>
-                </div>
-            </div>
-        </div>
-        <div class="rezepte-block">
-            <div class="rezept-karte">
-                <div class="heading-link">
-                    <div class="heading">
-                        <div class="label">
-                            <div class="label-text">Rezeptname</div>
-                        </div>
-                    </div>
-                    <div class="link">
-                        <div class="frame-link-icon">
-                            <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
-                        </div>
-                        <div class="text-wrapper">Learn more</div>
-                    </div>
-                </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/dish.png"/>
-                </div>
-            </div>
-            <div class="rezept-karte">
-                <div class="heading-link">
-                    <div class="heading">
-                        <div class="label">
-                            <div class="label-text">Rezeptname</div>
-                        </div>
-                    </div>
-                    <div class="link">
-                        <div class="frame-link-icon">
-                            <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
-                        </div>
-                        <div class="text-wrapper">Learn more</div>
-                    </div>
-                </div>
-                <div class="vorschaubild-container">
-                    <img class="vorschaubild" src="img/dish.png"/>
+                <div class="image-container">
+                    <img class="image" src="img/dish.png"/>
                 </div>
             </div>
         </div>
@@ -423,13 +272,13 @@
             <div class="contacts">
                 <div class="logo-and-name">
                     <div class="logo-cook-clever">
-                        <img class="cook-clever-ohne-schrift" src="img/logo-cook-clever-ohne-Schrift.png"/>
+                        <img class="cook-clever-without-title" src="img/logo-cook-clever-ohne-Schrift.png"/>
                     </div>
                     <div class="name-frame">
                         <div class="text-wrapper">Cook-Clever</div>
                     </div>
                 </div>
-                <div class="mitwirkende-frame">
+                <div class="contributors-frame">
                     <div class="contact-us">
                         <div class="heading">
                             <div class="label">
