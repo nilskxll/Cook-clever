@@ -37,49 +37,27 @@ function change_number_of_portions (direction) {
 }
 
 // Zutaten mit Namen und Werten einfügen
+let test_list_names = ["Basikilum", "Eier", "Mehl"]
+let test_list_values = [2, 6, "500 g"]
 function insert_ingredients() {
-    number_of_ingredients = 5
+    number_of_ingredients = test_list_names.length
+
+    // Zutatenelemente im HTML klonen
     let ingredients_frame = document.querySelector(".ingredients-frame")
-    // mit 0 angefangen, dass man aus der ingredients list direkt mit index = i einfügen kann
-    for (let i = 0; i < number_of_ingredients; i++) {
-        // HTML Elemente erstellen
-        /*<div className="ingredient">
-            <div className="name-frame">
-                <div className="name">Name der Zutat</div>
-            </div>
-            <div className="value-frame">
-                <div className="value">Menge der Zutat mit Einheit</div>
-            </div>
-        </div>*/
-        let ingredient = document.createElement("div")
-        ingredient.classList.add("ingredient")
+    let ingredient = document.querySelector(".ingredient")
+    for (let i = 1; i < number_of_ingredients; i++) {
+        let clone = ingredient.cloneNode(true)
+        ingredients_frame.appendChild(clone)
+    }
 
-        let name_frame = document.createElement("div")
-        name_frame.classList.add("name-frame")
+    // Namen und Werte der Zutaten einfügen
+    let ingredients_list = Array.from(document.querySelectorAll(".ingredient"))
+    for (let k = 0; k < number_of_ingredients; k++) {
+        let ingredient_name = ingredients_list[k].querySelector(".name")
+        let ingredient_value = ingredients_list[k].querySelector(".value")
 
-        let name = document.createElement("div")
-        name.classList.add("name")
-        name.textContent = "Name der Zutat"
-
-        let value_frame = document.createElement("div")
-        value_frame.classList.add("value-frame")
-
-        let value = document.createElement("div")
-        value.classList.add("value")
-        value.textContent = "Menge"
-
-        // Elemente zusammenfügen und in ingredients_frame im HTML Dokument einfügen
-        name_frame.appendChild(name)
-        value_frame.appendChild(value)
-        ingredient.appendChild(name_frame)
-        ingredient.appendChild(value_frame)
-        ingredients_frame.appendChild(ingredient)
+        ingredient_name.textContent = test_list_names[k]
+        ingredient_value.textContent = test_list_values[k]
     }
 }
-
-
-
 insert_ingredients()
-
-// TODO überall margin-top entfernen, wenn es unnötig ist
-// TODO anfangen, Suchergebnisse Seite in HTML zu machen
