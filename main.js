@@ -32,6 +32,7 @@ function Rezepte_auswählen (){//Zufällig
         Rezepte_IDs.splice(j,1) //damit nichts doppelt hier Element entfernt
     }
     console.log(Zufalls_Rezept_IDs)
+    console.log(window.Rezepte)
     return Zufalls_Rezept_IDs
 }
 
