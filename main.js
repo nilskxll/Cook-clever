@@ -19,3 +19,12 @@ function insert_recipes_blocks() {
 }
 
 insert_recipes_blocks()
+
+function Rezepte_auswählen (){ //Zufällig
+    let Rezepte_IDs = []
+    for (let i = 0; i < window.Rezepte.length; i++) {
+        Rezepte_IDs.push(window.Rezepte[i].Rezept_ID)
+    }
+    console.log(Rezepte_IDs)
+}
+Rezepte_auswählen()
