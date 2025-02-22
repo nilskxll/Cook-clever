@@ -1,4 +1,4 @@
-let number_of_recipes = 5
+let number_of_recipes = 6
 let number_of_recipe_blocks = Math.round(number_of_recipes / 2)
 
 // Rezepte-Rows (nach gewünschter Anzahl) erstellen
@@ -18,9 +18,8 @@ function insert_recipes_blocks() {
     }
 }
 
-insert_recipes_blocks()
-
-function Rezepte_auswählen (){//Zufällig
+// zufällige Rezepte IDs auswählen (für die Vorschläge)
+function Rezepte_auswählen (){
     let Rezepte_IDs = []
     let Zufalls_Rezept_IDs = [] //endgültige Liste, in der am ende alle zufällig ausgewählten rezepte drin sind
     for (let i = 0; i < window.Rezepte.length; i++) { //hier werden alle Rezept_Ids erstmal in eine vollständige Liste eingefügt
@@ -31,10 +30,28 @@ function Rezepte_auswählen (){//Zufällig
         Zufalls_Rezept_IDs.push(Rezepte_IDs[j]) //hier in endgültige Liste eingefügt
         Rezepte_IDs.splice(j,1) //damit nichts doppelt hier Element entfernt
     }
-    console.log(Zufalls_Rezept_IDs)
-    console.log(window.Rezepte)
+    // console.log(Zufalls_Rezept_IDs)
+    // console.log(window.Rezepte)
     return Zufalls_Rezept_IDs
 }
 
-setTimeout(Rezepte_auswählen, 1200)
-//TODO: Anpassen/ Schönere Methode finden, damit alles flüssiger Läuft (direkt nach dem alles definiert ist (von global))
+// Rezepte in die recipe-cards einfügen
+function insert_recipe_card_information() {
+    let list_IDs = Rezepte_auswählen()
+    let recipe_cards = Array.from(document.querySelectorAll(".recipe-card"))
+    for (let i = 0; i < number_of_recipes; i++) {
+        let recipe_name = recipe_cards[i].querySelector(".label-text")
+        let image = recipe_cards[i].querySelector(".image")
+
+        recipe_name.textContent = window.Rezepte[list_IDs[i] - 1].Rezeptname // 1. Zeile (Index 0) von window.Rezepte hat die Rezepte-ID 1 --> der Index in window.Rezepte ist also immer eins tiefer als dessen Rezepte-ID
+        // console.log("Rezeptename: " + recipe_name.textContent)
+        image.src = `img/recipes/${list_IDs[i]}/${window.Rezepte[list_IDs[i] - 1].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
+        // console.log("Bildquelle: " + image.srcText)
+    }
+}
+
+setTimeout(function() {
+    insert_recipes_blocks()
+    insert_recipe_card_information()
+}, 1200)
+//TODO: Anpassen/ Schönere Methode finden, damit die Funktion nicht nach einem Timeout, sondern direkt nachdem globals.js durchgelaufen ist, ausgeführt wird
