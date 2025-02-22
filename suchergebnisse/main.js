@@ -44,3 +44,4 @@ setTimeout(function() {
 // TODO: Anpassen/ Schönere Methode finden, damit die Funktion nicht nach einem Timeout, sondern direkt nachdem globals.js durchgelaufen ist, ausgeführt wird
 // TODO: anzeigen, nach was gesucht wurde
 // TODO: wird nichts gefunden, das dem Nutzer mitteilen
+// TODO: evtl die erste recipe-row aus der Startseite importieren (dass Änderungen auf der Startseite direkt übernommen werden)
