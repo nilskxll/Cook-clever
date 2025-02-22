@@ -31,9 +31,9 @@ function insert_recipe_card_information() {
         let image = recipe_cards[i].querySelector(".image")
 
         recipe_name.textContent = window.Rezepte[list_IDs[i] - 1].Rezeptname // 1. Zeile (Index 0) von window.Rezepte hat die Rezepte-ID 1 --> der Index in window.Rezepte ist also immer eins tiefer als dessen Rezepte-ID
-        console.log("Rezeptename: " + recipe_name.textContent)
+        // console.log("Rezeptename: " + recipe_name.textContent)
         image.src = `../img/recipes/${list_IDs[i]}/${window.Rezepte[list_IDs[i] - 1].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
-        console.log("Bildquelle: " + image.srcText)
+        // console.log("Bildquelle: " + image.srcText)
     }
 }
 
@@ -42,4 +42,5 @@ setTimeout(function() {
     insert_recipe_card_information()
 }, 1200)
 // TODO: Anpassen/ Schönere Methode finden, damit die Funktion nicht nach einem Timeout, sondern direkt nachdem globals.js durchgelaufen ist, ausgeführt wird
+// TODO: anzeigen, nach was gesucht wurde
 // TODO: wird nichts gefunden, das dem Nutzer mitteilen

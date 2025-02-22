@@ -33,46 +33,46 @@ function swap_category_block() {
 
 // auf Suchergebnisse-Seite wechseln mit den Rezepten der gewünschten Kategorie
 function show_vegan_recipes() {
-    console.log("vegane Rezepte anzeigen")
+    // console.log("vegane Rezepte anzeigen")
     // console.log("IDs: " + window.vegane_Rezepte)
     sessionStorage.setItem("valid_IDs", window.vegane_Rezepte)
     window.location.href = "../suchergebnisse"
 }
 
 function show_vegetarian_recipes() {
-    console.log("vegetarische Rezepte anzeigen")
+    // console.log("vegetarische Rezepte anzeigen")
     // console.log("IDs: " + window.vegetarische_Rezepte)
     sessionStorage.setItem("valid_IDs", window.vegetarische_Rezepte)
     window.location.href = "../suchergebnisse"
 }
 
 function show_meat_recipes() {
-    console.log("Rezepte mit Fleisch anzeigen")
+    // console.log("Rezepte mit Fleisch anzeigen")
     // console.log("IDs: " + window.Fleisch_Rezepte)
     sessionStorage.setItem("valid_IDs", window.Fleisch_Rezepte)
     window.location.href = "../suchergebnisse"
 }
 
 function show_protein_rich_recipes() {
-    console.log("proteinreiche Rezepte anzeigen")
+    // console.log("proteinreiche Rezepte anzeigen")
     // console.log("IDs: " + window.proteinreicheRezepte)
     sessionStorage.setItem("valid_IDs", window.proteinreicheRezepte)
     window.location.href = "../suchergebnisse"
 }
 
 function show_low_calorie_recipes() {
-    console.log("kalorienarme Rezepte anzeigen")
+    // console.log("kalorienarme Rezepte anzeigen")
     // console.log("IDs: " + window.kalorienarmeRezepte)
     sessionStorage.setItem("valid_IDs", window.kalorienarmeRezepte)
     window.location.href = "../suchergebnisse"
 }
 
 function show_cheat_day_recipes() {
-    console.log("vegane Rezepte anzeigen")
+    // console.log("vegane Rezepte anzeigen")
     // console.log("IDs: " + window.cheatmeals_Liste)
     sessionStorage.setItem("valid_IDs", window.cheatmeals_Liste)
     window.location.href = "../suchergebnisse"
 }
 
-// TODO: vlt Kategorieblöce in einen zusammenfassen, dass man eine schöne Animation machen kann
+// TODO: vlt Kategorieblöcke in einen zusammenfassen, dass man eine schöne Animation machen kann
 // TODO: sollten alle veganen Rezepte auch als vegetarisch einkategorisiert werden?
