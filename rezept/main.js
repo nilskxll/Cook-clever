@@ -76,3 +76,5 @@ function insert_ingredients_names_values() {
 }
 
 insert_ingredients()
+
+// TODO: share-button funktonierend machen

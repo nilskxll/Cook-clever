@@ -117,7 +117,7 @@ function suchFeld(big_small_header) {
             Rezepte_Suchanfrage_Liste_ID.push(Rezepte[i].Rezept_ID); // Passende Rezept-ID speichern
         }
     }
-    console.log(Rezepte_Suchanfrage_Liste_ID); // Testausgabe der gefundenen Rezept-IDs
+    // console.log(Rezepte_Suchanfrage_Liste_ID); // Testausgabe der gefundenen Rezept-IDs
     sessionStorage.setItem("valid_IDs", Rezepte_Suchanfrage_Liste_ID) // sessionStorage, dann Werte an Suchergebnisse-Seite übergeben werden können
     window.location.href = "../suchergebnisse"
 }
