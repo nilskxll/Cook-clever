@@ -67,80 +67,148 @@
     </div>
     <div class="spacer" id="header-small-spacer" style="display: none; height: 63px"></div>
     <div class="spacer" style="height: 50px"></div>
-    <div class="category-block" id="category-block-1">
+    <div class="category-block">
         <div class="frame-link-icon">
-            <img class="link-icon" src="img/link-links-icon.png" style="visibility: hidden"/>
+            <img class="link-icon" id="category-block-link-icon-left" src="img/link-links-icon.png" style="opacity: 0"/>
         </div>
-        <div class="category-cards">
-            <div class="category-card">
-                <div class="heading-link">
-                    <div class="heading">
-                        <div class="label">
-                            <div class="text-wrapper">Rezepte</div>
+        <div class="frame-categories">
+            <div class="category-cards">
+                <div class="category-card">
+                    <div class="heading-link">
+                        <div class="heading">
+                            <div class="label">
+                                <div class="text-wrapper">Rezepte</div>
+                            </div>
+                            <div class="label">
+                                <div class="text-wrapper">vegan</div>
+                            </div>
                         </div>
-                        <div class="label">
-                            <div class="text-wrapper">vegan</div>
-                        </div>
-                    </div>
-                    <div class="link-small">
-                        <div class="frame-link-icon">
-                            <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
-                        </div>
-                        <div class="link-description">ansehen</div>
-                    </div>
-                </div>
-                <div class="image-container">
-                    <img class="image vegan" src="img/kategorie-vegan.png">
-                </div>
-            </div>
-            <div class="category-card">
-                <div class="heading-link">
-                    <div class="heading">
-                        <div class="label">
-                            <div class="text-wrapper">Rezepte</div>
-                        </div>
-                        <div class="label">
-                            <div class="text-wrapper">vegetarisch</div>
+                        <div class="link-small" id="vegan-button">
+                            <div class="frame-link-icon">
+                                <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
+                            </div>
+                            <div class="link-description">ansehen</div>
                         </div>
                     </div>
-                    <div class="link-small">
-                        <div class="frame-link-icon">
-                            <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
-                        </div>
-                        <div class="link-description">ansehen</div>
+                    <div class="image-container">
+                        <img class="image vegan" src="img/kategorie-vegan.png">
                     </div>
                 </div>
-                <div class="image-container">
-                    <img class="image" src="img/kategorie-vegetarisch.png">
-                </div>
-            </div>
-            <div class="category-card">
-                <div class="heading-link">
-                    <div class="heading">
-                        <div class="label">
-                            <div class="text-wrapper">Rezepte</div>
+                <div class="category-card">
+                    <div class="heading-link">
+                        <div class="heading">
+                            <div class="label">
+                                <div class="text-wrapper">Rezepte</div>
+                            </div>
+                            <div class="label">
+                                <div class="text-wrapper">vegetarisch</div>
+                            </div>
                         </div>
-                        <div class="label">
-                            <div class="text-wrapper">mit Fleisch</div>
+                        <div class="link-small" id="vegetarian-button">
+                            <div class="frame-link-icon">
+                                <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
+                            </div>
+                            <div class="link-description">ansehen</div>
                         </div>
                     </div>
-                    <div class="link-small">
-                        <div class="frame-link-icon">
-                            <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
-                        </div>
-                        <div class="link-description">ansehen</div>
+                    <div class="image-container">
+                        <img class="image" src="img/kategorie-vegetarisch.png">
                     </div>
                 </div>
-                <div class="image-container">
-                    <img class="image" src="img/kategorie-mit-fleisch.png">
+                <div class="category-card">
+                    <div class="heading-link">
+                        <div class="heading">
+                            <div class="label">
+                                <div class="text-wrapper">Rezepte</div>
+                            </div>
+                            <div class="label">
+                                <div class="text-wrapper">mit Fleisch</div>
+                            </div>
+                        </div>
+                        <div class="link-small" id="meat-button">
+                            <div class="frame-link-icon">
+                                <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
+                            </div>
+                            <div class="link-description">ansehen</div>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <img class="image" src="img/kategorie-mit-fleisch.png">
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="heading-link">
+                        <div class="heading">
+                            <div class="label">
+                                <div class="text-wrapper">Rezepte</div>
+                            </div>
+                            <div class="label">
+                                <div class="text-wrapper">proteinreich</div>
+                            </div>
+                        </div>
+                        <div class="link-small" id="protein-rich-button">
+                            <div class="frame-link-icon">
+                                <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
+                            </div>
+                            <div class="link-description">ansehen</div>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <img class="image" src="img/kategorie-proteinreich.png">
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="heading-link">
+                        <div class="heading">
+                            <div class="label">
+                                <div class="text-wrapper">Rezepte</div>
+                            </div>
+                            <div class="label">
+                                <div class="text-wrapper">kalorienarm</div>
+                            </div>
+                        </div>
+                        <div class="link-small" id="low-calorie-button">
+                            <div class="frame-link-icon">
+                                <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
+                            </div>
+                            <div class="link-description">ansehen</div>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <img class="image" src="img/kategorie-kalorienarm.png">
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="heading-link">
+                        <div class="heading">
+                            <div class="label">
+                                <div class="text-wrapper">Rezepte</div>
+                            </div>
+                            <div class="label">
+                                <div class="text-wrapper">für den</div>
+                            </div>
+                            <div class="label">
+                                <div class="text-wrapper">Cheat-Day</div>
+                            </div>
+                        </div>
+                        <div class="link-small" id="cheat-day-button">
+                            <div class="frame-link-icon">
+                                <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
+                            </div>
+                            <div class="link-description">ansehen</div>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <img class="image" src="img/kategorie-für-den-cheat-day.png">
+                    </div>
                 </div>
             </div>
         </div>
         <div class="frame-link-icon">
-            <img class="link-icon" id="category-block-link-icon-right" src="img/link-rechts-icon.png"/>
+            <img class="link-icon" id="category-block-link-icon-right" src="img/link-rechts-icon.png" style="opacity: 1"/>
         </div>
     </div>
-    <div class="category-block" id="category-block-2" style="display: none">
+    <!--<div class="category-block" id="category-block-2" style="display: none">
         <div class="frame-link-icon">
             <img class="link-icon" id="category-block-link-icon-left" src="img/link-links-icon.png"/>
         </div>
@@ -155,7 +223,7 @@
                             <div class="text-wrapper">proteinreich</div>
                         </div>
                     </div>
-                    <div class="link-small">
+                    <div class="link-small" id="protein-rich-button">
                         <div class="frame-link-icon">
                             <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
                         </div>
@@ -176,7 +244,7 @@
                             <div class="text-wrapper">kalorienarm</div>
                         </div>
                     </div>
-                    <div class="link-small">
+                    <div class="link-small" id="low-calorie-button">
                         <div class="frame-link-icon">
                             <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
                         </div>
@@ -200,7 +268,7 @@
                             <div class="text-wrapper">Cheat-Day</div>
                         </div>
                     </div>
-                    <div class="link-small">
+                    <div class="link-small" id="cheat-day-button">
                         <div class="frame-link-icon">
                             <img class="link-icon" src="img/link-rechts-oben-icon.png"/>
                         </div>
@@ -215,7 +283,7 @@
         <div class="frame-link-icon">
             <img class="link-icon" src="img/link-rechts-icon.png" style="visibility: hidden"/>
         </div>
-    </div>
+    </div>-->
     <div class="spacer" style="height: 50px"></div>
     <div class="heading-subheading">
         <div class="heading">
@@ -287,8 +355,8 @@
                             </div>
                         </div>
                         <div class="info">
-                            <div class="text-wrapper">Nils Kullmann</div>
-                            <div class="text-wrapper-2">Lukas Müller</div>
+                            <div class="text-wrapper">Lukas Müller</div>
+                            <div class="text-wrapper-2">Nils Kullmann</div>
                             <div class="text-wrapper-2">Leonie Pfaff</div>
                         </div>
                     </div>
@@ -297,8 +365,8 @@
             <div class="line-and-text">
                 <img class="line" src="img/line.png"/>
                 <div class="text">
-                    <p class="element-cook-clever">2025&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cook-Clever.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Informatik
-                        12.&nbsp;&nbsp;&nbsp;&nbsp;Gottfried-Wilhelm-Leibniz Gymnasium.</p>
+                    <p class="element-cook-clever">2025&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cook-Clever&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Informatik
+                        12&nbsp;&nbsp;&nbsp;&nbsp;Gottfried-Wilhelm-Leibniz Gymnasium</p>
                 </div>
             </div>
         </div>

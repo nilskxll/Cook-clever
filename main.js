@@ -1,4 +1,4 @@
-let number_of_recipes = 6
+let number_of_recipes = 8
 let number_of_recipe_blocks = Math.round(number_of_recipes / 2)
 
 // Rezepte-Rows (nach gewünschter Anzahl) erstellen

@@ -21,4 +21,27 @@ function insert_recipes_blocks() {
     }
 }
 
-insert_recipes_blocks()
+// Rezepte in die recipe-cards einfügen
+function insert_recipe_card_information() {
+    let list_IDs = valid_IDs
+    console.log("test")
+    let recipe_cards = Array.from(document.querySelectorAll(".recipe-card"))
+    for (let i = 0; i < number_of_recipes; i++) {
+        let recipe_name = recipe_cards[i].querySelector(".label-text")
+        let image = recipe_cards[i].querySelector(".image")
+
+        recipe_name.textContent = window.Rezepte[list_IDs[i] - 1].Rezeptname // 1. Zeile (Index 0) von window.Rezepte hat die Rezepte-ID 1 --> der Index in window.Rezepte ist also immer eins tiefer als dessen Rezepte-ID
+        // console.log("Rezeptename: " + recipe_name.textContent)
+        image.src = `../img/recipes/${list_IDs[i]}/${window.Rezepte[list_IDs[i] - 1].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
+        // console.log("Bildquelle: " + image.srcText)
+    }
+}
+
+setTimeout(function() {
+    insert_recipes_blocks()
+    insert_recipe_card_information()
+}, 1200)
+// TODO: Anpassen/ Schönere Methode finden, damit die Funktion nicht nach einem Timeout, sondern direkt nachdem globals.js durchgelaufen ist, ausgeführt wird
+// TODO: anzeigen, nach was gesucht wurde
+// TODO: wird nichts gefunden, das dem Nutzer mitteilen
+// TODO: evtl die erste recipe-row aus der Startseite importieren (dass Änderungen auf der Startseite direkt übernommen werden)
