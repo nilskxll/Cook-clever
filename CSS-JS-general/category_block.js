@@ -1,4 +1,4 @@
-let category_cards = document.querySelector(".category-cards")
+let category_cards = Array.from(document.querySelectorAll(".category-cards"))
 let category_block_link_icon_right = document.getElementById("category-block-link-icon-right")
 let category_block_link_icon_left = document.getElementById("category-block-link-icon-left")
 let vegan_button = document.getElementById("vegan-button")
@@ -21,29 +21,29 @@ cheat_day_button.addEventListener("click", show_cheat_day_recipes)
 // angezeigte Kategorien wechseln, beim Klicken auf den Pfeil links bzw. rechts
 function move_category_block() {
     // console.log("Kategorie swap gedrückt")
-    category_cards.classList.toggle("second-page")
-    if (category_cards.classList.contains("second-page")) {
+    console.log("länge " + category_cards.length)
+    // auf die zwei categorie-cards container die Klasse togglen
+    for (let i = 0; i < category_cards.length; i++) {
+        category_cards[i].classList.toggle("second-page")
+    }
+    // die Buttons rechte und links dazu- bzw. wegmachen
+    if (category_cards[0].classList.contains("second-page")) {
         category_block_link_icon_right.style.opacity = "0"
         category_block_link_icon_left.style.visibility = ""
         category_block_link_icon_left.style.opacity = "1"
-        setTimeout(function() {
+        // Timeout wegen der Dauer der Transition
+        setTimeout(function () {
             category_block_link_icon_right.style.visibility = "hidden"
         }, 400)
     } else {
         category_block_link_icon_left.style.opacity = "0"
         category_block_link_icon_right.style.visibility = ""
         category_block_link_icon_right.style.opacity = "1"
-        setTimeout(function() {
+        setTimeout(function () {
             category_block_link_icon_left.style.visibility = "hidden"
         }, 400)
     }
-    /*if (category_block_1.style.display === "") {
-        category_block_1.style.display = "none"
-        category_block_2.style.display = ""
-    } else {
-        category_block_2.style.display = "none"
-        category_block_1.style.display = ""
-    }*/
+
 }
 
 // auf Suchergebnisse-Seite wechseln mit den Rezepten der gewünschten Kategorie
