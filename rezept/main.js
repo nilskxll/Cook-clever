@@ -6,6 +6,19 @@ let number_of_ingredients
 let recipe_id
 let aktuell_Liste_Nährwerte = []
 
+let aktuelle_Nährwerte, aktuelle_Zutaten, aktuelles_Rezept // ist das aktuelle Rezept welches ausgewählt ist. Sozusagen dann eine Liste mit eben allen Informationen zu diesem einen konkreten rezept. So zu sagen jedes von denen hat dann eine Zeile der Tabelle aus der Db (da mehrere Tabellen, werden auch mehrere Variablen benötigt
+let aktueller_Rezept_Name, aktuelle_Anleitung, aktuelle_Essgewohnheit // werden die grundlegenden Informationen des Rezeptes ausgegeben
+let aktuelle_Arbeitszeit, aktuelle_Kochzeit, aktuelle_Gesamtzeit // Wird die Zeit für das aktuell ausgewählte Rezept gespeichert
+let Kochzeit_h, Kochzeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
+let Arbeitszeit_h, Arbeitszeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
+let Gesamtzeit_h, Gesamtzeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
+let zutatenListe = [], mengenListe = [], einheitenListe = [] //
+let zutat // ist wie i in der dann verwendeten for-schleife. So aber verständlicher mit dem Namen
+let mengenListe_plus_portionen // einfach die Liste, in der die Mengenangaben multipliziert stehen (im Vergleich zu der mengenListe wo nur für eine Person gerechnet ist)
+let portionen = 1 // Anzahl aktuell ausgewählter Portionen
+
+
+
 minus_button.addEventListener("click", function() {change_number_of_portions("down")})
 plus_button.addEventListener("click", function() {change_number_of_portions("up")})
 
