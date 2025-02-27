@@ -13,9 +13,7 @@ let Kochzeit_h, Kochzeit_min //geteilt in einmal Minuten und Stunden (je nach de
 let Arbeitszeit_h, Arbeitszeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
 let Gesamtzeit_h, Gesamtzeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
 let zutatenListe = [], mengenListe = [], einheitenListe = [] //
-let zutat // ist wie i in der dann verwendeten for-schleife. So aber verständlicher mit dem Namen
 let mengenListe_plus_portionen // einfach die Liste, in der die Mengenangaben multipliziert stehen (im Vergleich zu der mengenListe wo nur für eine Person gerechnet ist)
-let portionen = 1 // Anzahl aktuell ausgewählter Portionen
 
 
 
@@ -31,7 +29,6 @@ function set_recipe_ID() {
 // Rezept Werte zuweisen
 function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit variable "aktuell" übergeben, wird in die einzelnen Variablen definiert, um diese dann in folgenden Schritten aufrufen zu können
     if (aktuell <= Rezepte.length) { //überprüfen ob Rezept überhaupt vorhanden (eventuell unnötig)
-        portionen = 1 // Immer wenn neues Rezept aufgerufen wird, ist es Standardmäßig auf einer Portion
         aktuelle_Nährwerte = window.Nährwerte[aktuell - 1] // Wir bei 1 anfangen und Computer bei 0 deshalb minus 1. Allgemein wird in den Zeilen einfach nur eine Zeile (mit Rezept_ID === aktuell) den jeweiligen Listen zugewiesen
         aktuelles_Rezept = window.Rezepte[aktuell - 1]
         aktuelle_Zutaten = window.Zutaten[aktuell - 1]
@@ -58,11 +55,12 @@ function Zutaten_in_Listen_umwandeln(){
     zutatenListe.length = 0 //wichtig das die Listen sobald man von einem rezept aufs nächste klickt auch die Listen wieder leer sind
     mengenListe.length = 0
     einheitenListe.length = 0
+    let zutat // ist wie i in der dann verwendeten for-schleife. So aber verständlicher mit dem Namen
     for (zutat in aktuelle_Zutaten){ // jede Zutat wird einmal durchgegangen
-        let menge = aktuelle_Zutaten[zutat] // die menge ( wie viel von einer Zutat) wird gespeichert in "menge")
+        let menge = aktuelle_Zutaten[zutat] // die menge (wie viel von einer Zutat) wird gespeichert in "menge")
 
         if (menge !== null && zutat !== "Rezept_ID"){ // wenn die menge dann "Null" ist, dann ist diese Zutat nicht in diesem Rezept vorhanden (nur in anderen) und wird herausgefiltert. Natürlich Rezept_ID auch keine Zutat, deshalb auch rausgefiltert.
-            zutatenListe.push(zutat) // falls aber alles passt wird es in die Listen hinein gepushed (in richtiger Reihenfolge (Also wie in DB und nicht Alphabetisch (macht für uns keinen Unterschied))
+            zutatenListe.push(zutat) // falls aber alles passt, wird es in die Listen hinein gepushed (in richtiger Reihenfolge (Also wie in DB und nicht Alphabetisch (macht für uns keinen Unterschied))
             mengenListe.push(menge) //das gleiche mit der Menge
             let einheit_Objekte = Einheiten.find(Objekt_Zutat => Objekt_Zutat.Zutat === zutat); // da Einheiten eine Liste mit Objekten ist, muss dort die aktuelle zutat in den Objekten gesucht werden (find)
             einheitenListe.push(einheit_Objekte ? einheit_Objekte.Einheit : ""); // Falls keine Einheit gefunden wird, bleibt es leer
