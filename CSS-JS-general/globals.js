@@ -52,7 +52,7 @@ function swap_header() {
 // zum Footer scrollen, wenn man im Header auf About us klickt
 function scroll_to_bottom() {
     document.documentElement.scrollTop = document.documentElement.scrollHeight
-    console.log("about us gedrückt")
+    // console.log("about us gedrückt")
 }
 
 

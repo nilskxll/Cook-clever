@@ -1,11 +1,10 @@
-let recipe_name = document.getElementById("recipe-name")
 let minus_button = document.getElementById("minus-button")
 let plus_button = document.getElementById("plus-button")
 let number_of_portions_text = document.querySelector(".number-of-portions-frame .value")
 let number_of_ingredients
 let recipe_id
-let aktuell_Liste_Nährwerte = []
 
+let aktuell_Liste_Nährwerte = []
 let aktuelle_Nährwerte, aktuelle_Zutaten, aktuelles_Rezept // ist das aktuelle Rezept welches ausgewählt ist. Sozusagen dann eine Liste mit eben allen Informationen zu diesem einen konkreten rezept. So zu sagen jedes von denen hat dann eine Zeile der Tabelle aus der Db (da mehrere Tabellen, werden auch mehrere Variablen benötigt
 let aktueller_Rezept_Name, aktuelle_Anleitung, aktuelle_Essgewohnheit // werden die grundlegenden Informationen des Rezeptes ausgegeben
 let aktuelle_Arbeitszeit, aktuelle_Kochzeit, aktuelle_Gesamtzeit // Wird die Zeit für das aktuell ausgewählte Rezept gespeichert
@@ -16,9 +15,9 @@ let zutatenListe = [], mengenListe = [], einheitenListe = [] //
 let mengenListe_plus_portionen // einfach die Liste, in der die Mengenangaben multipliziert stehen (im Vergleich zu der mengenListe wo nur für eine Person gerechnet ist)
 
 
-
 minus_button.addEventListener("click", function() {change_number_of_portions("down")})
 plus_button.addEventListener("click", function() {change_number_of_portions("up")})
+
 
 
 // Rezept-ID abfragen
@@ -26,7 +25,7 @@ function set_recipe_ID() {
     recipe_id = 1
 }
 
-// Rezept Werte zuweisen
+// Rezept Werte zuweisen (Nährwerte, Name, Essgewohnheit Zeiten, Anleitung)
 function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit variable "aktuell" übergeben, wird in die einzelnen Variablen definiert, um diese dann in folgenden Schritten aufrufen zu können
     if (aktuell <= Rezepte.length) { //überprüfen ob Rezept überhaupt vorhanden (eventuell unnötig)
         aktuelle_Nährwerte = window.Nährwerte[aktuell - 1] // Wir bei 1 anfangen und Computer bei 0 deshalb minus 1. Allgemein wird in den Zeilen einfach nur eine Zeile (mit Rezept_ID === aktuell) den jeweiligen Listen zugewiesen
@@ -74,7 +73,6 @@ function portionenRechner(Portionen){
         Zutaten_in_Listen_umwandeln()
     }
     mengenListe_plus_portionen = mengenListe.map(menge => menge * Portionen) //hier wird einfach nur die aktuelle mengenListe mal die eingegeben Portionen gerechnet und gespeichert
-    Zutaten_ausgeben()
 }
 
 // Zeit in Minuten und Stunden rechnen
@@ -91,12 +89,21 @@ function zeit_umrechnen(){ //hier wird einfach nur die Zeit, falls sie über 60m
 
 // Rezeptname einfügen
 function insert_recipe_name() {
-    recipe_name.textContent = ""
+    let recipe_name = document.getElementById("recipe-name")
+    recipe_name.textContent = aktueller_Rezept_Name
 }
 
 // Nährwerte einfügen
 function insert_nutrients() {
-
+    let nutrients_list = Array.from(document.querySelectorAll(".naehrwertangaben .angabe"))
+    for (let i = 0; i < nutrients_list.length; i++) {
+        let value = nutrients_list[i].querySelector(".value")
+        if (i === 0) {
+            value.textContent = `${aktuell_Liste_Nährwerte[i]} kcal`
+        } else {
+            value.textContent = `${aktuell_Liste_Nährwerte[i]} g`
+        }
+    }
 }
 
 // Zeiten einfügen
@@ -196,28 +203,10 @@ function insert_ingredients_names_values() {
         }
     }
 }
-
-// Rezeptdetails einfügen
-function insert_recipe() {
-    set_recipe_ID()
-    aktuelles_Rezept_Werte_zuweisen(recipe_id)
-    Zutaten_in_Listen_umwandeln()
-    portionenRechner(extract_number_of_portions())
-    zeit_umrechnen()
-    insert_recipe_name()
-    insert_nutrients()
-    Werte_Rezept_ausgeben_Zeit()
-    insert_ingredients()
-}
-
-insert_recipe()
-
-// TODO: share-button funktonierend machen
-
-
-function Zutaten_ausgeben(){
+// von Nils
+function Zutaten_ausgeben(Portionen){
     let zutatenText = ""
-    if (portionen === 1){//entweder die mit einer Portion
+    if (Portionen === 1){//entweder die mit einer Portion
         for (i = 0; i < mengenListe.length; i++){ //dabei geht die for-schleife jedes Objekt in der Liste durch
             if (mengenListe[i] === 0){ // Wenn die mengenListe 0 Anzeigt bedeutet das, dass diese Zutat keine Menge besitzt (Salz)
                 zutatenText += zutatenListe[i] + "\n"//der \n macht einfach nur, das es in eine Neue Zeile in den String gesetzt wird
@@ -241,3 +230,25 @@ function Zutaten_ausgeben(){
     }
 
 }
+
+// Rezeptdetails einfügen
+function insert_recipe() {
+    set_recipe_ID()
+    aktuelles_Rezept_Werte_zuweisen(recipe_id)
+    Zutaten_in_Listen_umwandeln()
+    /*portionenRechner(extract_number_of_portions())
+    Zutaten_ausgeben(extract_number_of_portions())*/
+    zeit_umrechnen()
+
+    insert_recipe_name()
+    insert_nutrients()
+    Werte_Rezept_ausgeben_Zeit()
+    insert_ingredients()
+}
+
+setTimeout(insert_recipe, 1200)
+
+// TODO: share-button funktonierend machen
+// TODO: portionenRechner und mengenListe_plus_portionen können doch weg? wenn man einfach immer die Zutatenangaben mit der Portionenzahl multipliziert (macht ja bei 1 keinen Unterschied)
+// TODO: variable zutat entfernen und mit i ersetzen(ist verständlicher)
+// TODO: Datenbankabfrage nicht bei jeder Seite machen, sondern einmal auf Startseite und das mit sessionStorage an jede andere Seite übergeben
