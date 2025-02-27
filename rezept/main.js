@@ -1,12 +1,21 @@
+let recipe_name = document.getElementById("recipe-name")
 let minus_button = document.getElementById("minus-button")
 let plus_button = document.getElementById("plus-button")
 let number_of_portions_text = document.querySelector(".number-of-portions-frame .value")
 let number_of_ingredients
+let recipe_id
 let aktuell_Liste_Nährwerte = []
 
 minus_button.addEventListener("click", function() {change_number_of_portions("down")})
 plus_button.addEventListener("click", function() {change_number_of_portions("up")})
 
+
+// Rezept-ID abfragen
+function set_recipe_ID() {
+    recipe_id = 1
+}
+
+// Rezept Werte zuweisen
 function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit variable "aktuell" übergeben, wird in die einzelnen Variablen definiert, um diese dann in folgenden Schritten aufrufen zu können
     if (aktuell <= Rezepte.length) { //überprüfen ob Rezept überhaupt vorhanden (eventuell unnötig)
         portionen = 1 // Immer wenn neues Rezept aufgerufen wird, ist es Standardmäßig auf einer Portion
@@ -21,7 +30,6 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit 
         aktuell_Liste_Nährwerte.push(aktuelle_Nährwerte.zugesetzer_Zucker)
         aktuell_Liste_Nährwerte.push(aktuelle_Nährwerte.Ballaststoffe)
 
-
         aktueller_Rezept_Name = aktuelles_Rezept.Rezeptname // gleiche wie bei den Nährwerten auch bei den allgemeinen Informationen zu dem Rezept
         aktuelle_Anleitung = aktuelles_Rezept.Anleitung
         aktuelle_Essgewohnheit = aktuelles_Rezept.Essgewohnheit
@@ -32,6 +40,33 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit 
     }
 }
 
+// Zutaten-Listen erstellen
+function Zutaten_in_Listen_umwandeln(){
+    zutatenListe.length = 0 //wichtig das die Listen sobald man von einem rezept aufs nächste klickt auch die Listen wieder leer sind
+    mengenListe.length = 0
+    einheitenListe.length = 0
+    for (zutat in aktuelle_Zutaten){ // jede Zutat wird einmal durchgegangen
+        let menge = aktuelle_Zutaten[zutat] // die menge ( wie viel von einer Zutat) wird gespeichert in "menge")
+
+        if (menge !== null && zutat !== "Rezept_ID"){ // wenn die menge dann "Null" ist, dann ist diese Zutat nicht in diesem Rezept vorhanden (nur in anderen) und wird herausgefiltert. Natürlich Rezept_ID auch keine Zutat, deshalb auch rausgefiltert.
+            zutatenListe.push(zutat) // falls aber alles passt wird es in die Listen hinein gepushed (in richtiger Reihenfolge (Also wie in DB und nicht Alphabetisch (macht für uns keinen Unterschied))
+            mengenListe.push(menge) //das gleiche mit der Menge
+            let einheit_Objekte = Einheiten.find(Objekt_Zutat => Objekt_Zutat.Zutat === zutat); // da Einheiten eine Liste mit Objekten ist, muss dort die aktuelle zutat in den Objekten gesucht werden (find)
+            einheitenListe.push(einheit_Objekte ? einheit_Objekte.Einheit : ""); // Falls keine Einheit gefunden wird, bleibt es leer
+        }
+    }
+}
+
+// Zutaten der Portionszahl anpassen
+function portionenRechner(Portionen){
+    if(mengenListe.length === 0) { // überprüfen ob die Liste leer ist, falls ja brauch er ja die Funktion nicht ausführen und lässt nochmal die Liste definieren (ist sozusagen eine sicherheit)
+        Zutaten_in_Listen_umwandeln()
+    }
+    mengenListe_plus_portionen = mengenListe.map(menge => menge * Portionen) //hier wird einfach nur die aktuelle mengenListe mal die eingegeben Portionen gerechnet und gespeichert
+    Zutaten_ausgeben()
+}
+
+// Zeit in Minuten und Stunden rechnen
 function zeit_umrechnen(){ //hier wird einfach nur die Zeit, falls sie über 60min ist umgerechnet in h und der rest bleibt in Minuten (wird aber auch mit ausgegeben)
     Arbeitszeit_h = Math.floor(aktuelle_Arbeitszeit / 60)
     Arbeitszeit_min = aktuelle_Arbeitszeit % 60
@@ -43,7 +78,17 @@ function zeit_umrechnen(){ //hier wird einfach nur die Zeit, falls sie über 60m
     Gesamtzeit_min = aktuelle_Gesamtzeit % 60
 }
 
+// Rezeptname einfügen
+function insert_recipe_name() {
+    recipe_name.textContent = ""
+}
 
+// Nährwerte einfügen
+function insert_nutrients() {
+
+}
+
+// Zeiten einfügen
 function Werte_Rezept_ausgeben_Zeit(){//die definierten JS Variablen werden einfach in eine Variable in HTML gepackt
     if (Arbeitszeit_h === 0) { //falls halt unter 60min dann ohne Stunden, wenn mehr als 60min dann mit Stunden ausgeben
         document.getElementById("Arbeitszeit").innerText = Arbeitszeit_min + "min"
@@ -73,15 +118,6 @@ function Werte_Rezept_ausgeben_Zeit(){//die definierten JS Variablen werden einf
         }
     }
 }
-
-function portionenRechner(Portionen){
-    if(mengenListe.length === 0) { // überprüfen ob die Liste leer ist, falls ja brauch er ja die Funktion nicht ausführen und lässt nochmal die Liste definieren (ist sozusagen eine sicherheit)
-        Zutaten_in_Listen_umwandeln()
-    }
-    mengenListe_plus_portionen = mengenListe.map(menge => menge * Portionen) //hier wird einfach nur die aktuelle mengenListe mal die eingegeben Portionen gerechnet und gespeichert
-    Zutaten_ausgeben()
-}
-
 
 // Anzahl der Portionen extrahieren
 function extract_number_of_portions() {
@@ -150,23 +186,20 @@ function insert_ingredients_names_values() {
     }
 }
 
-insert_ingredients()
-aktuelles_Rezept_Werte_zuweisen(1)
+// Rezeptdetails einfügen
+function insert_recipe() {
+    set_recipe_ID()
+    aktuelles_Rezept_Werte_zuweisen(recipe_id)
+    Zutaten_in_Listen_umwandeln()
+    portionenRechner(extract_number_of_portions())
+    zeit_umrechnen()
+    insert_recipe_name()
+    insert_nutrients()
+    Werte_Rezept_ausgeben_Zeit()
+    insert_ingredients()
+}
+
+insert_recipe()
 
 // TODO: share-button funktonierend machen
 
-function Zutaten_in_Listen_umwandeln(){
-    zutatenListe.length = 0 //wichtig das die Listen sobald man von einem rezept aufs nächste klickt auch die Listen wieder leer sind
-    mengenListe.length = 0
-    einheitenListe.length = 0
-    for (zutat in aktuelle_Zutaten){ // jede Zutat wird einmal durchgegangen
-        let menge = aktuelle_Zutaten[zutat] // die menge ( wie viel von einer Zutat) wird gespeichert in "menge")
-
-        if (menge !== null && zutat !== "Rezept_ID"){ // wenn die menge dann "Null" ist, dann ist diese Zutat nicht in diesem Rezept vorhanden (nur in anderen) und wird herausgefiltert. Natürlich Rezept_ID auch keine Zutat, deshalb auch rausgefiltert.
-            zutatenListe.push(zutat) // falls aber alles passt wird es in die Listen hinein gepushed (in richtiger Reihenfolge (Also wie in DB und nicht Alphabetisch (macht für uns keinen Unterschied))
-            mengenListe.push(menge) //das gleiche mit der Menge
-            let einheit_Objekte = Einheiten.find(Objekt_Zutat => Objekt_Zutat.Zutat === zutat); // da Einheiten eine Liste mit Objekten ist, muss dort die aktuelle zutat in den Objekten gesucht werden (find)
-            einheitenListe.push(einheit_Objekte ? einheit_Objekte.Einheit : ""); // Falls keine Einheit gefunden wird, bleibt es leer
-        }
-    }
-}

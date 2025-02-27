@@ -89,5 +89,4 @@ function show_cheat_day_recipes() {
     window.location.href = "../suchergebnisse"
 }
 
-// TODO: vlt Kategorieblöcke in einen zusammenfassen, dass man eine schöne Animation machen kann
 // TODO: sollten alle veganen Rezepte auch als vegetarisch einkategorisiert werden?
