@@ -154,3 +154,19 @@ insert_ingredients()
 aktuelles_Rezept_Werte_zuweisen(1)
 
 // TODO: share-button funktonierend machen
+
+function Zutaten_in_Listen_umwandeln(){
+    zutatenListe.length = 0 //wichtig das die Listen sobald man von einem rezept aufs nächste klickt auch die Listen wieder leer sind
+    mengenListe.length = 0
+    einheitenListe.length = 0
+    for (zutat in aktuelle_Zutaten){ // jede Zutat wird einmal durchgegangen
+        let menge = aktuelle_Zutaten[zutat] // die menge ( wie viel von einer Zutat) wird gespeichert in "menge")
+
+        if (menge !== null && zutat !== "Rezept_ID"){ // wenn die menge dann "Null" ist, dann ist diese Zutat nicht in diesem Rezept vorhanden (nur in anderen) und wird herausgefiltert. Natürlich Rezept_ID auch keine Zutat, deshalb auch rausgefiltert.
+            zutatenListe.push(zutat) // falls aber alles passt wird es in die Listen hinein gepushed (in richtiger Reihenfolge (Also wie in DB und nicht Alphabetisch (macht für uns keinen Unterschied))
+            mengenListe.push(menge) //das gleiche mit der Menge
+            let einheit_Objekte = Einheiten.find(Objekt_Zutat => Objekt_Zutat.Zutat === zutat); // da Einheiten eine Liste mit Objekten ist, muss dort die aktuelle zutat in den Objekten gesucht werden (find)
+            einheitenListe.push(einheit_Objekte ? einheit_Objekte.Einheit : ""); // Falls keine Einheit gefunden wird, bleibt es leer
+        }
+    }
+}
