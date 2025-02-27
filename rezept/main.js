@@ -203,3 +203,30 @@ insert_recipe()
 
 // TODO: share-button funktonierend machen
 
+
+function Zutaten_ausgeben(){
+    let zutatenText = ""
+    if (portionen === 1){//entweder die mit einer Portion
+        for (i = 0; i < mengenListe.length; i++){ //dabei geht die for-schleife jedes Objekt in der Liste durch
+            if (mengenListe[i] === 0){ // Wenn die mengenListe 0 Anzeigt bedeutet das, dass diese Zutat keine Menge besitzt (Salz)
+                zutatenText += zutatenListe[i] + "\n"//der \n macht einfach nur, das es in eine Neue Zeile in den String gesetzt wird
+            }
+            else { //andern Falls gibt es die Menge und Einheit aus und dann die Zutat, Falls keine Einheit wird einfach nur "" angefügt (also wie nichts)
+                zutatenText += mengenListe[i] + einheitenListe[i] + " " + zutatenListe[i] + "\n" //der \n macht einfach nur, das es in eine Neue Zeile in den String gesetzt wird
+            }
+        }
+        document.getElementById("Zutaten").innerText = zutatenText
+    }
+    else { //oder mit beliebiger Anzahl an Portionen, Aber sonst eins zu eins gleich von Funktion, nimmt nur andere Liste als Berechnung
+        for (i = 0; i < mengenListe_plus_portionen.length; i++){
+            if (mengenListe_plus_portionen[i] === 0){
+                zutatenText += zutatenListe[i] + "\n"
+            }
+            else {
+                zutatenText += mengenListe_plus_portionen[i] + einheitenListe[i] + " " + zutatenListe[i] + "\n"
+            }
+        }
+        document.getElementById("Zutaten").innerText = zutatenText;
+    }
+
+}
