@@ -49,43 +49,43 @@ function move_category_block() {
 // auf Suchergebnisse-Seite wechseln mit den Rezepten der gewünschten Kategorie
 function show_vegan_recipes() {
     // console.log("vegane Rezepte anzeigen")
-    // console.log("IDs: " + window.vegane_Rezepte)
-    sessionStorage.setItem("valid_IDs", window.vegane_Rezepte)
+    // console.log("IDs: " + vegane_Rezepte)
+    sessionStorage.setItem("valid_IDs", JSON.stringify(vegane_Rezepte))
     window.location.href = "../suchergebnisse"
 }
 
 function show_vegetarian_recipes() {
     // console.log("vegetarische Rezepte anzeigen")
-    // console.log("IDs: " + window.vegetarische_Rezepte)
-    sessionStorage.setItem("valid_IDs", window.vegetarische_Rezepte)
+    // console.log("IDs: " + vegetarische_Rezepte)
+    sessionStorage.setItem("valid_IDs", JSON.stringify(vegetarische_Rezepte))
     window.location.href = "../suchergebnisse"
 }
 
 function show_meat_recipes() {
     // console.log("Rezepte mit Fleisch anzeigen")
-    // console.log("IDs: " + window.Fleisch_Rezepte)
-    sessionStorage.setItem("valid_IDs", window.Fleisch_Rezepte)
+    // console.log("IDs: " + Fleisch_Rezepte)
+    sessionStorage.setItem("valid_IDs", JSON.stringify(Fleisch_Rezepte))
     window.location.href = "../suchergebnisse"
 }
 
 function show_protein_rich_recipes() {
     // console.log("proteinreiche Rezepte anzeigen")
-    // console.log("IDs: " + window.proteinreicheRezepte)
-    sessionStorage.setItem("valid_IDs", window.proteinreicheRezepte)
+    // console.log("IDs: " + proteinreicheRezepte)
+    sessionStorage.setItem("valid_IDs", JSON.stringify(proteinreicheRezepte))
     window.location.href = "../suchergebnisse"
 }
 
 function show_low_calorie_recipes() {
     // console.log("kalorienarme Rezepte anzeigen")
-    // console.log("IDs: " + window.kalorienarmeRezepte)
-    sessionStorage.setItem("valid_IDs", window.kalorienarmeRezepte)
+    // console.log("IDs: " + kalorienarmeRezepte)
+    sessionStorage.setItem("valid_IDs", JSON.stringify(kalorienarmeRezepte))
     window.location.href = "../suchergebnisse"
 }
 
 function show_cheat_day_recipes() {
     // console.log("vegane Rezepte anzeigen")
-    // console.log("IDs: " + window.cheatmeals_Liste)
-    sessionStorage.setItem("valid_IDs", window.cheatmeals_Liste)
+    // console.log("IDs: " + cheatmeals_Liste)
+    sessionStorage.setItem("valid_IDs", JSON.stringify(cheatmeals_Liste))
     window.location.href = "../suchergebnisse"
 }
 

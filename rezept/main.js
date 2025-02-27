@@ -1,3 +1,14 @@
+let Rezepte = JSON.parse(sessionStorage.getItem("Rezepte"))
+let Nährwerte = JSON.parse(sessionStorage.getItem("Nährwerte"))
+let Zutaten = JSON.parse(sessionStorage.getItem("Zutaten"))
+let Einheiten = JSON.parse(sessionStorage.getItem("Einheiten"))
+let cheatmeals_Liste = JSON.parse(sessionStorage.getItem("cheatmeals_Liste"))
+let kalorienarmeRezepte = JSON.parse(sessionStorage.getItem("kalorienarmeRezepte"))
+let proteinreicheRezepte = JSON.parse(sessionStorage.getItem("proteinreicheRezepte"))
+let vegetarische_Rezepte = JSON.parse(sessionStorage.getItem("vegetarische_Rezepte"))
+let vegane_Rezepte = JSON.parse(sessionStorage.getItem("vegane_Rezepte"))
+let Fleisch_Rezepte = JSON.parse(sessionStorage.getItem("Fleisch_Rezepte"))
+
 let minus_button = document.getElementById("minus-button")
 let plus_button = document.getElementById("plus-button")
 let number_of_portions_text = document.querySelector(".number-of-portions-frame .value")
@@ -20,6 +31,7 @@ plus_button.addEventListener("click", function() {change_number_of_portions("up"
 
 
 
+
 // Rezept-ID abfragen
 function set_recipe_ID() {
     recipe_id = 1
@@ -28,9 +40,9 @@ function set_recipe_ID() {
 // Rezept Werte zuweisen (Nährwerte, Name, Essgewohnheit Zeiten, Anleitung)
 function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit variable "aktuell" übergeben, wird in die einzelnen Variablen definiert, um diese dann in folgenden Schritten aufrufen zu können
     if (aktuell <= Rezepte.length) { //überprüfen ob Rezept überhaupt vorhanden (eventuell unnötig)
-        aktuelle_Nährwerte = window.Nährwerte[aktuell - 1] // Wir bei 1 anfangen und Computer bei 0 deshalb minus 1. Allgemein wird in den Zeilen einfach nur eine Zeile (mit Rezept_ID === aktuell) den jeweiligen Listen zugewiesen
-        aktuelles_Rezept = window.Rezepte[aktuell - 1]
-        aktuelle_Zutaten = window.Zutaten[aktuell - 1]
+        aktuelle_Nährwerte = Nährwerte[aktuell - 1] // Wir bei 1 anfangen und Computer bei 0 deshalb minus 1. Allgemein wird in den Zeilen einfach nur eine Zeile (mit Rezept_ID === aktuell) den jeweiligen Listen zugewiesen
+        aktuelles_Rezept = Rezepte[aktuell - 1]
+        aktuelle_Zutaten = Zutaten[aktuell - 1]
 
         aktuell_Liste_Nährwerte.push(aktuelle_Nährwerte.Kalorien) // in den folgenden Zeilen wird dann aus der eben Definierten Liste, verschiedene Objekte definiert (damit besser abrufbar)
         aktuell_Liste_Nährwerte.push(aktuelle_Nährwerte.Protein)
@@ -49,19 +61,17 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit 
     }
 }
 
-// Zutaten-Listen erstellen
+// Zutaten-Listen erstellen (zutat zu i gemacht, geht es noch?)
 function Zutaten_in_Listen_umwandeln(){
     zutatenListe.length = 0 //wichtig das die Listen sobald man von einem rezept aufs nächste klickt auch die Listen wieder leer sind
     mengenListe.length = 0
     einheitenListe.length = 0
-    let zutat // ist wie i in der dann verwendeten for-schleife. So aber verständlicher mit dem Namen
-    for (zutat in aktuelle_Zutaten){ // jede Zutat wird einmal durchgegangen
-        let menge = aktuelle_Zutaten[zutat] // die menge (wie viel von einer Zutat) wird gespeichert in "menge")
-
-        if (menge !== null && zutat !== "Rezept_ID"){ // wenn die menge dann "Null" ist, dann ist diese Zutat nicht in diesem Rezept vorhanden (nur in anderen) und wird herausgefiltert. Natürlich Rezept_ID auch keine Zutat, deshalb auch rausgefiltert.
-            zutatenListe.push(zutat) // falls aber alles passt, wird es in die Listen hinein gepushed (in richtiger Reihenfolge (Also wie in DB und nicht Alphabetisch (macht für uns keinen Unterschied))
+    for (let i in aktuelle_Zutaten){ // jede Zutat wird einmal durchgegangen
+        let menge = aktuelle_Zutaten[i] // die menge (wie viel von einer Zutat) wird gespeichert in "menge")
+        if (menge !== null && i !== "Rezept_ID"){ // wenn die menge dann "Null" ist, dann ist diese Zutat nicht in diesem Rezept vorhanden (nur in anderen) und wird herausgefiltert. Natürlich Rezept_ID auch keine Zutat, deshalb auch rausgefiltert.
+            zutatenListe.push(i) // falls aber alles passt, wird es in die Listen hinein gepushed (in richtiger Reihenfolge (Also wie in DB und nicht Alphabetisch (macht für uns keinen Unterschied))
             mengenListe.push(menge) //das gleiche mit der Menge
-            let einheit_Objekte = Einheiten.find(Objekt_Zutat => Objekt_Zutat.Zutat === zutat); // da Einheiten eine Liste mit Objekten ist, muss dort die aktuelle zutat in den Objekten gesucht werden (find)
+            let einheit_Objekte = Einheiten.find(Objekt_Zutat => Objekt_Zutat.Zutat === i); // da Einheiten eine Liste mit Objekten ist, muss dort die aktuelle zutat in den Objekten gesucht werden (find)
             einheitenListe.push(einheit_Objekte ? einheit_Objekte.Einheit : ""); // Falls keine Einheit gefunden wird, bleibt es leer
         }
     }
@@ -242,13 +252,13 @@ function insert_recipe() {
 
     insert_recipe_name()
     insert_nutrients()
-    Werte_Rezept_ausgeben_Zeit()
+    // Werte_Rezept_ausgeben_Zeit()
     insert_ingredients()
 }
 
-setTimeout(insert_recipe, 1200)
+insert_recipe()
 
 // TODO: share-button funktonierend machen
-// TODO: portionenRechner und mengenListe_plus_portionen können doch weg? wenn man einfach immer die Zutatenangaben mit der Portionenzahl multipliziert (macht ja bei 1 keinen Unterschied)
-// TODO: variable zutat entfernen und mit i ersetzen(ist verständlicher)
-// TODO: Datenbankabfrage nicht bei jeder Seite machen, sondern einmal auf Startseite und das mit sessionStorage an jede andere Seite übergeben
+// TODO: portionenRechner und mengenListe_plus_portionen können doch weg? die Zutatenangaben werden mit der Portionenzahl beim anzeigen multipliziert (macht ja bei 1 keinen Unterschied)
+
+// TODO: angenommen, man öffnet das Rezept von außen über einen Link, dann ist ja noch kein sesionStorage da --> wenn keiner da ist, also datenbank abrufen --> vllt über einzelne JS Datei

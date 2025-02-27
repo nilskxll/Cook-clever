@@ -7,8 +7,6 @@ let label_about_us_big = document.getElementById("label-about-us-big")
 let label_about_us_small = document.getElementById("label-about-us-small")
 let search_bar_big = document.getElementById("sucheingabe-header-big")
 let search_bar_small = document.getElementById("sucheingabe-header-small")
-window.Nährwerte, window.Rezepte, window.Einheiten, window.Zutaten //Sind Matrizen die alle informationen der DB enthalten
-window.cheatmeals_Liste = [], window.kalorienarmeRezepte = [], window.proteinreicheRezepte = [], window.vegetarische_Rezepte = [], window.vegane_Rezepte = [], window.Fleisch_Rezepte = [] // Sind Listen in den die Rezept_ID der jeweiligen Rezepte gespeichert werden, in welche Kategorie sie eben gerade passen
 
 window.addEventListener("scroll", swap_header)
 label_about_us_big.addEventListener("click", scroll_to_bottom)
@@ -55,56 +53,6 @@ function scroll_to_bottom() {
     // console.log("about us gedrückt")
 }
 
-
-function daten_aus_db(callback) {
-    fetch('cgi-bin/db_connection.php')
-        .then(response => response.json())
-        .then(daten => {
-            //Daten aus der PHP Datei in die Matrizen einfügen, damit man in JS damit arbeiten kann
-            window.Nährwerte = daten.naehrwerte
-            window.Rezepte = daten.rezepte
-            window.Einheiten = daten.einheiten
-            window.Zutaten = daten.zutaten
-            console.log("daten geladen")
-            // Callback ausführen, um nach dem Abrufen der Daten weiterzuarbeiten
-            if (callback) {
-                callback();  // Rufe die Callback-Funktion auf
-            }
-
-        })
-        .catch(error => { //Falls irgendwo nen Fehler auftritt, sieht man gleich über den error warum
-            console.error("Fehler beim Abrufen der Daten:", error)
-        })
-}
-
-function einkategorisieren (){
-    // hier wird jeweils ein Objekt (eine Reihe von einem Rezept mit bestimmter ID überprüft, ob sie bestimmte Voraussetzungen hat. Wenn ja, wird sie mit der Rezept_ID hinzugefügt. Falls nein passiert nichts. (alles nur im Hintergrund)
-    for ( let i = 0; i < window.Nährwerte.length; i++) {
-        let Rezept_überprüfung = window.Nährwerte[i]
-        if (Rezept_überprüfung.Kalorien >= 800) {               //Hier kann man einstellen, ab wann es eben zu den cheatmeals gehört
-            window.cheatmeals_Liste.push(Rezept_überprüfung.Rezept_ID)
-        }
-        if(Rezept_überprüfung.Kalorien <= 300) {                //Hier kann man einstellen, ab wann es eben zu den Kalorienarmen gehört
-            window.kalorienarmeRezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-        if (Rezept_überprüfung.Protein >= 40){                   //Hier kann man einstellen, ab wann es eben zu den Eiweiß reichen Rezepten gehört
-            window.proteinreicheRezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-    }
-    for (let i = 0; i < window.Rezepte.length; i++){
-        let Rezept_überprüfung = window.Rezepte[i]
-        if (Rezept_überprüfung.Essgewohnheit === "vegetarisch"){
-            window.vegetarische_Rezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-        if (Rezept_überprüfung.Essgewohnheit === "vegan"){
-            window.vegane_Rezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-        if (Rezept_überprüfung.Essgewohnheit === "mit Fleisch"){
-            window.Fleisch_Rezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-    }
-}
-
 // wenn man im Suchfeld Enter drückt
 function suchFeld(big_small_header) {
     let input = document.getElementById(big_small_header).value.toLowerCase(); // Eingabe aus dem HTML-Input holen
@@ -118,7 +66,6 @@ function suchFeld(big_small_header) {
         }
     }
     // console.log(Rezepte_Suchanfrage_Liste_ID); // Testausgabe der gefundenen Rezept-IDs
-    sessionStorage.setItem("valid_IDs", Rezepte_Suchanfrage_Liste_ID) // sessionStorage, dann Werte an Suchergebnisse-Seite übergeben werden können
+    sessionStorage.setItem("valid_IDs", JSON.stringify(Rezepte_Suchanfrage_Liste_ID)) // sessionStorage, dann Werte an Suchergebnisse-Seite übergeben werden können
     window.location.href = "../suchergebnisse"
 }
-daten_aus_db(einkategorisieren)

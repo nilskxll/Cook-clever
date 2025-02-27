@@ -1,4 +1,15 @@
-let valid_IDs = sessionStorage.getItem("valid_IDs").split(",")
+let Rezepte = JSON.parse(sessionStorage.getItem("Rezepte"))
+let Nährwerte = JSON.parse(sessionStorage.getItem("Nährwerte"))
+let Zutaten = JSON.parse(sessionStorage.getItem("Zutaten"))
+let Einheiten = JSON.parse(sessionStorage.getItem("Einheiten"))
+let cheatmeals_Liste = JSON.parse(sessionStorage.getItem("cheatmeals_Liste"))
+let kalorienarmeRezepte = JSON.parse(sessionStorage.getItem("kalorienarmeRezepte"))
+let proteinreicheRezepte = JSON.parse(sessionStorage.getItem("proteinreicheRezepte"))
+let vegetarische_Rezepte = JSON.parse(sessionStorage.getItem("vegetarische_Rezepte"))
+let vegane_Rezepte = JSON.parse(sessionStorage.getItem("vegane_Rezepte"))
+let Fleisch_Rezepte = JSON.parse(sessionStorage.getItem("Fleisch_Rezepte"))
+
+let valid_IDs = JSON.parse(sessionStorage.getItem("valid_IDs")).split(",")
 console.log("übergebene IDs: " + valid_IDs)
 
 let number_of_recipes = valid_IDs.length
@@ -30,18 +41,16 @@ function insert_recipe_card_information() {
         let recipe_name = recipe_cards[i].querySelector(".label-text")
         let image = recipe_cards[i].querySelector(".image")
 
-        recipe_name.textContent = window.Rezepte[list_IDs[i] - 1].Rezeptname // 1. Zeile (Index 0) von window.Rezepte hat die Rezepte-ID 1 --> der Index in window.Rezepte ist also immer eins tiefer als dessen Rezepte-ID
+        recipe_name.textContent = Rezepte[list_IDs[i] - 1].Rezeptname // 1. Zeile (Index 0) von Rezepte hat die Rezepte-ID 1 --> der Index in Rezepte ist also immer eins tiefer als dessen Rezepte-ID
         // console.log("Rezeptename: " + recipe_name.textContent)
-        image.src = `../img/recipes/${list_IDs[i]}/${window.Rezepte[list_IDs[i] - 1].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
+        image.src = `../img/recipes/${list_IDs[i]}/${Rezepte[list_IDs[i] - 1].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
         // console.log("Bildquelle: " + image.srcText)
     }
 }
 
-setTimeout(function() {
-    insert_recipes_blocks()
-    insert_recipe_card_information()
-}, 1200)
-// TODO: Anpassen/ Schönere Methode finden, damit die Funktion nicht nach einem Timeout, sondern direkt nachdem globals.js durchgelaufen ist, ausgeführt wird
+insert_recipes_blocks()
+insert_recipe_card_information()
+console.log(Einheiten)
 // TODO: anzeigen, nach was gesucht wurde
 // TODO: wird nichts gefunden, das dem Nutzer mitteilen
 // TODO: evtl die erste recipe-row aus der Startseite importieren (dass Änderungen auf der Startseite direkt übernommen werden)
