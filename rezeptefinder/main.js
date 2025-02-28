@@ -342,6 +342,9 @@ function Kategorien_mit_Rezept_überprüfen() {
                 }
             }
         }
+        if (gefilterte_Rezepte_Nährwerte.length === 0){
+            gefilterte_Rezepte_fertig = gefilterte_Rezepte_Kategorien
+        }
         for (let i = 0; i < gefilterte_Rezepte_Nährwerte.length; i++) //Beide listen werden miteinander verbunden und überprüft. Wenn diese ein gleiches Element haben, dann wird es in die endgültige Liste geschrieben
             if (gefilterte_Rezepte_Kategorien.includes(gefilterte_Rezepte_Nährwerte[i])){
                 gefilterte_Rezepte_fertig.push(gefilterte_Rezepte_Nährwerte[i])
@@ -350,4 +353,7 @@ function Kategorien_mit_Rezept_überprüfen() {
     else{ //Falls es keine einschränkungen gibt, dann werden einfach die Nährwert einschränkungen übernommen
         gefilterte_Rezepte_fertig = gefilterte_Rezepte_Nährwerte
     }
+    console.log(gefilterte_Rezepte_Kategorien + "ka")
+    console.log(gefilterte_Rezepte_Nährwerte + "nä")
+    console.log(gefilterte_Rezepte_fertig + "fertig")
 }
