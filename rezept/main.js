@@ -19,6 +19,7 @@ let aktuell_Liste_Nährwerte = []
 let aktuelle_Nährwerte, aktuelle_Zutaten, aktuelles_Rezept // ist das aktuelle Rezept welches ausgewählt ist. Sozusagen dann eine Liste mit eben allen Informationen zu diesem einen konkreten rezept. So zu sagen jedes von denen hat dann eine Zeile der Tabelle aus der Db (da mehrere Tabellen, werden auch mehrere Variablen benötigt
 let aktueller_Rezept_Name, aktuelle_Anleitung, aktuelle_Essgewohnheit // werden die grundlegenden Informationen des Rezeptes ausgegeben
 let aktuelle_Arbeitszeit, aktuelle_Kochzeit, aktuelle_Gesamtzeit // Wird die Zeit für das aktuell ausgewählte Rezept gespeichert
+let aktuelle_Kategorien = []
 let Kochzeit_h, Kochzeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
 let Arbeitszeit_h, Arbeitszeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
 let Gesamtzeit_h, Gesamtzeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
@@ -58,6 +59,25 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit 
         aktuelle_Arbeitszeit = aktuelles_Rezept.Arbeitszeit // gleiche wie bei den Nährwerten und den allgemeinen Informationen zu dem Rezept auch hier bei den Zeiten zu dem Rezept
         aktuelle_Kochzeit = aktuelles_Rezept.Kochzeit
         aktuelle_Gesamtzeit = aktuelle_Arbeitszeit + aktuelle_Kochzeit
+        if (vegane_Rezepte.includes(aktuell)){
+            aktuelle_Kategorien.push("Vegan")
+        }
+        if (vegetarische_Rezepte.includes(aktuell)){
+            aktuelle_Kategorien.push("Vegetarisch")
+        }
+        if (Fleisch_Rezepte.includes(aktuell)){
+            aktuelle_Kategorien.push("mit Fleisch")
+        }
+        if (proteinreicheRezepte.includes(aktuell)){
+            aktuelle_Kategorien.push("Proteinreich")
+        }
+        if (kalorienarmeRezepte.includes(aktuell)){
+            aktuelle_Kategorien.push("Kalorienarm")
+        }
+        if (cheatmeals_Liste.includes(aktuell)){
+            aktuelle_Kategorien.push("Cheat-Day")
+        }
+        console.log(aktuelle_Kategorien)
     }
 }
 
