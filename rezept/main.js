@@ -12,8 +12,9 @@ let Fleisch_Rezepte = JSON.parse(sessionStorage.getItem("Fleisch_Rezepte"))
 let minus_button = document.getElementById("minus-button")
 let plus_button = document.getElementById("plus-button")
 let number_of_portions_text = document.querySelector(".number-of-portions-frame .value")
-let number_of_ingredients
-let recipe_id
+
+minus_button.addEventListener("click", function() {change_number_of_portions("down")})
+plus_button.addEventListener("click", function() {change_number_of_portions("up")})
 
 let aktuell_Liste_Nährwerte = []
 let aktuelle_Nährwerte, aktuelle_Zutaten, aktuelles_Rezept // ist das aktuelle Rezept welches ausgewählt ist. Sozusagen dann eine Liste mit eben allen Informationen zu diesem einen konkreten rezept. So zu sagen jedes von denen hat dann eine Zeile der Tabelle aus der Db (da mehrere Tabellen, werden auch mehrere Variablen benötigt
@@ -25,17 +26,17 @@ let Arbeitszeit_h, Arbeitszeit_min //geteilt in einmal Minuten und Stunden (je n
 let Gesamtzeit_h, Gesamtzeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
 let zutatenListe = [], mengenListe = [], einheitenListe = [] //
 let mengenListe_plus_portionen // einfach die Liste, in der die Mengenangaben multipliziert stehen (im Vergleich zu der mengenListe wo nur für eine Person gerechnet ist)
+let number_of_ingredients
+let recipe_id
+let time = {}
 
 
-minus_button.addEventListener("click", function() {change_number_of_portions("down")})
-plus_button.addEventListener("click", function() {change_number_of_portions("up")})
 
 
-
-
+// Variablen mit allen fürs Anzeigen gebrauchten Informationen zuweisen
 // Rezept-ID abfragen
 function set_recipe_ID() {
-    recipe_id = 1
+    recipe_id = 16
 }
 
 // Rezept Werte zuweisen (Nährwerte, Name, Essgewohnheit Zeiten, Anleitung)
@@ -59,6 +60,7 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit 
         aktuelle_Arbeitszeit = aktuelles_Rezept.Arbeitszeit // gleiche wie bei den Nährwerten und den allgemeinen Informationen zu dem Rezept auch hier bei den Zeiten zu dem Rezept
         aktuelle_Kochzeit = aktuelles_Rezept.Kochzeit
         aktuelle_Gesamtzeit = aktuelle_Arbeitszeit + aktuelle_Kochzeit
+
         if (vegane_Rezepte.includes(aktuell)){
             aktuelle_Kategorien.push("Vegan")
         }
@@ -77,7 +79,7 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit 
         if (cheatmeals_Liste.includes(aktuell)){
             aktuelle_Kategorien.push("Cheat-Day")
         }
-        console.log(aktuelle_Kategorien)
+        // console.log(aktuelle_Kategorien)
     }
 }
 
@@ -115,12 +117,22 @@ function zeit_umrechnen(){ //hier wird einfach nur die Zeit, falls sie über 60m
 
     Gesamtzeit_h = Math.floor( aktuelle_Gesamtzeit / 60)
     Gesamtzeit_min = aktuelle_Gesamtzeit % 60
+
+    time = [[Arbeitszeit_h, Arbeitszeit_min], [Kochzeit_h, Kochzeit_min], [Gesamtzeit_h, Gesamtzeit_min]]
 }
 
+
+// Informationen des Rezepts in die Website einfügen
 // Rezeptname einfügen
 function insert_recipe_name() {
     let recipe_name = document.getElementById("recipe-name")
     recipe_name.textContent = aktueller_Rezept_Name
+}
+
+// Bild einfügen
+function insert_picture() {
+    let picture = document.querySelector(".block-bild-details .bild")
+    picture.src = `../img/recipes/${recipe_id}/${Rezepte[recipe_id - 1].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
 }
 
 // Nährwerte einfügen
@@ -136,35 +148,57 @@ function insert_nutrients() {
     }
 }
 
+// Kategorien-Elemente einfügen
+function insert_categories() {
+
+    // Zutatenelemente im HTML klonen
+    let kategorieangaben_frame = document.querySelector(".kategorieangaben")
+    let kategorieangabe = document.querySelector(".kategorieangaben .angabe")
+    for (let i = 1; i < aktuelle_Kategorien.length; i++) {
+        let clone = kategorieangabe.cloneNode(true)
+        kategorieangaben_frame.appendChild(clone)
+    }
+
+    // Namen der Kategorien einfügen
+    insert_categories_names()
+}
+
+// Kategorien Namen einfügen
+function insert_categories_names() {
+    let category_information = Array.from(document.querySelectorAll(".kategorieangaben .value"))
+    for (let i = 0; i < aktuelle_Kategorien.length; i++) {
+        category_information[i].textContent = aktuelle_Kategorien[i]
+    }
+}
+
 // Zeiten einfügen
-function Werte_Rezept_ausgeben_Zeit(){//die definierten JS Variablen werden einfach in eine Variable in HTML gepackt
-    if (Arbeitszeit_h === 0) { //falls halt unter 60min dann ohne Stunden, wenn mehr als 60min dann mit Stunden ausgeben
-        document.getElementById("Arbeitszeit").innerText = Arbeitszeit_min + "min"
-    } else {
-        if (Arbeitszeit_min === 0) {//wenn dann aber genau eine oder 2 Stunden und keine Minuten bleiben übrig soll er die auch nicht mit ausgeben
-            document.getElementById("Arbeitszeit").innerText = Arbeitszeit_h + "h"
-        } else {
-            document.getElementById("Arbeitszeit").innerText = Arbeitszeit_h + "h " + Arbeitszeit_min + "min"
+function insert_time(){//die definierten JS Variablen werden einfach in eine Variable in HTML gepackt
+    let time_information = Array.from(document.querySelectorAll(".time-information"))
+    let time_names = ["Vorbereitungszeit", "Koch/Backzeit", "Gesamtzeit"]
+    // console.log("Zeiten-Liste: " + time)
+    for (let i = 0; i < time_information.length; i++) {
+        let value = time_information[i].querySelector(".value")
+        // Aufbau time[]: [[Arbeitszeit_h, Arbeitszeit_min], [Kochzeit_h, Kochzeit_min], [Gesamtzeit_h, Gesamtzeit_min]]
+        if (time[i][0] === 0) { // Stunden nein
+            if (time[i][1] === 0) { // Stunden nein, Minuten nein
+                time_information[i].style.display = "none"
+            } else { // Stunden nein, Minuten ja
+                value.innerText = `${time_names[i]}: ${time[i][1]} min`
+            }
+        } else { // Stunden ja
+            if (time[i][1] === 0) { // Stunden ja, Minuten nein
+                value.innerText = `${time_names[i]}: ${time[i][0]} h`
+            } else { // Stunden ja, Minuten ja
+                value.innerText = `${time_names[i]}: ${time[i][0]} h ${time[i][1]} min`
+            }
         }
     }
-    if (Kochzeit_h === 0) {//falls halt unter 60min dann ohne Stunden, wenn mehr als 60min dann mit Stunden ausgeben
-        document.getElementById("Kochzeit").innerText = Kochzeit_min + "min"
-    } else {
-        if (Kochzeit_min === 0) {//wenn dann aber genau eine oder 2 Stunden und keine Minuten bleiben übrig soll er die auch nicht mit ausgeben
-            document.getElementById("Kochzeit").innerText = Kochzeit_h + "h"
-        } else {
-            document.getElementById("Kochzeit").innerText = Kochzeit_h + "h " + Kochzeit_min + "min"
-        }
-    }
-    if (Gesamtzeit_h === 0) {//falls halt unter 60min dann ohne Stunden, wenn mehr als 60min dann mit Stunden ausgeben
-        document.getElementById("Gesamtzeit").innerText = Gesamtzeit_min + "min"
-    } else {
-        if (Gesamtzeit_min === 0) {//wenn dann aber genau eine oder 2 Stunden und keine Minuten bleiben übrig soll er die auch nicht mit ausgeben
-            document.getElementById("Gesamtzeit").innerText = Gesamtzeit_h + "h"
-        } else {
-            document.getElementById("Gesamtzeit").innerText = Gesamtzeit_h + "h " + Gesamtzeit_min + "min"
-        }
-    }
+}
+
+// Anleitung einfügen
+function insert_instructions() {
+    let preparation_text = document.querySelector(".block-preparation-ingredients .text-preparation")
+    preparation_text.innerText = aktuelle_Anleitung
 }
 
 // Anzahl der Portionen extrahieren
@@ -200,7 +234,7 @@ function change_number_of_portions (direction) {
 
 // Zutaten-Elemente einfügen
 function insert_ingredients() {
-    number_of_ingredients = test_list_names.length
+    number_of_ingredients = zutatenListe.length
 
     // Zutatenelemente im HTML klonen
     let ingredients_frame = document.querySelector(".ingredients-frame")
@@ -215,21 +249,22 @@ function insert_ingredients() {
 }
 
 // Zutaten Namen und Werte einfügen
-let test_list_names = ["Basikilum", "Eier", "Mehl"]
-let test_list_values = [2, 6, 500]
-let test_list_values_unit = ["", "", "g"]
 function insert_ingredients_names_values() {
     let ingredients_list = Array.from(document.querySelectorAll(".ingredient"))
     let number_of_portions = extract_number_of_portions()
     for (let k = 0; k < number_of_ingredients; k++) {
         let ingredient_name = ingredients_list[k].querySelector(".name")
         let ingredient_value = ingredients_list[k].querySelector(".value")
-
-        ingredient_name.textContent = test_list_names[k]
-        if (test_list_values_unit[k] === "") {
-            ingredient_value.textContent = number_of_portions * test_list_values[k]
-        } else {
-            ingredient_value.textContent = `${number_of_portions * test_list_values[k]} ${test_list_values_unit[k]}`
+        console.log("mengenliste: " + mengenListe)
+        ingredient_name.textContent = zutatenListe[k]
+        if (einheitenListe[k] === "") { // ohne Einheit
+            if (mengenListe[k] === 0) {
+                ingredient_value.textContent = ""
+            } else {
+                ingredient_value.textContent = number_of_portions * mengenListe[k]
+            }
+        } else { // mit Einheit
+            ingredient_value.textContent = `${number_of_portions * mengenListe[k]} ${einheitenListe[k]}`
         }
     }
 }
@@ -261,22 +296,32 @@ function Zutaten_ausgeben(Portionen){
 
 }
 
-// Rezeptdetails einfügen
+// alle Informationen einfügen (Funtionen aufrufen)
 function insert_recipe() {
+    // Werte zuweisen
     set_recipe_ID()
     aktuelles_Rezept_Werte_zuweisen(recipe_id)
     Zutaten_in_Listen_umwandeln()
-    /*portionenRechner(extract_number_of_portions())
-    Zutaten_ausgeben(extract_number_of_portions())*/
     zeit_umrechnen()
 
+    /*portionenRechner(extract_number_of_portions())
+    Zutaten_ausgeben(extract_number_of_portions())*/
+
+    // Informationen einfügen
     insert_recipe_name()
+    insert_picture()
     insert_nutrients()
-    // Werte_Rezept_ausgeben_Zeit()
+    insert_categories()
+    insert_time()
+    insert_instructions()
     insert_ingredients()
 }
 
 insert_recipe()
+
+// TODO: Kategorieangaben Position ändert sich, wenn nur z.B. 1 Kategorie ist
+// TODO: in DB ein Rezept mit id=0 einfügen, dass man bei der bildquelle nicht mehr "id - 1" braucht
+// TODO: Zutatenmengen auf 2 Nachkommastellen runden
 
 // TODO: share-button funktonierend machen
 // TODO: portionenRechner und mengenListe_plus_portionen können doch weg? die Zutatenangaben werden mit der Portionenzahl beim anzeigen multipliziert (macht ja bei 1 keinen Unterschied)
