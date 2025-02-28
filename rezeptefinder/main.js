@@ -140,6 +140,10 @@ function show_results () {
     console.log(Nährwerte)
     console.log(Rezepte)
     Nährwerte_mit_Rezept_überprüfen()
+    setTimeout(function(){
+        sessionStorage.setItem("valid_IDs", JSON.stringify(gefilterte_Rezepte_fertig))
+        window.location.href = "../suchergebnisse"
+        }, 2000)
 }
 
 //Nährwerte checken und schauen auf welche Rezepte die aktuell ausgewählten Nährwerte Anforderungen passen:
@@ -346,5 +350,4 @@ function Kategorien_mit_Rezept_überprüfen() {
     else{ //Falls es keine einschränkungen gibt, dann werden einfach die Nährwert einschränkungen übernommen
         gefilterte_Rezepte_fertig = gefilterte_Rezepte_Nährwerte
     }
-    console.log(gefilterte_Rezepte_fertig)
 }

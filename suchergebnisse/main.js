@@ -9,8 +9,8 @@ let vegetarische_Rezepte = JSON.parse(sessionStorage.getItem("vegetarische_Rezep
 let vegane_Rezepte = JSON.parse(sessionStorage.getItem("vegane_Rezepte"))
 let Fleisch_Rezepte = JSON.parse(sessionStorage.getItem("Fleisch_Rezepte"))
 
-let valid_IDs = JSON.parse(sessionStorage.getItem("valid_IDs")).split(",")
-console.log("übergebene IDs: " + valid_IDs)
+let valid_IDs = JSON.parse(sessionStorage.getItem("valid_IDs"))
+// console.log("übergebene IDs: " + valid_IDs)
 
 let number_of_recipes = valid_IDs.length
 let number_of_recipe_blocks = Math.round(number_of_recipes / 2)
