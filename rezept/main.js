@@ -34,7 +34,7 @@ let time = {}
 // Variablen mit allen fürs Anzeigen gebrauchten Informationen zuweisen
 // Rezept-ID abfragen
 function set_recipe_ID() {
-    recipe_id = 21
+    recipe_id = 11
 }
 
 // Rezept Werte zuweisen (Nährwerte, Name, Essgewohnheit Zeiten, Anleitung)
@@ -78,10 +78,6 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit 
             aktuelle_Kategorien.push("Cheat-Day")
         }
         // console.log(aktuelle_Kategorien)
-        aktuelle_Kategorien.push("test")
-        aktuelle_Kategorien.push("test")
-        aktuelle_Kategorien.push("test")
-        aktuelle_Kategorien.push("test")
     }
 }
 
@@ -94,7 +90,14 @@ function Zutaten_in_Listen_umwandeln(){
         let menge = aktuelle_Zutaten[i] // die menge (wie viel von einer Zutat) wird gespeichert in "menge")
         if (menge !== null && i !== "Rezept_ID"){ // wenn die menge dann "Null" ist, dann ist diese Zutat nicht in diesem Rezept vorhanden (nur in anderen) und wird herausgefiltert. Natürlich Rezept_ID auch keine Zutat, deshalb auch rausgefiltert.
             zutatenListe.push(i) // falls aber alles passt, wird es in die Listen hinein gepushed (in richtiger Reihenfolge (Also wie in DB und nicht Alphabetisch (macht für uns keinen Unterschied))
-            mengenListe.push(menge) //das gleiche mit der Menge
+
+            //das Gleiche mit der Menge
+            if (menge === 0.33) { // z.B. 0.33 Knoblauchzehe, 1/3 ist für die Multiplikation mit der Portionsanzahl wichtig
+                mengenListe.push(1/3)
+            } else {
+                mengenListe.push(menge)
+            }
+
             let einheit_Objekte = Einheiten.find(Objekt_Zutat => Objekt_Zutat.Zutat === i); // da Einheiten eine Liste mit Objekten ist, muss dort die aktuelle zutat in den Objekten gesucht werden (find)
             einheitenListe.push(einheit_Objekte ? einheit_Objekte.Einheit : ""); // Falls keine Einheit gefunden wird, bleibt es leer
         }
@@ -248,17 +251,20 @@ function insert_ingredients_names_values() {
     for (let k = 0; k < number_of_ingredients; k++) {
         let ingredient_name = ingredients_list[k].querySelector(".name")
         let ingredient_value = ingredients_list[k].querySelector(".value")
-        console.log("mengenliste: " + mengenListe)
+        // console.log("mengenliste: " + mengenListe)
         ingredient_name.textContent = zutatenListe[k]
         if (einheitenListe[k] === "") { // ohne Einheit
-            if (mengenListe[k] === 0) {
+            if (mengenListe[k] === 0) { // wenn es nur vorhanden sein soll (z.B. Pfeffer)
                 ingredient_value.textContent = ""
             } else {
-                ingredient_value.textContent = number_of_portions * mengenListe[k]
+                ingredient_value.textContent = Math.round(number_of_portions * mengenListe[k] * 100) / 100
             }
         } else { // mit Einheit
-            ingredient_value.textContent = `${number_of_portions * mengenListe[k]} ${einheitenListe[k]}`
+            ingredient_value.textContent = `${Math.round(number_of_portions * mengenListe[k] * 100) / 100} ${einheitenListe[k]}`
         }
+        // Rechnung mit Math.round(... * 100) / 100, weil JS z.B. 0.2 nicht exakt speichern kann, nur angenähert
+        // dadurch entstehen kleine Rechenfehler ("Gleitkomma-Präzisionsfehler" z.B. 0.2 * 3 = 0.600000000...1)
+        // da wir max. 2 Nachkommastellen machen, wird mit 100 multiplizieren, dann gerundet, um die extra Nullen wegzubekommen, dann wieder durch 100 geteilt
     }
 }
 
