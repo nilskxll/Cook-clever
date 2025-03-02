@@ -25,11 +25,9 @@ let Kochzeit_h, Kochzeit_min //geteilt in einmal Minuten und Stunden (je nach de
 let Arbeitszeit_h, Arbeitszeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
 let Gesamtzeit_h, Gesamtzeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
 let zutatenListe = [], mengenListe = [], einheitenListe = [] //
-let mengenListe_plus_portionen // einfach die Liste, in der die Mengenangaben multipliziert stehen (im Vergleich zu der mengenListe wo nur für eine Person gerechnet ist)
 let number_of_ingredients
 let recipe_id
 let time = {}
-
 
 
 
@@ -87,7 +85,7 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit 
     }
 }
 
-// Zutaten-Listen erstellen (zutat zu i gemacht, geht es noch?)
+// Zutaten-Listen erstellen
 function Zutaten_in_Listen_umwandeln(){
     zutatenListe.length = 0 //wichtig das die Listen sobald man von einem rezept aufs nächste klickt auch die Listen wieder leer sind
     mengenListe.length = 0
@@ -101,14 +99,6 @@ function Zutaten_in_Listen_umwandeln(){
             einheitenListe.push(einheit_Objekte ? einheit_Objekte.Einheit : ""); // Falls keine Einheit gefunden wird, bleibt es leer
         }
     }
-}
-
-// Zutaten der Portionszahl anpassen
-function portionenRechner(Portionen){
-    if(mengenListe.length === 0) { // überprüfen ob die Liste leer ist, falls ja brauch er ja die Funktion nicht ausführen und lässt nochmal die Liste definieren (ist sozusagen eine sicherheit)
-        Zutaten_in_Listen_umwandeln()
-    }
-    mengenListe_plus_portionen = mengenListe.map(menge => menge * Portionen) //hier wird einfach nur die aktuelle mengenListe mal die eingegeben Portionen gerechnet und gespeichert
 }
 
 // Zeit in Minuten und Stunden rechnen
@@ -125,7 +115,7 @@ function zeit_umrechnen(){ //hier wird einfach nur die Zeit, falls sie über 60m
     time = [[Arbeitszeit_h, Arbeitszeit_min], [Kochzeit_h, Kochzeit_min], [Gesamtzeit_h, Gesamtzeit_min]]
 }
 
-// Anzahl der Portionen extrahieren
+// Anzahl der gewünschten Portionen extrahieren
 function extract_number_of_portions() {
     let text = number_of_portions_text.textContent
     let words = text.split(" ")
@@ -138,20 +128,6 @@ function extract_number_of_portions() {
 function insert_recipe_name() {
     let recipe_name = document.getElementById("recipe-name")
     recipe_name.textContent = aktueller_Rezept_Name
-}
-
-// Bild einfügen
-function insert_picture() {
-    let picture = document.querySelector(".block-bild-details .bild")
-    let picture_container = document.querySelector(".block-bild-details .bild-container")
-    let details = document.querySelector(".block-bild-details .details")
-    picture.src = `../img/recipes/${recipe_id}/${Rezepte[recipe_id - 1].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
-    // Hohe des Bildes auf 534px oder größer setzen (wenn Details mehr Platz brauchen)
-    if (details.offsetHeight > picture.offsetHeight) {
-        picture_container.style.height = `${details.offsetHeight}px`
-    } else {
-        picture_container.style.height = "534px"
-    }
 }
 
 // Nährwerte einfügen
@@ -169,7 +145,6 @@ function insert_nutrients() {
 
 // Kategorien-Elemente einfügen
 function insert_categories() {
-
     // Zutatenelemente im HTML klonen
     let kategorieangaben_frame = document.querySelector(".kategorieangaben")
     let kategorieangabe = document.querySelector(".kategorieangaben .angabe")
@@ -187,6 +162,20 @@ function insert_categories_names() {
     let category_information = Array.from(document.querySelectorAll(".kategorieangaben .value"))
     for (let i = 0; i < aktuelle_Kategorien.length; i++) {
         category_information[i].textContent = aktuelle_Kategorien[i]
+    }
+}
+
+// Bild einfügen
+function insert_picture() {
+    let picture = document.querySelector(".block-bild-details .bild")
+    let picture_container = document.querySelector(".block-bild-details .bild-container")
+    let details = document.querySelector(".block-bild-details .details")
+    picture.src = `../img/recipes/${recipe_id}/${Rezepte[recipe_id - 1].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
+    // Hohe des Bildes auf 534px oder größer setzen (wenn Details mehr Platz brauchen)
+    if (details.offsetHeight > picture.offsetHeight) {
+        picture_container.style.height = `${details.offsetHeight}px`
+    } else {
+        picture_container.style.height = "534px"
     }
 }
 
@@ -256,32 +245,6 @@ function insert_ingredients_names_values() {
         }
     }
 }
-// von Nils
-function Zutaten_ausgeben(Portionen){
-    let zutatenText = ""
-    if (Portionen === 1){//entweder die mit einer Portion
-        for (i = 0; i < mengenListe.length; i++){ //dabei geht die for-schleife jedes Objekt in der Liste durch
-            if (mengenListe[i] === 0){ // Wenn die mengenListe 0 Anzeigt bedeutet das, dass diese Zutat keine Menge besitzt (Salz)
-                zutatenText += zutatenListe[i] + "\n"//der \n macht einfach nur, das es in eine Neue Zeile in den String gesetzt wird
-            }
-            else { //andern Falls gibt es die Menge und Einheit aus und dann die Zutat, Falls keine Einheit wird einfach nur "" angefügt (also wie nichts)
-                zutatenText += mengenListe[i] + einheitenListe[i] + " " + zutatenListe[i] + "\n" //der \n macht einfach nur, das es in eine Neue Zeile in den String gesetzt wird
-            }
-        }
-        document.getElementById("Zutaten").innerText = zutatenText
-    }
-    else { //oder mit beliebiger Anzahl an Portionen, Aber sonst eins zu eins gleich von Funktion, nimmt nur andere Liste als Berechnung
-        for (i = 0; i < mengenListe_plus_portionen.length; i++){
-            if (mengenListe_plus_portionen[i] === 0){
-                zutatenText += zutatenListe[i] + "\n"
-            }
-            else {
-                zutatenText += mengenListe_plus_portionen[i] + einheitenListe[i] + " " + zutatenListe[i] + "\n"
-            }
-        }
-        document.getElementById("Zutaten").innerText = zutatenText;
-    }
-}
 
 // Anzahl der Portionen ändern
 function change_number_of_portions (direction) {
@@ -307,16 +270,13 @@ function change_number_of_portions (direction) {
     insert_ingredients_names_values()
 }
 
-// alle Informationen einfügen (Funtionen aufrufen)
+// alle Informationen einfügen (Funktionen aufrufen)
 function insert_recipe() {
     // Werte zuweisen
     set_recipe_ID()
     aktuelles_Rezept_Werte_zuweisen(recipe_id)
     Zutaten_in_Listen_umwandeln()
     zeit_umrechnen()
-
-    /*portionenRechner(extract_number_of_portions())
-    Zutaten_ausgeben(extract_number_of_portions())*/
 
     // Informationen einfügen
     insert_recipe_name()
@@ -335,7 +295,6 @@ insert_recipe()
 // TODO: Zutatenmengen auf 2 Nachkommastellen runden
 
 // TODO: share-button funktonierend machen
-// TODO: portionenRechner und mengenListe_plus_portionen können doch weg? die Zutatenangaben werden mit der Portionenzahl beim anzeigen multipliziert (macht ja bei 1 keinen Unterschied)
 
 // TODO: angenommen, man öffnet das Rezept von außen über einen Link, dann ist ja noch kein sesionStorage da --> wenn keiner da ist, also datenbank abrufen --> vllt über einzelne JS Datei
 
