@@ -56,12 +56,12 @@
 .block-bild-details .frame-content {
     display: flex;
     width: 1240px;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: 75px;
     position: relative;
     flex: 1;
     align-self: stretch;
-    flex-grow: 1;
     background-color: var(--grey);
     border-radius: 45px;
 }
@@ -69,8 +69,9 @@
 .block-bild-details .bild-container {
     display: flex;
     width: 61.29%;
-    height: 534px;
-    align-items: center;
+    min-height: 534px;
+    max-height: 100%;
+    align-items: stretch;
     justify-content: center;
     position: relative;
     border-radius: 45px;
@@ -87,15 +88,15 @@
 .block-bild-details .details {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: flex-start;
-    justify-content: space-between;
     max-width: 32.7%;
+    padding-top: 25px;
+    padding-bottom: 20px;
+    gap: 40px;
     overflow: hidden;
-    padding: 25px 0px 20px;
     position: relative;
-    flex: 1;
-    align-self: stretch;
-    flex-grow: 1;
+    flex: 0 0 auto;
 }
 
 .block-bild-details .frame-angaben {
@@ -148,7 +149,7 @@
 .block-bild-details .naehrwertangaben {
     display: flex;
     flex-direction: column;
-    width: 315px;
+    width: 335px;
     align-items: flex-start;
     gap: 15px;
     padding: 0px 15px;
@@ -198,7 +199,7 @@
     position: relative;
     flex: 1;
     flex-grow: 1;
-    max-width: 40%;
+    max-width: 44%;
 }
 
 .block-bild-details .value {

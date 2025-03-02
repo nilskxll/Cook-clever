@@ -36,7 +36,7 @@ let time = {}
 // Variablen mit allen fürs Anzeigen gebrauchten Informationen zuweisen
 // Rezept-ID abfragen
 function set_recipe_ID() {
-    recipe_id = 16
+    recipe_id = 21
 }
 
 // Rezept Werte zuweisen (Nährwerte, Name, Essgewohnheit Zeiten, Anleitung)
@@ -80,6 +80,10 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit 
             aktuelle_Kategorien.push("Cheat-Day")
         }
         // console.log(aktuelle_Kategorien)
+        aktuelle_Kategorien.push("test")
+        aktuelle_Kategorien.push("test")
+        aktuelle_Kategorien.push("test")
+        aktuelle_Kategorien.push("test")
     }
 }
 
@@ -121,6 +125,13 @@ function zeit_umrechnen(){ //hier wird einfach nur die Zeit, falls sie über 60m
     time = [[Arbeitszeit_h, Arbeitszeit_min], [Kochzeit_h, Kochzeit_min], [Gesamtzeit_h, Gesamtzeit_min]]
 }
 
+// Anzahl der Portionen extrahieren
+function extract_number_of_portions() {
+    let text = number_of_portions_text.textContent
+    let words = text.split(" ")
+    return Number(words[0])
+}
+
 
 // Informationen des Rezepts in die Website einfügen
 // Rezeptname einfügen
@@ -132,7 +143,15 @@ function insert_recipe_name() {
 // Bild einfügen
 function insert_picture() {
     let picture = document.querySelector(".block-bild-details .bild")
+    let picture_container = document.querySelector(".block-bild-details .bild-container")
+    let details = document.querySelector(".block-bild-details .details")
     picture.src = `../img/recipes/${recipe_id}/${Rezepte[recipe_id - 1].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
+    // Hohe des Bildes auf 534px oder größer setzen (wenn Details mehr Platz brauchen)
+    if (details.offsetHeight > picture.offsetHeight) {
+        picture_container.style.height = `${details.offsetHeight}px`
+    } else {
+        picture_container.style.height = "534px"
+    }
 }
 
 // Nährwerte einfügen
@@ -201,37 +220,6 @@ function insert_instructions() {
     preparation_text.innerText = aktuelle_Anleitung
 }
 
-// Anzahl der Portionen extrahieren
-function extract_number_of_portions() {
-    let text = number_of_portions_text.textContent
-    let words = text.split(" ")
-    return Number(words[0])
-}
-
-// Anzahl der Portionen ändern
-function change_number_of_portions (direction) {
-    let value = extract_number_of_portions()
-
-    // Wert der Portionenzahl ändern (Beschränkung auf max. 99 hat keinen wirklichen Grund. Lässt man mehr zu, müsste der number of portions frame mit wachsen.)
-    if (direction === "up") {
-        if (value < 99) {
-            value++
-        }
-    } else if (value > 1) {
-        value--
-    }
-
-    // Wert mit "Portion" in Singular/Plural ausgeben
-    if (value === 1) {
-        number_of_portions_text.textContent = "1 Portion"
-    } else {
-        number_of_portions_text.textContent = `${value} Portionen`
-    }
-
-    // Zutatenmengen ändern
-    insert_ingredients_names_values()
-}
-
 // Zutaten-Elemente einfügen
 function insert_ingredients() {
     number_of_ingredients = zutatenListe.length
@@ -293,7 +281,30 @@ function Zutaten_ausgeben(Portionen){
         }
         document.getElementById("Zutaten").innerText = zutatenText;
     }
+}
 
+// Anzahl der Portionen ändern
+function change_number_of_portions (direction) {
+    let value = extract_number_of_portions()
+
+    // Wert der Portionenzahl ändern (Beschränkung auf max. 99 hat keinen wirklichen Grund. Lässt man mehr zu, müsste der number of portions frame mit wachsen.)
+    if (direction === "up") {
+        if (value < 99) {
+            value++
+        }
+    } else if (value > 1) {
+        value--
+    }
+
+    // Wert mit "Portion" in Singular/Plural ausgeben
+    if (value === 1) {
+        number_of_portions_text.textContent = "1 Portion"
+    } else {
+        number_of_portions_text.textContent = `${value} Portionen`
+    }
+
+    // Zutatenmengen ändern
+    insert_ingredients_names_values()
 }
 
 // alle Informationen einfügen (Funtionen aufrufen)
@@ -309,9 +320,9 @@ function insert_recipe() {
 
     // Informationen einfügen
     insert_recipe_name()
-    insert_picture()
     insert_nutrients()
     insert_categories()
+    insert_picture()
     insert_time()
     insert_instructions()
     insert_ingredients()
@@ -319,7 +330,7 @@ function insert_recipe() {
 
 insert_recipe()
 
-// TODO: Kategorieangaben Position ändert sich, wenn nur z.B. 1 Kategorie ist
+
 // TODO: in DB ein Rezept mit id=0 einfügen, dass man bei der bildquelle nicht mehr "id - 1" braucht
 // TODO: Zutatenmengen auf 2 Nachkommastellen runden
 
@@ -327,3 +338,5 @@ insert_recipe()
 // TODO: portionenRechner und mengenListe_plus_portionen können doch weg? die Zutatenangaben werden mit der Portionenzahl beim anzeigen multipliziert (macht ja bei 1 keinen Unterschied)
 
 // TODO: angenommen, man öffnet das Rezept von außen über einen Link, dann ist ja noch kein sesionStorage da --> wenn keiner da ist, also datenbank abrufen --> vllt über einzelne JS Datei
+
+// TODO: wenn wir mal mehr als 3 Kategorien pro Rezept haben, dann die Kategoriennamen 2 Stück nebeneinander machen
