@@ -122,6 +122,30 @@ function extract_number_of_portions() {
     return Number(words[0])
 }
 
+// Anzahl der Portionen ändern
+function change_number_of_portions (direction) {
+    let value = extract_number_of_portions()
+
+    // Wert der Portionenzahl ändern (Beschränkung auf max. 99 hat keinen wirklichen Grund. Lässt man mehr zu, müsste der number of portions frame mit wachsen.)
+    if (direction === "up") {
+        if (value < 99) {
+            value++
+        }
+    } else if (value > 1) {
+        value--
+    }
+
+    // Wert mit "Portion" in Singular/Plural ausgeben
+    if (value === 1) {
+        number_of_portions_text.textContent = "1 Portion"
+    } else {
+        number_of_portions_text.textContent = `${value} Portionen`
+    }
+
+    // Zutatenmengen ändern
+    insert_ingredients_names_values()
+}
+
 
 // Informationen des Rezepts in die Website einfügen
 // Rezeptname einfügen
@@ -168,15 +192,7 @@ function insert_categories_names() {
 // Bild einfügen
 function insert_picture() {
     let picture = document.querySelector(".block-bild-details .bild")
-    let picture_container = document.querySelector(".block-bild-details .bild-container")
-    let details = document.querySelector(".block-bild-details .details")
     picture.src = `../img/recipes/${recipe_id}/${Rezepte[recipe_id - 1].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
-    // Hohe des Bildes auf 534px oder größer setzen (wenn Details mehr Platz brauchen)
-    if (details.offsetHeight > picture.offsetHeight) {
-        picture_container.style.height = `${details.offsetHeight}px`
-    } else {
-        picture_container.style.height = "534px"
-    }
 }
 
 // Zeiten einfügen
@@ -246,28 +262,17 @@ function insert_ingredients_names_values() {
     }
 }
 
-// Anzahl der Portionen ändern
-function change_number_of_portions (direction) {
-    let value = extract_number_of_portions()
-
-    // Wert der Portionenzahl ändern (Beschränkung auf max. 99 hat keinen wirklichen Grund. Lässt man mehr zu, müsste der number of portions frame mit wachsen.)
-    if (direction === "up") {
-        if (value < 99) {
-            value++
-        }
-    } else if (value > 1) {
-        value--
-    }
-
-    // Wert mit "Portion" in Singular/Plural ausgeben
-    if (value === 1) {
-        number_of_portions_text.textContent = "1 Portion"
+// Bildhöhe an die Höhe der Details daneben anpassen
+function adjust_picture_height() {
+    let picture = document.querySelector(".block-bild-details .bild")
+    let picture_container = document.querySelector(".block-bild-details .bild-container")
+    let details = document.querySelector(".block-bild-details .details")
+    // Hohe des Bildes auf 534px oder größer setzen (wenn Details mehr Platz brauchen)
+    if (details.offsetHeight > picture.offsetHeight) {
+        picture_container.style.height = `${details.offsetHeight}px`
     } else {
-        number_of_portions_text.textContent = `${value} Portionen`
+        picture_container.style.height = "534px"
     }
-
-    // Zutatenmengen ändern
-    insert_ingredients_names_values()
 }
 
 // alle Informationen einfügen (Funktionen aufrufen)
@@ -280,16 +285,18 @@ function insert_recipe() {
 
     // Informationen einfügen
     insert_recipe_name()
+    insert_picture()
     insert_nutrients()
     insert_categories()
-    insert_picture()
     insert_time()
     insert_instructions()
     insert_ingredients()
+
+    // Bildhöhe an die Höhe der Details daneben anpassen
+    setTimeout(adjust_picture_height,100)
 }
 
 insert_recipe()
-
 
 // TODO: in DB ein Rezept mit id=0 einfügen, dass man bei der bildquelle nicht mehr "id - 1" braucht
 // TODO: Zutatenmengen auf 2 Nachkommastellen runden
