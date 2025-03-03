@@ -305,7 +305,7 @@ function insert_recipe() {
 }
 
 
-// Link zum Rezepte in die Zwischenablage kopieren, wenn auf "Teilen" geclickt wird
+// Link zum Rezepte in die Zwischenablage kopieren, wenn auf "Teilen" geklickt wird
 function copy_link_to_clipboard() {
     navigator.clipboard.writeText(window.location.href).then(
         show_clipboard_copy_text
@@ -315,6 +315,7 @@ function copy_link_to_clipboard() {
     // .then(), wenn die Zwischenablage funktioniert
 }
 
+// Link-kopiert-Meldung anzeigen
 function show_clipboard_copy_text() {
     let share_text = document.querySelector(".block-share .share-text")
     if (!share_text.classList.contains("active")) {
@@ -324,6 +325,8 @@ function show_clipboard_copy_text() {
         }, 4000)
     }
 }
+
+
 
 insert_recipe()
 
