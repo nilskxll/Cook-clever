@@ -36,7 +36,24 @@ let time = {}
 // Variablen mit allen fürs Anzeigen gebrauchten Informationen zuweisen
 // Rezept-ID abfragen
 function set_recipe_ID() {
-    recipe_id = 11
+    let name_from_url = decodeURIComponent(window.location.hash.substring(2)) // decode..., um z.B. ö aus der url richtig zu lesen
+    // console.log("url", name_from_url, typeof(name_from_url))
+
+    recipe_id = Rezepte.find(rezept => rezept.Rezeptname === name_from_url)
+    /*in der DB Rezepte wollen wir eine Zeile (ein Rezept) finden, bei der der Rezeptname dem Namen von der url entspricht
+    normalerweise braucht bei .find() ein return, aber bei der verkürzten Arrow-function wird direkt die Zeile zurückgegeben, bei der die Bedingung wahr ist
+    .find() geht hier jede Zeile der Rezepte-DB durch und überprüft die Bedingung
+    das Folgende wäre eine Alternative
+    recipe_id = Rezepte.find((rezept) => {
+        if (rezept.Rezeptname === name_from_url) {
+            return rezept
+        }
+    })*/
+    if (recipe_id) {
+        recipe_id = recipe_id.Rezept_ID
+    } else {
+        console.error("kein Rezept gefunden von url", name_from_url)
+    }
 }
 
 // Rezept Werte zuweisen (Nährwerte, Name, Essgewohnheit Zeiten, Anleitung)
@@ -100,8 +117,11 @@ function Zutaten_in_Listen_umwandeln(){
                 mengenListe.push(menge)
             }
 
+            /*in der DB Einheiten wollen wir eine Zeile (eine Zutatenname-Einheit-Kombination) finden, bei der der Zutatenname dem Namen von i entspricht
+            normalerweise braucht bei .find() ein return, aber bei der verkürzten Arrow-function wird direkt die Zeile zurückgegeben, bei der die Bedingung wahr ist
+            .find() geht hier jede Zeile der Rezepte-DB durch und überprüft die Bedingung*/
             let einheit_Objekte = Einheiten.find(Objekt_Zutat => Objekt_Zutat.Zutat === i); // da Einheiten eine Liste mit Objekten ist, muss dort die aktuelle zutat in den Objekten gesucht werden (find)
-            einheitenListe.push(einheit_Objekte ? einheit_Objekte.Einheit : ""); // Falls keine Einheit gefunden wird, bleibt es leer
+            einheitenListe.push(einheit_Objekte ? einheit_Objekte.Einheit : ""); // Falls Einheit vorhanden, fügt er die in die Einheitenliste, falls keine Einheit gefunden wird, wird ein leerer String eingefügt
         }
     }
 }
@@ -329,6 +349,10 @@ function show_clipboard_copy_text() {
 
 
 insert_recipe()
+
+// TODO: favicon-Fehler: hat das war mit dem kleinen icon in der Leiste obern zu tun?
+
+// TODO: pjohcfmg/index.html#/credentials können wir z.B. so eine Rezepte id übergeben oder wirds hässlich?
 
 // TODO: in DB ein Rezept mit id=0 einfügen, dass man bei der bildquelle nicht mehr "id - 1" braucht
 
