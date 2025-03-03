@@ -12,9 +12,11 @@ let Fleisch_Rezepte = JSON.parse(sessionStorage.getItem("Fleisch_Rezepte"))
 let minus_button = document.getElementById("minus-button")
 let plus_button = document.getElementById("plus-button")
 let number_of_portions_text = document.querySelector(".number-of-portions-frame .value")
+let share_button = document.querySelector(".block-share .share-frame")
 
 minus_button.addEventListener("click", function() {change_number_of_portions("down")})
 plus_button.addEventListener("click", function() {change_number_of_portions("up")})
+share_button.addEventListener("click", copy_link_to_clipboard)
 
 let aktuell_Liste_Nährwerte = []
 let aktuelle_Nährwerte, aktuelle_Zutaten, aktuelles_Rezept // ist das aktuelle Rezept welches ausgewählt ist. Sozusagen dann eine Liste mit eben allen Informationen zu diesem einen konkreten rezept. So zu sagen jedes von denen hat dann eine Zeile der Tabelle aus der Db (da mehrere Tabellen, werden auch mehrere Variablen benötigt
@@ -302,12 +304,30 @@ function insert_recipe() {
     setTimeout(adjust_picture_height,100)
 }
 
+
+// Link zum Rezepte in die Zwischenablage kopieren, wenn auf "Teilen" geclickt wird
+function copy_link_to_clipboard() {
+    navigator.clipboard.writeText(window.location.href).then(
+        show_clipboard_copy_text
+    ).catch(err => {
+        console.error("Fehler beim Kopieren:", err)
+    })
+    // .then(), wenn die Zwischenablage funktioniert
+}
+
+function show_clipboard_copy_text() {
+    let share_text = document.querySelector(".block-share .share-text")
+    if (!share_text.classList.contains("active")) {
+        share_text.classList.add("active")
+        setTimeout(() => {
+            share_text.classList.remove("active")
+        }, 4000)
+    }
+}
+
 insert_recipe()
 
 // TODO: in DB ein Rezept mit id=0 einfügen, dass man bei der bildquelle nicht mehr "id - 1" braucht
-// TODO: Zutatenmengen auf 2 Nachkommastellen runden
-
-// TODO: share-button funktonierend machen
 
 // TODO: angenommen, man öffnet das Rezept von außen über einen Link, dann ist ja noch kein sesionStorage da --> wenn keiner da ist, also datenbank abrufen --> vllt über einzelne JS Datei
 
