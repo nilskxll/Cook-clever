@@ -350,9 +350,8 @@ function show_clipboard_copy_text() {
 
 insert_recipe()
 
-// TODO: favicon-Fehler: hat das war mit dem kleinen icon in der Leiste obern zu tun?
 
-// TODO: pjohcfmg/index.html#/credentials können wir z.B. so eine Rezepte id übergeben oder wirds hässlich?
+// TODO: Sind die Bilder auf dieser Seite unscharf oder bilde ich mir das ein?
 
 // TODO: in DB ein Rezept mit id=0 einfügen, dass man bei der bildquelle nicht mehr "id - 1" braucht
 

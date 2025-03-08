@@ -87,12 +87,13 @@
     font-style: var(--h-3-font-style);
 }
 
-.block-recipes .link {
+.block-recipes .link-open-recipe {
     display: inline-flex;
     align-items: center;
     gap: 15px;
     position: relative;
     flex: 0 0 auto;
+    cursor: pointer;
 }
 
 .block-recipes .frame-link-icon {

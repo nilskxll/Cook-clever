@@ -48,9 +48,29 @@ function insert_recipe_card_information() {
     }
 }
 
+// Event-Listeners auf die Link-Buttons hinzufügen, um Rezepte öffnen zu können
+function add_recipe_link_event_listeners() {
+    let links_open_recipe = document.querySelectorAll(".block-recipes .link-open-recipe")
+    links_open_recipe.forEach(function (link) {
+        link.addEventListener("click", function() {
+            // angeklicktes Rezept öffnen
+            let parent = this.closest(".recipe-card")
+            let recipe_name = parent.querySelector(".heading .label-text").textContent
+            if (recipe_name) {
+                window.location.href=`../rezept/#/${encodeURIComponent(recipe_name)}`
+            } else {
+                console.error("Keinen Rezeptnamen gefunden, um die Rezeptseite zu öffnen!")
+            }
+
+        })
+    })
+}
+
+
 insert_recipes_blocks()
 insert_recipe_card_information()
-console.log(Einheiten)
+add_recipe_link_event_listeners()
+
 // TODO: anzeigen, nach was gesucht wurde
 // TODO: wird nichts gefunden, das dem Nutzer mitteilen
 // TODO: evtl die erste recipe-row aus der Startseite importieren (dass Änderungen auf der Startseite direkt übernommen werden)

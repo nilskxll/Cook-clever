@@ -2,17 +2,9 @@ let Nährwerte, Rezepte,Einheiten,Zutaten //Sind Matrizen die alle informationen
 let cheatmeals_Liste = [], kalorienarmeRezepte = [], proteinreicheRezepte = [], vegetarische_Rezepte = [], vegane_Rezepte = [], Fleisch_Rezepte = [] // Sind Listen in den die Rezept_ID der jeweiligen Rezepte gespeichert werden, in welche Kategorie sie eben gerade passen
 let number_of_recipes = 8
 let number_of_recipe_blocks = Math.round(number_of_recipes / 2)
-let links_open_recipe = document.querySelectorAll(".link-open-recipe")
-
-links_open_recipe.forEach(function (link) {
-    link.addEventListener("click", open_recipe)
-})
 
 
-function open_recipe() {
-    window.location.href="rezept"
-}
-
+// Informationen der Datenbank in Matrizen speichern
 function daten_aus_db() {
     fetch('cgi-bin/db_connection.php')
         .then(response => response.json())
@@ -36,6 +28,7 @@ function daten_aus_db() {
         })
 }
 
+// Kategorienlisten erstellen
 function einkategorisieren (){
     // hier wird jeweils ein Objekt (eine Reihe von einem Rezept mit bestimmter ID überprüft, ob sie bestimmte Voraussetzungen hat. Wenn ja, wird sie mit der Rezept_ID hinzugefügt. Falls nein passiert nichts. (alles nur im Hintergrund)
     for ( let i = 0; i < Nährwerte.length; i++) {
@@ -121,10 +114,28 @@ function insert_recipe_card_information() {
     }
 }
 
+// Event-Listeners auf die Link-Buttons hinzufügen, um Rezepte öffnen zu können
+function add_recipe_link_event_listeners() {
+    let links_open_recipe = document.querySelectorAll(".block-recipes .link-open-recipe")
+    links_open_recipe.forEach(function (link) {
+        link.addEventListener("click", function() {
+            // angeklicktes Rezept öffnen
+            let parent = this.closest(".recipe-card")
+            let recipe_name = parent.querySelector(".heading .label-text").textContent
+            if (recipe_name) {
+                window.location.href=`rezept/#/${encodeURIComponent(recipe_name)}`
+            } else {
+                console.error("Keinen Rezeptnamen gefunden, um die Rezeptseite zu öffnen!")
+            }
+        })
+    })
+}
+
 // Rezepte erste einfügen, wenn Datenbank komplett fertig abgerufen und einkategorisiert wurde
 function finished_db() {
     insert_recipes_blocks()
     insert_recipe_card_information()
+    add_recipe_link_event_listeners()
 }
 
 daten_aus_db()
