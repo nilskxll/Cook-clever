@@ -141,6 +141,4 @@ function finished_db() {
 daten_aus_db()
 
 
-// TODO: wenn die divs link-open-recipe die class link haben, ist die Anordnung gut, sonst nicht, aber ich finde kein CSS, dass das macht
-
 // TODO: ganz am Ende internal_path.php aus strato entfernen

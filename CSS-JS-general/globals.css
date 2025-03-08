@@ -73,8 +73,9 @@ p {
 }
 
 /* Stile für mobile Geräte
-(eigentlich unnötig für uns, aber in styleguide war es dabei) */
-@media (max-width: 768px) {
+(eigentlich unnötig für uns, aber Variablen waren in styleguide dabei)
+ist auskommentiert, da wir auf kleineren Geräten die Website herausgezoomt darstellen*/
+/*@media (max-width: 768px) {
     h1 {
         font-family: var(--h1-mob-font-family);
         font-weight: var(--h1-mob-font-weight);
@@ -124,7 +125,7 @@ p {
         font-style: var(--p-mob-font-style);
         color: var(--black);
     }
-}
+}*/
 
 .fullscreen {
     display: flex;

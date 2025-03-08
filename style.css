@@ -1,5 +1,6 @@
-/*hat chatgpt vorgeschlagen, weiß nicht, ob das gut ist*/
-@media (max-width: 1024px) {
+/*hat chatgpt vorgeschlagen, weiß nicht, ob das gut ist
+ist auskommentiert, da wir auf kleineren Geräten die Website herausgezoomt darstellen*/
+/*@media (max-width: 1024px) {
     .block-recipes {
         width: 100%;
         padding: 0 20px;
@@ -14,7 +15,7 @@
         width: 100%;
         padding: 20px;
     }
-}
+}*/
 
 .heading-subheading {
     display: flex;
