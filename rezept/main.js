@@ -1,14 +1,3 @@
-let Rezepte = JSON.parse(sessionStorage.getItem("Rezepte"))
-let Nährwerte = JSON.parse(sessionStorage.getItem("Nährwerte"))
-let Zutaten = JSON.parse(sessionStorage.getItem("Zutaten"))
-let Einheiten = JSON.parse(sessionStorage.getItem("Einheiten"))
-let cheatmeals_Liste = JSON.parse(sessionStorage.getItem("cheatmeals_Liste"))
-let kalorienarmeRezepte = JSON.parse(sessionStorage.getItem("kalorienarmeRezepte"))
-let proteinreicheRezepte = JSON.parse(sessionStorage.getItem("proteinreicheRezepte"))
-let vegetarische_Rezepte = JSON.parse(sessionStorage.getItem("vegetarische_Rezepte"))
-let vegane_Rezepte = JSON.parse(sessionStorage.getItem("vegane_Rezepte"))
-let Fleisch_Rezepte = JSON.parse(sessionStorage.getItem("Fleisch_Rezepte"))
-
 let minus_button = document.getElementById("minus-button")
 let plus_button = document.getElementById("plus-button")
 let number_of_portions_text = document.querySelector(".number-of-portions-frame .value")
@@ -347,14 +336,16 @@ function show_clipboard_copy_text() {
 }
 
 
+// Rezept erste einfügen, wenn Datenbank komplett fertig abgerufen und einkategorisiert wurde
+function finished_db() {
+    insert_recipe()
+}
 
-insert_recipe()
+set_db_variables()
 
 
 // TODO: Sind die Bilder auf dieser Seite unscharf oder bilde ich mir das ein?
 
 // TODO: in DB ein Rezept mit id=0 einfügen, dass man bei der bildquelle nicht mehr "id - 1" braucht
-
-// TODO: angenommen, man öffnet das Rezept von außen über einen Link, dann ist ja noch kein sesionStorage da --> wenn keiner da ist, also datenbank abrufen --> vllt über einzelne JS Datei
 
 // TODO: wenn wir mal mehr als 3 Kategorien pro Rezept haben, dann die Kategoriennamen 2 Stück nebeneinander machen

@@ -1,14 +1,3 @@
-let Rezepte = JSON.parse(sessionStorage.getItem("Rezepte"))
-let Nährwerte = JSON.parse(sessionStorage.getItem("Nährwerte"))
-let Zutaten = JSON.parse(sessionStorage.getItem("Zutaten"))
-let Einheiten = JSON.parse(sessionStorage.getItem("Einheiten"))
-let cheatmeals_Liste = JSON.parse(sessionStorage.getItem("cheatmeals_Liste"))
-let kalorienarmeRezepte = JSON.parse(sessionStorage.getItem("kalorienarmeRezepte"))
-let proteinreicheRezepte = JSON.parse(sessionStorage.getItem("proteinreicheRezepte"))
-let vegetarische_Rezepte = JSON.parse(sessionStorage.getItem("vegetarische_Rezepte"))
-let vegane_Rezepte = JSON.parse(sessionStorage.getItem("vegane_Rezepte"))
-let Fleisch_Rezepte = JSON.parse(sessionStorage.getItem("Fleisch_Rezepte"))
-
 let show_results_button = document.getElementById("show-results-button")
 let required_categories = []
 let required_nutrients = []
@@ -16,6 +5,8 @@ let gefilterte_Rezepte_Nährwerte = []
 let gefilterte_Rezepte_fertig = []
 let gefilterte_Rezepte_Kategorien = []
 let alle_Rezept_IDs = []
+
+set_db_variables()
 
 show_results_button.addEventListener("click", show_results)
 

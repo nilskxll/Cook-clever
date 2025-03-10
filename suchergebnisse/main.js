@@ -1,14 +1,3 @@
-let Rezepte = JSON.parse(sessionStorage.getItem("Rezepte"))
-let Nährwerte = JSON.parse(sessionStorage.getItem("Nährwerte"))
-let Zutaten = JSON.parse(sessionStorage.getItem("Zutaten"))
-let Einheiten = JSON.parse(sessionStorage.getItem("Einheiten"))
-let cheatmeals_Liste = JSON.parse(sessionStorage.getItem("cheatmeals_Liste"))
-let kalorienarmeRezepte = JSON.parse(sessionStorage.getItem("kalorienarmeRezepte"))
-let proteinreicheRezepte = JSON.parse(sessionStorage.getItem("proteinreicheRezepte"))
-let vegetarische_Rezepte = JSON.parse(sessionStorage.getItem("vegetarische_Rezepte"))
-let vegane_Rezepte = JSON.parse(sessionStorage.getItem("vegane_Rezepte"))
-let Fleisch_Rezepte = JSON.parse(sessionStorage.getItem("Fleisch_Rezepte"))
-
 let valid_IDs = JSON.parse(sessionStorage.getItem("valid_IDs"))
 // console.log("übergebene IDs: " + valid_IDs)
 
@@ -35,7 +24,6 @@ function insert_recipes_blocks() {
 // Rezepte in die recipe-cards einfügen
 function insert_recipe_card_information() {
     let list_IDs = valid_IDs
-    console.log("test")
     let recipe_cards = Array.from(document.querySelectorAll(".recipe-card"))
     for (let i = 0; i < number_of_recipes; i++) {
         let recipe_name = recipe_cards[i].querySelector(".label-text")
@@ -67,9 +55,14 @@ function add_recipe_link_event_listeners() {
 }
 
 
-insert_recipes_blocks()
-insert_recipe_card_information()
-add_recipe_link_event_listeners()
+set_db_variables()
+
+function finished_db() {
+    insert_recipes_blocks()
+    insert_recipe_card_information()
+    add_recipe_link_event_listeners()
+}
+
 
 // TODO: anzeigen, nach was gesucht wurde
 // TODO: wird nichts gefunden, das dem Nutzer mitteilen

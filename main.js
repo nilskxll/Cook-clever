@@ -1,69 +1,6 @@
-let Nährwerte, Rezepte,Einheiten,Zutaten //Sind Matrizen die alle informationen der DB enthalten
-let cheatmeals_Liste = [], kalorienarmeRezepte = [], proteinreicheRezepte = [], vegetarische_Rezepte = [], vegane_Rezepte = [], Fleisch_Rezepte = [] // Sind Listen in den die Rezept_ID der jeweiligen Rezepte gespeichert werden, in welche Kategorie sie eben gerade passen
 let number_of_recipes = 8
 let number_of_recipe_blocks = Math.round(number_of_recipes / 2)
 
-
-// Informationen der Datenbank in Matrizen speichern
-function daten_aus_db() {
-    fetch('cgi-bin/db_connection.php')
-        .then(response => response.json())
-        .then(daten => {
-            //Daten aus der PHP Datei in die Matrizen einfügen, damit man in JS damit arbeiten kann
-            Rezepte = daten.rezepte
-            Nährwerte = daten.naehrwerte
-            Zutaten = daten.zutaten
-            Einheiten = daten.einheiten
-            sessionStorage.setItem("Rezepte", JSON.stringify(Rezepte))
-            sessionStorage.setItem("Nährwerte", JSON.stringify(Nährwerte))
-            sessionStorage.setItem("Zutaten", JSON.stringify(Zutaten))
-            sessionStorage.setItem("Einheiten", JSON.stringify(Einheiten))
-
-            console.log("daten geladen")
-            einkategorisieren()
-
-        })
-        .catch(error => { //Falls irgendwo nen Fehler auftritt, sieht man gleich über den error warum
-            console.error("Fehler beim Abrufen der Daten:", error)
-        })
-}
-
-// Kategorienlisten erstellen
-function einkategorisieren (){
-    // hier wird jeweils ein Objekt (eine Reihe von einem Rezept mit bestimmter ID überprüft, ob sie bestimmte Voraussetzungen hat. Wenn ja, wird sie mit der Rezept_ID hinzugefügt. Falls nein passiert nichts. (alles nur im Hintergrund)
-    for ( let i = 0; i < Nährwerte.length; i++) {
-        let Rezept_überprüfung = Nährwerte[i]
-        if (Rezept_überprüfung.Kalorien >= 800) {               //Hier kann man einstellen, ab wann es eben zu den cheatmeals gehört
-            cheatmeals_Liste.push(Rezept_überprüfung.Rezept_ID)
-        }
-        if(Rezept_überprüfung.Kalorien <= 300) {                //Hier kann man einstellen, ab wann es eben zu den Kalorienarmen gehört
-            kalorienarmeRezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-        if (Rezept_überprüfung.Protein >= 40){                   //Hier kann man einstellen, ab wann es eben zu den Eiweiß reichen Rezepten gehört
-            proteinreicheRezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-    }
-    for (let i = 0; i < Rezepte.length; i++){
-        let Rezept_überprüfung = Rezepte[i]
-        if (Rezept_überprüfung.Essgewohnheit === "vegetarisch"){
-            vegetarische_Rezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-        if (Rezept_überprüfung.Essgewohnheit === "vegan"){
-            vegane_Rezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-        if (Rezept_überprüfung.Essgewohnheit === "mit Fleisch"){
-            Fleisch_Rezepte.push(Rezept_überprüfung.Rezept_ID)
-        }
-    }
-    sessionStorage.setItem("cheatmeals_Liste", JSON.stringify(cheatmeals_Liste))
-    sessionStorage.setItem("kalorienarmeRezepte", JSON.stringify(kalorienarmeRezepte))
-    sessionStorage.setItem("proteinreicheRezepte", JSON.stringify(proteinreicheRezepte))
-    sessionStorage.setItem("vegetarische_Rezepte", JSON.stringify(vegetarische_Rezepte))
-    sessionStorage.setItem("vegane_Rezepte", JSON.stringify(vegane_Rezepte))
-    sessionStorage.setItem("Fleisch_Rezepte", JSON.stringify(Fleisch_Rezepte))
-
-    finished_db()
-}
 
 // Rezepte-Rows (nach gewünschter Anzahl) erstellen
 function insert_recipes_blocks() {
@@ -138,7 +75,6 @@ function finished_db() {
     add_recipe_link_event_listeners()
 }
 
-daten_aus_db()
-
+set_db_variables()
 
 // TODO: ganz am Ende internal_path.php aus strato entfernen
