@@ -53,11 +53,13 @@ function add_recipe_link_event_listeners() {
             let parent = this.closest(".recipe-card")
             let recipe_name = parent.querySelector(".heading .label-text").textContent
             if (recipe_name) {
+                let recipe_name_words = recipe_name.split(" ")
+                recipe_name = recipe_name_words.join("_")
+                // console.log("url Rezeptname", recipe_name)
                 window.location.href=`../rezept/#/${encodeURIComponent(recipe_name)}`
             } else {
                 console.error("Keinen Rezeptnamen gefunden, um die Rezeptseite zu öffnen!")
             }
-
         })
     })
 }

@@ -26,8 +26,9 @@ let time = {}
 // Rezept-ID abfragen
 function set_recipe_ID() {
     let name_from_url = decodeURIComponent(window.location.hash.substring(2)) // decode..., um z.B. ö aus der url richtig zu lesen
-    // console.log("url", name_from_url, typeof(name_from_url))
-
+    //console.log("url", name_from_url, typeof(name_from_url))
+    let name_from_url_words = name_from_url.split("_")
+    name_from_url = name_from_url_words.join(" ")
     recipe_id = Rezepte.find(rezept => rezept.Rezeptname === name_from_url)
     /*in der DB Rezepte wollen wir eine Zeile (ein Rezept) finden, bei der der Rezeptname dem Namen von der url entspricht
     normalerweise braucht bei .find() ein return, aber bei der verkürzten Arrow-function wird direkt die Zeile zurückgegeben, bei der die Bedingung wahr ist
