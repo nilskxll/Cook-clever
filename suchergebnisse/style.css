@@ -240,3 +240,38 @@ ist auskommentiert, da wir auf kleineren Geräten die Website herausgezoomt dars
     object-fit: cover;
     border-radius: 25px;
 }
+
+.block-nothing-found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 1440px;
+    padding: 0px 100px;
+    gap: 100px;
+    flex: 0 0 auto;
+}
+
+.block-nothing-found .nothing-found-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 9px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--grey);
+    border-radius: 6px;
+}
+
+.block-nothing-found .label {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: var(--h-3-font-family);
+    font-weight: var(--h-3-font-weight);
+    color: var(--black);
+    font-size: var(--h-3-font-size);
+    letter-spacing: var(--h-3-letter-spacing);
+    line-height: var(--h-3-line-height);
+    font-style: var(--h-3-font-style);
+}

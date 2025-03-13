@@ -9,6 +9,14 @@ function insert_recipes_blocks() {
     // Rezepte-Rows einfügen (2 Rezepte-Karten pro Row)
     let recipes_block = document.querySelector(".block-recipes")
     let recipes_row = document.querySelector(".recipes-row")
+    let nothing_found_block = document.querySelector(".block-nothing-found")
+    // wenn keine Rezepte gefunden wurden
+    if (number_of_recipes === 0) {
+        recipes_block.style.display="none"
+        nothing_found_block.style.display=""
+        return
+    }
+    // wenn Rezepte gefunden wurden
     for (let i = 0; i < number_of_recipe_blocks - 1; i++) {
         let clone = recipes_row.cloneNode(true)
         recipes_block.appendChild(clone)
@@ -65,5 +73,4 @@ function finished_db() {
 
 
 // TODO: anzeigen, nach was gesucht wurde
-// TODO: wird nichts gefunden, das dem Nutzer mitteilen
 // TODO: evtl die erste recipe-row aus der Startseite importieren (dass Änderungen auf der Startseite direkt übernommen werden)
