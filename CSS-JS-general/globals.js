@@ -72,6 +72,7 @@ function suchFeld(big_small_header) {
     }
     // console.log(Rezepte_Suchanfrage_Liste_ID); // Testausgabe der gefundenen Rezept-IDs
     sessionStorage.setItem("valid_IDs", JSON.stringify(Rezepte_Suchanfrage_Liste_ID)) // sessionStorage, dann Werte an Suchergebnisse-Seite übergeben werden können
+    sessionStorage.setItem("search_term", JSON.stringify(input))
     window.location.href = "../suchergebnisse"
 }
 

@@ -4,6 +4,59 @@ let valid_IDs = JSON.parse(sessionStorage.getItem("valid_IDs"))
 let number_of_recipes = valid_IDs.length
 let number_of_recipe_blocks = Math.round(number_of_recipes / 2)
 
+
+// anzeigen, nach was gesucht wurde
+function insert_search_information() {
+    let subheading = document.querySelector(".heading-subheading .subheading")
+    let search_criteria = document.querySelector(".heading-subheading .filters")
+
+    // wenn mit der Suchleiste gesucht wurde
+    let search_term = JSON.parse(sessionStorage.getItem("search_term"))
+    if (search_term) {
+        search_criteria.innerText = search_term
+        return
+    }
+
+    // wenn mit dem Rezeptefinder gesucht wurde
+    let search_criteria_text = ""
+    // Kategorieangaben
+    let required_categories = JSON.parse(sessionStorage.getItem("required_categories"))
+    if (required_categories[0]) { // nur ausführen, wenn die Liste Inhalt hat
+        search_criteria_text += `Kategorien:\nRezepte ${required_categories.join("\nRezepte ")}`
+    }
+    // Nährwertangaben
+    let required_nutrients = JSON.parse(sessionStorage.getItem("required_nutrients"))
+    if (required_nutrients[0]) { // nur ausführen, wenn die Liste Inhalt hat
+        let nutrients_text = ""
+        if (search_criteria_text) { // wenn schon Kategorien im Text stehen, Platz einfügen
+            nutrients_text = "\n\nNährwerte:\n"
+        } else {
+            nutrients_text = "Nährwerte:\n"
+        }
+
+        if (Array.isArray(required_nutrients[0])) { // wenn nach mehr als einem Nährwert gefiltert wird, muss eine Matrix formatiert werden
+            for (let i = 0; i < required_nutrients.length; i++) {
+                nutrients_text += `${required_nutrients[i][0]}: `
+                nutrients_text += `${required_nutrients[i][1]} g\u00A0\u00A0` // zwei geschützte Leerzeichen, dass die von HTML nicht zu einem zusammengefasst werden
+                nutrients_text += `(${required_nutrients[i][2]})\n`
+            }
+        } else { // wenn nach genau einem Nährwert gefiltert wird, muss ein normales Array formatiert werden
+            nutrients_text += `${required_nutrients[0]}: `
+            nutrients_text += `${required_nutrients[1]} g\u00A0\u00A0`
+            nutrients_text += `(${required_nutrients[2]})`
+        }
+        search_criteria_text += nutrients_text
+    }
+    // Text anzeigen
+    if (search_criteria_text) {
+        search_criteria.innerText = search_criteria_text
+        return
+    }
+
+    // wenn gar keine Sucheingaben/Filter eingefügt wurden, subheading komplett wegmachen
+    subheading.style.display = "none"
+}
+
 // Rezepte-Rows (nach gewünschter Anzahl) erstellen
 function insert_recipes_blocks() {
     // Rezepte-Rows einfügen (2 Rezepte-Karten pro Row)
@@ -16,6 +69,7 @@ function insert_recipes_blocks() {
         nothing_found_block.style.display=""
         return
     }
+    nothing_found_block.style.display="none"
     // wenn Rezepte gefunden wurden
     for (let i = 0; i < number_of_recipe_blocks - 1; i++) {
         let clone = recipes_row.cloneNode(true)
@@ -68,11 +122,11 @@ function add_recipe_link_event_listeners() {
 set_db_variables()
 
 function finished_db() {
+    insert_search_information()
     insert_recipes_blocks()
     insert_recipe_card_information()
     add_recipe_link_event_listeners()
 }
 
 
-// TODO: anzeigen, nach was gesucht wurde
 // TODO: evtl die erste recipe-row aus der Startseite importieren (dass Änderungen auf der Startseite direkt übernommen werden)

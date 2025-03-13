@@ -118,10 +118,14 @@ function extract_categories () {
 // Suchangaben ausgeben
 function show_results () {
     // Kategorien
-    let required_categories = extract_categories()
+    let required_categories = []
+    required_categories = extract_categories()
+    sessionStorage.setItem("required_categories", JSON.stringify(required_categories))
 
     // Nährwerte
-    let required_nutrients = extract_nutrients()
+    let required_nutrients = []
+    required_nutrients = extract_nutrients()
+    sessionStorage.setItem("required_nutrients", JSON.stringify(required_nutrients))
 
     console.log("suche Nährwerte:")
     console.log(required_nutrients)
@@ -348,3 +352,15 @@ function Kategorien_mit_Rezept_überprüfen() {
     console.log(gefilterte_Rezepte_Nährwerte + "nä")
     console.log(gefilterte_Rezepte_fertig + "fertig")
 }
+
+function finished_db() {
+    // wird bei set_db_variables() am Ende aufgerufen
+    // sessionStorage könnte auch außerhalb der Funktion stehen, aber finished_db() muss es geben, dass kein Fehler geschmissen wird
+    sessionStorage.setItem("search_term", JSON.stringify(""))
+    sessionStorage.setItem("required_categories", JSON.stringify(""))
+    sessionStorage.setItem("required_nutrients", JSON.stringify(""))
+}
+
+// TODO: Rezeptefinder sucht nicht richtig
+
+// TODO: setTimeout entfernen, wenn Rezeptefinder fertig ist
