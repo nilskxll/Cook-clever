@@ -108,6 +108,9 @@ function extract_categories () {
             words.shift()
             category_name = words.join(" ")
 
+            if (category_name === "vegetarisch") { // bei der Kategorie vegetarisch auch nach vegan suchen
+                required_categories.push("vegan")
+            }
             required_categories.push(category_name)
         }
     })
@@ -120,6 +123,7 @@ function show_results () {
     // Kategorien
     let required_categories = []
     required_categories = extract_categories()
+    required_categories = [...new Set(required_categories)] // new Set() erstellt ein Set ohne Dopplungen [...] macht das Set zu einem Array (vegan könnte doppelt drin stehen, falls vegan und vegetarisch ausgewählt werden
     sessionStorage.setItem("required_categories", JSON.stringify(required_categories))
 
     // Nährwerte
@@ -138,7 +142,7 @@ function show_results () {
     setTimeout(function(){
         sessionStorage.setItem("valid_IDs", JSON.stringify(gefilterte_Rezepte_fertig))
         window.location.href = "../suchergebnisse"
-        }, 2000)
+        }, 6000/*2000*/)
 }
 
 //Nährwerte checken und schauen auf welche Rezepte die aktuell ausgewählten Nährwerte Anforderungen passen:
@@ -362,5 +366,10 @@ function finished_db() {
 }
 
 // TODO: Rezeptefinder sucht nicht richtig
+// TODO: steht vegan nicht als erstes in der required_categories liste, wird nicht nach den Kategorien gesucht, die davor stehen
+
+// TODO: wenn man mehrere Kategorien auswählt, wollen wir unterscheiden, alle erfüllt sein müssen oder dass min eine erfüllt sein muss?
+// Oder wir machen, dass min eine angewählte Essgewohnheit und min eins von proteinreich und so erfüllt sein müssen
+// weil wenn ich jetzt nach vegetarisch und proteinreich suche, kommen auf Rezepte mit Fleisch
 
 // TODO: setTimeout entfernen, wenn Rezeptefinder fertig ist
