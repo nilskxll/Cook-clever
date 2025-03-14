@@ -50,6 +50,8 @@ function move_category_block() {
 function show_vegan_recipes() {
     // console.log("vegane Rezepte anzeigen")
     // console.log("IDs: " + vegane_Rezepte)
+    sessionStorage.setItem("required_categories", JSON.stringify(["vegan"])) // Suchergebnisse-Seite braucht ein Array, da ja auch mehrere Kategorien angezeigt werden können.
+    sessionStorage.setItem("required_nutrients", JSON.stringify([])) // Suchergebnisse-Seite wertet entweder einen Suchbegriff aus oder Kategorien und Nährwerte. Deshalb leeres Array, dass kein Fehler entsteht.
     sessionStorage.setItem("valid_IDs", JSON.stringify(vegane_Rezepte))
     window.location.href = "../suchergebnisse"
 }
@@ -57,13 +59,17 @@ function show_vegan_recipes() {
 function show_vegetarian_recipes() {
     // console.log("vegetarische Rezepte anzeigen")
     // console.log("IDs: " + vegetarische_Rezepte)
-    sessionStorage.setItem("valid_IDs", JSON.stringify(vegetarische_Rezepte))
+    sessionStorage.setItem("required_categories", JSON.stringify(["vegetarisch", "vegan"]))
+    sessionStorage.setItem("required_nutrients", JSON.stringify([]))
+    sessionStorage.setItem("valid_IDs", JSON.stringify(vegetarische_Rezepte.concat(vegane_Rezepte))) // vegetarische und vegane Rezepte anzeigen
     window.location.href = "../suchergebnisse"
 }
 
 function show_meat_recipes() {
     // console.log("Rezepte mit Fleisch anzeigen")
     // console.log("IDs: " + Fleisch_Rezepte)
+    sessionStorage.setItem("required_categories", JSON.stringify(["mit Fleisch"]))
+    sessionStorage.setItem("required_nutrients", JSON.stringify([]))
     sessionStorage.setItem("valid_IDs", JSON.stringify(Fleisch_Rezepte))
     window.location.href = "../suchergebnisse"
 }
@@ -71,6 +77,8 @@ function show_meat_recipes() {
 function show_protein_rich_recipes() {
     // console.log("proteinreiche Rezepte anzeigen")
     // console.log("IDs: " + proteinreicheRezepte)
+    sessionStorage.setItem("required_categories", JSON.stringify(["proteinreich"]))
+    sessionStorage.setItem("required_nutrients", JSON.stringify([]))
     sessionStorage.setItem("valid_IDs", JSON.stringify(proteinreicheRezepte))
     window.location.href = "../suchergebnisse"
 }
@@ -78,6 +86,8 @@ function show_protein_rich_recipes() {
 function show_low_calorie_recipes() {
     // console.log("kalorienarme Rezepte anzeigen")
     // console.log("IDs: " + kalorienarmeRezepte)
+    sessionStorage.setItem("required_categories", JSON.stringify(["kalorienarm"]))
+    sessionStorage.setItem("required_nutrients", JSON.stringify([]))
     sessionStorage.setItem("valid_IDs", JSON.stringify(kalorienarmeRezepte))
     window.location.href = "../suchergebnisse"
 }
@@ -85,8 +95,8 @@ function show_low_calorie_recipes() {
 function show_cheat_day_recipes() {
     // console.log("vegane Rezepte anzeigen")
     // console.log("IDs: " + cheatmeals_Liste)
+    sessionStorage.setItem("required_categories", JSON.stringify(["für den Cheat-Day"]))
+    sessionStorage.setItem("required_nutrients", JSON.stringify([]))
     sessionStorage.setItem("valid_IDs", JSON.stringify(cheatmeals_Liste))
     window.location.href = "../suchergebnisse"
 }
-
-// TODO: sollten alle veganen Rezepte auch als vegetarisch einkategorisiert werden?
