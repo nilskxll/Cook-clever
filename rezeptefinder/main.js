@@ -303,7 +303,11 @@ function Kategorien_mit_Rezept_überprüfen() {
     if(required_categories.length != 0){ //schaut wieder ob es überhaupt ausgewählte Kategorien gibt die nachgefragt werden
         for (let i = 0; i < required_categories.length; i++) { //geht jedes Element aus der Liste durch
             if (required_categories[i] === "vegan"){
-                gefilterte_Rezepte_Kategorien = vegane_Rezepte //falls vegan angeklickt wurde dann soll er einfach
+                for(let j = 0; j < vegane_Rezepte.length; j++){ //falls eben vegan, durchläuft er alle elemente von den vegetarischen Rezepten
+                    if (!gefilterte_Rezepte_Kategorien.includes(vegane_Rezepte[j])){ //falls es noch nicht in der aktuellen gefilterte_Rezepte_Kategorien vorhanden ist, fügt er es hinzu, falls nicht überprüft er das nächste Objekt
+                        gefilterte_Rezepte_Kategorien.push(vegane_Rezepte[j])
+                    }
+                }
             }
             else if (required_categories[i] === "vegetarisch"){
                 for(let j = 0; j < vegetarische_Rezepte.length; j++){ //falls eben vegetarisch, durchläuft er alle elemente von den vegetarischen Rezepten
@@ -352,6 +356,7 @@ function Kategorien_mit_Rezept_überprüfen() {
     else{ //Falls es keine einschränkungen gibt, dann werden einfach die Nährwert einschränkungen übernommen
         gefilterte_Rezepte_fertig = gefilterte_Rezepte_Nährwerte
     }
+    console.log(required_categories + " Ausgewählte kategorien")
     console.log(gefilterte_Rezepte_Kategorien + "ka")
     console.log(gefilterte_Rezepte_Nährwerte + "nä")
     console.log(gefilterte_Rezepte_fertig + "fertig")
@@ -366,10 +371,10 @@ function finished_db() {
 }
 
 // TODO: Rezeptefinder sucht nicht richtig
-// TODO: steht vegan nicht als erstes in der required_categories liste, wird nicht nach den Kategorien gesucht, die davor stehen
+// TODO: steht vegan nicht als erstes in der required_categories liste, wird nicht nach den Kategorien gesucht, die davor stehen (ja steht aber immer an erster stelle wenn angeklickt)
 
-// TODO: wenn man mehrere Kategorien auswählt, wollen wir unterscheiden, alle erfüllt sein müssen oder dass min eine erfüllt sein muss?
-// Oder wir machen, dass min eine angewählte Essgewohnheit und min eins von proteinreich und so erfüllt sein müssen
-// weil wenn ich jetzt nach vegetarisch und proteinreich suche, kommen auf Rezepte mit Fleisch
+// TODO: wenn man mehrere Kategorien auswählt, wollen wir unterscheiden, alle erfüllt sein müssen oder dass min eine erfüllt sein muss? (nils: mindestens eine dachte ich, glaub hab das auch soweit gemacht)
+// Oder wir machen, dass min eine angewählte Essgewohnheit und min eins von proteinreich und so erfüllt sein müssen (Ne bei den Nährwerten muss alles stimmen)
+// weil wenn ich jetzt nach vegetarisch und proteinreich suche, kommen auf Rezepte mit Fleisch (Ja weil mindestens eine erfüllt sein muss)
 
 // TODO: setTimeout entfernen, wenn Rezeptefinder fertig ist
