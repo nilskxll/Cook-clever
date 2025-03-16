@@ -78,6 +78,7 @@ document.querySelectorAll(".nutritional-filters-frame .value").forEach(function 
 // Suchangaben extrahieren
 // Nährwerte
 function extract_nutrients () {
+    required_nutrients = []
     document.querySelectorAll(".nutritional-filters-frame .checkbox").forEach(function(checkbox) {
         let parent = checkbox.closest(".nutritional-filter")
         let nutrition_name = parent.querySelector(".label-filter-name").textContent
@@ -98,6 +99,7 @@ function extract_nutrients () {
 
 // Kategorien
 function extract_categories () {
+    required_categories = []
     document.querySelectorAll(".category-filters-frame .checkbox").forEach(function(checkbox) {
         if (checkbox.checked) {
             let parent = checkbox.closest(".category-filter")
@@ -108,10 +110,10 @@ function extract_categories () {
             words.shift()
             category_name = words.join(" ")
 
+            required_categories.push(category_name)
             if (category_name === "vegetarisch") { // bei der Kategorie vegetarisch auch nach vegan suchen
                 required_categories.push("vegan")
             }
-            required_categories.push(category_name)
         }
     })
 
@@ -142,7 +144,7 @@ function show_results () {
     setTimeout(function(){
         sessionStorage.setItem("valid_IDs", JSON.stringify(gefilterte_Rezepte_fertig))
         window.location.href = "../suchergebnisse"
-        }, 6000/*2000*/)
+        }, 2000)
 }
 
 //Nährwerte checken und schauen auf welche Rezepte die aktuell ausgewählten Nährwerte Anforderungen passen:
@@ -378,3 +380,5 @@ function finished_db() {
 // weil wenn ich jetzt nach vegetarisch und proteinreich suche, kommen auf Rezepte mit Fleisch (Ja weil mindestens eine erfüllt sein muss)
 
 // TODO: setTimeout entfernen, wenn Rezeptefinder fertig ist
+
+// bsp.: Suche nach vegetarisch und mit Fleisch
