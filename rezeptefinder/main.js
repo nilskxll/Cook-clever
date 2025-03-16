@@ -384,4 +384,5 @@ function finished_db() {
 
 // TODO: setTimeout entfernen, wenn Rezeptefinder fertig ist
 
-// bsp.: Suche nach vegetarisch und mit Fleisch
+// bsp.: Suche nach vegetarisch, mit Fleisch, proteinreich, kalorienarm
+// --> es kommen alle Rezepte raus, die vegetarisch oder mit Fleisch sind, die aber trotzdem sowohl proteinreich als auch kalorienarm sind
