@@ -78,7 +78,6 @@ document.querySelectorAll(".nutritional-filters-frame .value").forEach(function 
 // Suchangaben extrahieren
 // Nährwerte
 function extract_nutrients () {
-    required_nutrients = []
     document.querySelectorAll(".nutritional-filters-frame .checkbox").forEach(function(checkbox) {
         let parent = checkbox.closest(".nutritional-filter")
         let nutrition_name = parent.querySelector(".label-filter-name").textContent
@@ -99,7 +98,6 @@ function extract_nutrients () {
 
 // Kategorien
 function extract_categories () {
-    required_categories = []
     document.querySelectorAll(".category-filters-frame .checkbox").forEach(function(checkbox) {
         if (checkbox.checked) {
             let parent = checkbox.closest(".category-filter")
@@ -122,14 +120,19 @@ function extract_categories () {
 
 // Suchangaben ausgeben
 function show_results () {
+    // Listen leer machen
+    gefilterte_Rezepte_Nährwerte.length = 0
+    gefilterte_Rezepte_fertig.length = 0
+    gefilterte_Rezepte_Kategorien.length = 0
+    required_categories.length = 0
+    required_nutrients.length = 0
+
     // Kategorien
-    let required_categories = []
     required_categories = extract_categories()
     required_categories = [...new Set(required_categories)] // new Set() erstellt ein Set ohne Dopplungen [...] macht das Set zu einem Array (vegan könnte doppelt drin stehen, falls vegan und vegetarisch ausgewählt werden
     sessionStorage.setItem("required_categories", JSON.stringify(required_categories))
 
     // Nährwerte
-    let required_nutrients = []
     required_nutrients = extract_nutrients()
     sessionStorage.setItem("required_nutrients", JSON.stringify(required_nutrients))
 
