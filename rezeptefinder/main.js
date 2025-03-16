@@ -2,8 +2,10 @@ let show_results_button = document.getElementById("show-results-button")
 let required_categories = []
 let required_nutrients = []
 let gefilterte_Rezepte_Nährwerte = []
+let gefilterte_Rezepte_halb_fertig = []
 let gefilterte_Rezepte_fertig = []
-let gefilterte_Rezepte_Kategorien = []
+let gefilterte_Rezepte_Kategorien_Essgewohnheit = []
+let gefilterte_Rezepte_Kategorien_voreingestellte_Nährwerte = []
 let alle_Rezept_IDs = []
 
 set_db_variables()
@@ -123,7 +125,8 @@ function show_results () {
     // Listen leer machen
     gefilterte_Rezepte_Nährwerte.length = 0
     gefilterte_Rezepte_fertig.length = 0
-    gefilterte_Rezepte_Kategorien.length = 0
+    gefilterte_Rezepte_Kategorien_Essgewohnheit.length = 0
+    gefilterte_Rezepte_Kategorien_voreingestellte_Nährwerte.length = 0
     required_categories.length = 0
     required_nutrients.length = 0
 
@@ -147,141 +150,134 @@ function show_results () {
     setTimeout(function(){
         sessionStorage.setItem("valid_IDs", JSON.stringify(gefilterte_Rezepte_fertig))
         window.location.href = "../suchergebnisse"
-        }, 2000)
+        }, 8000)
 }
 
 //Nährwerte checken und schauen auf welche Rezepte die aktuell ausgewählten Nährwerte Anforderungen passen:
 
-function Nährwerte_mit_Rezept_überprüfen (){
-    let Kalorien_akzeptiert = [], Protein_akzeptiert = [], Fett_akzeptiert = [], Kohlenhydrate_akzeptiert = [], zugesetzer_Zucker_akzeptiert = [], Ballaststoffe_akzeptiert = []
-    let Kalorien_angeklickt = 0, Protein_angeklickt = 0, Fett_angeklickt = 0, Kohlenhydrate_angeklickt = 0, zugesetzer_Zucker_angeklickt = 0, Ballaststoffe_angeklickt = 0
+function Nährwerte_mit_Rezept_überprüfen () {
+    let Kalorien_akzeptiert = [], Protein_akzeptiert = [], Fett_akzeptiert = [], Kohlenhydrate_akzeptiert = [],
+        zugesetzer_Zucker_akzeptiert = [], Ballaststoffe_akzeptiert = []
+    let Kalorien_angeklickt = 0, Protein_angeklickt = 0, Fett_angeklickt = 0, Kohlenhydrate_angeklickt = 0,
+        zugesetzer_Zucker_angeklickt = 0, Ballaststoffe_angeklickt = 0
 
+    alle_Rezept_IDs = []
+    for (let i = 0; i < Nährwerte.length; i++) {
+        alle_Rezept_IDs.push(Nährwerte[i].Rezept_ID)
+    }
+    console.log("fertig mit aLLEN ids" + alle_Rezept_IDs)
     if (required_nutrients.length != 0) { //wenn die Null ist kann der ganze Teil übersprungen werden, da keine Einschränkung für Nährwerte gegeben wurde
         for (let i = 0; i < required_nutrients.length; i++) {
             if (required_nutrients[i][0] === "Energie") { //wenn der User Energie angeklickt hat, dann wird das überprüft
                 Kalorien_angeklickt = 1 //zeigt für den Schluss an, ob eben diese Nährwertangabe mit Energie angeklickt wurde oder eben nicht
-                if (required_nutrients[i][2] === "min"){ //geschaut, ob eben min oder max gefragt falls max macht er das selbe nur bei der else schleife
+                if (required_nutrients[i][2] === "min") { //geschaut, ob eben min oder max gefragt falls max macht er das selbe nur bei der else schleife
                     for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Kalorien >= required_nutrients[i][1]){ //dann nach den Anforderungen die jeweiligen Objekte in der DB durchgehen
+                        if (Nährwerte[j].Kalorien >= required_nutrients[i][1]) { //dann nach den Anforderungen die jeweiligen Objekte in der DB durchgehen
                             Kalorien_akzeptiert.push(Nährwerte[j].Rezept_ID); //wenn alles passt, kommt es in eine Liste die dann unten noch weiter überprüft wird
                         }
                     }
                 } //das Ganze wird einfach für jeden Nährwert durchgeführt und jeweils immer in eine separate Liste gepushed
                 else {
                     for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Kalorien <= required_nutrients[i][1]){
+                        if (Nährwerte[j].Kalorien <= required_nutrients[i][1]) {
                             Kalorien_akzeptiert.push(Nährwerte[j].Rezept_ID);
                         }
                     }
                 }
-            }
-            else if (required_nutrients[i][0] === "Eiweiß") {
+            } else if (required_nutrients[i][0] === "Eiweiß") {
                 Protein_angeklickt = 1
-                if (required_nutrients[i][2] === "min"){
+                if (required_nutrients[i][2] === "min") {
                     for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Protein >= required_nutrients[i][1]){
+                        if (Nährwerte[j].Protein >= required_nutrients[i][1]) {
+                            Protein_akzeptiert.push(Nährwerte[j].Rezept_ID);
+                        }
+                    }
+                } else {
+                    for (let j = 0; j < Nährwerte.length; j++) {
+                        if (Nährwerte[j].Protein <= required_nutrients[i][1]) {
                             Protein_akzeptiert.push(Nährwerte[j].Rezept_ID);
                         }
                     }
                 }
-                else {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Protein <= required_nutrients[i][1]){
-                            Protein_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                }
-            }
-            else if (required_nutrients[i][0] === "Fett") {
+            } else if (required_nutrients[i][0] === "Fett") {
                 Fett_angeklickt = 1
-                if (required_nutrients[i][2] === "min"){
+                if (required_nutrients[i][2] === "min") {
                     for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Fett >= required_nutrients[i][1]){
+                        if (Nährwerte[j].Fett >= required_nutrients[i][1]) {
+                            Fett_akzeptiert.push(Nährwerte[j].Rezept_ID);
+                        }
+                    }
+                } else {
+                    for (let j = 0; j < Nährwerte.length; j++) {
+                        if (Nährwerte[j].Fett <= required_nutrients[i][1]) {
                             Fett_akzeptiert.push(Nährwerte[j].Rezept_ID);
                         }
                     }
                 }
-                else {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Fett <= required_nutrients[i][1]){
-                            Fett_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                }
-            }
-            else if (required_nutrients[i][0] === "Kohlenhydrate") {
+            } else if (required_nutrients[i][0] === "Kohlenhydrate") {
                 Kohlenhydrate_angeklickt = 1
-                if (required_nutrients[i][2] === "min"){
+                if (required_nutrients[i][2] === "min") {
                     for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Kohlenhydrate >= required_nutrients[i][1]){
+                        if (Nährwerte[j].Kohlenhydrate >= required_nutrients[i][1]) {
+                            Kohlenhydrate_akzeptiert.push(Nährwerte[j].Rezept_ID);
+                        }
+                    }
+                } else {
+                    for (let j = 0; j < Nährwerte.length; j++) {
+                        if (Nährwerte[j].Kohlenhydrate <= required_nutrients[i][1]) {
                             Kohlenhydrate_akzeptiert.push(Nährwerte[j].Rezept_ID);
                         }
                     }
                 }
-                else {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Kohlenhydrate <= required_nutrients[i][1]){
-                            Kohlenhydrate_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                }
-            }
-            else if (required_nutrients[i][0] === "zuges. Zucker") {
+            } else if (required_nutrients[i][0] === "zuges. Zucker") {
                 zugesetzer_Zucker_angeklickt = 1
-                if (required_nutrients[i][2] === "min"){
+                if (required_nutrients[i][2] === "min") {
                     for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].zugesetzer_Zucker >= required_nutrients[i][1]){
+                        if (Nährwerte[j].zugesetzer_Zucker >= required_nutrients[i][1]) {
+                            zugesetzer_Zucker_akzeptiert.push(Nährwerte[j].Rezept_ID);
+                        }
+                    }
+                } else {
+                    for (let j = 0; j < Nährwerte.length; j++) {
+                        if (Nährwerte[j].zugesetzer_Zucker <= required_nutrients[i][1]) {
                             zugesetzer_Zucker_akzeptiert.push(Nährwerte[j].Rezept_ID);
                         }
                     }
                 }
-                else {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].zugesetzer_Zucker <= required_nutrients[i][1]){
-                            zugesetzer_Zucker_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                }
-            }
-            else if (required_nutrients[i][0] === "Ballaststoffe") {
+            } else if (required_nutrients[i][0] === "Ballaststoffe") {
                 Ballaststoffe_angeklickt = 1
-                if (required_nutrients[i][2] === "min"){
+                if (required_nutrients[i][2] === "min") {
                     for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Ballaststoffe >= required_nutrients[i][1]){
+                        if (Nährwerte[j].Ballaststoffe >= required_nutrients[i][1]) {
                             Ballaststoffe_akzeptiert.push(Nährwerte[j].Rezept_ID);
                         }
                     }
-                }
-                else {
+                } else {
                     for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Ballaststoffe <= required_nutrients[i][1]){
+                        if (Nährwerte[j].Ballaststoffe <= required_nutrients[i][1]) {
                             Ballaststoffe_akzeptiert.push(Nährwerte[j].Rezept_ID);
                         }
                     }
                 }
             }
         }
-        alle_Rezept_IDs = []
-        for (let i = 0; i < Nährwerte.length; i++){
-            alle_Rezept_IDs.push(Nährwerte[i].Rezept_ID)
+        if (Kalorien_akzeptiert.length === 0 && Kalorien_angeklickt === 0) { //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden) (falls leer, weil nicht angeklickt, werden denen alle Rezept_IDs zugewiesen.
+            Kalorien_akzeptiert = alle_Rezept_IDs.slice()
         }
-        if (Kalorien_akzeptiert.length === 0 && Kalorien_angeklickt === 0){ //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden) (falls leer, weil nicht angeklickt, werden denen alle Rezept_IDs zugewiesen.
-                Kalorien_akzeptiert = alle_Rezept_IDs.slice()
+        if (Protein_akzeptiert.length === 0 && Protein_angeklickt === 0) { //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
+            Protein_akzeptiert = alle_Rezept_IDs.slice()
         }
-        if (Protein_akzeptiert.length === 0 && Protein_angeklickt === 0){ //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
-                Protein_akzeptiert = alle_Rezept_IDs.slice()
+        if (Fett_akzeptiert.length === 0 && Fett_angeklickt === 0) { //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
+            Fett_akzeptiert = alle_Rezept_IDs.slice()
         }
-        if (Fett_akzeptiert.length === 0 && Fett_angeklickt === 0){ //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
-                Fett_akzeptiert = alle_Rezept_IDs.slice()
+        if (Kohlenhydrate_akzeptiert.length === 0 && Kohlenhydrate_angeklickt === 0) { //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
+            Kohlenhydrate_akzeptiert = alle_Rezept_IDs.slice()
         }
-        if (Kohlenhydrate_akzeptiert.length === 0 && Kohlenhydrate_angeklickt === 0){ //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
-                Kohlenhydrate_akzeptiert = alle_Rezept_IDs.slice()
+        if (zugesetzer_Zucker_akzeptiert.length === 0 && zugesetzer_Zucker_angeklickt === 0) { //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
+            zugesetzer_Zucker_akzeptiert = alle_Rezept_IDs.slice()
         }
-        if (zugesetzer_Zucker_akzeptiert.length === 0 && zugesetzer_Zucker_angeklickt === 0){ //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
-                zugesetzer_Zucker_akzeptiert = alle_Rezept_IDs.slice()
-        }
-        if (Ballaststoffe_akzeptiert.length === 0 && Ballaststoffe_angeklickt === 0){ //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
-                Ballaststoffe_akzeptiert = alle_Rezept_IDs.slice()
+        if (Ballaststoffe_akzeptiert.length === 0 && Ballaststoffe_angeklickt === 0) { //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
+            Ballaststoffe_akzeptiert = alle_Rezept_IDs.slice()
         }
         //Hier die jeweiligen Listen miteinander Vergleichen. Die ID die in der jeder Liste vorhanden ist, kann in eine (halb) Finale Liste mit denen die der Suche entsprechen
 
@@ -289,83 +285,95 @@ function Nährwerte_mit_Rezept_überprüfen (){
         gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id => Kalorien_akzeptiert.includes(id)) //in den folgenden Zeilen wird geschaut ob eben gefilterte_Rezepte_Nährwerte und Kalorien_akzeptiert gleiche Elemente haben. Die werden dann wieder in der gefilterte_Rezepte_Nährwerte geschrieben und mit der nächsten Liste verglichen
         gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id => Protein_akzeptiert.includes(id))
         gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id => Fett_akzeptiert.includes(id))
-        gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id=> Kohlenhydrate_akzeptiert.includes(id))
-        gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id=> zugesetzer_Zucker_akzeptiert.includes(id))
+        gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id => Kohlenhydrate_akzeptiert.includes(id))
+        gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id => zugesetzer_Zucker_akzeptiert.includes(id))
         gefilterte_Rezepte_Nährwerte = gefilterte_Rezepte_Nährwerte.filter(id => Ballaststoffe_akzeptiert.includes(id))
         console.log(gefilterte_Rezepte_Nährwerte)
-        Kategorien_mit_Rezept_überprüfen() //nun ist er hiermit fertig und soll die Kategorien überprüfen
+        Kategorien_mit_Rezept_überprüfen_Essgewohnheit() //nun ist er hiermit fertig und soll die Kategorien überprüfen
     }
     else{
         gefilterte_Rezepte_Nährwerte = alle_Rezept_IDs
-        Kategorien_mit_Rezept_überprüfen()
+        Kategorien_mit_Rezept_überprüfen_Essgewohnheit()
     }
+
 }
 
 
-function Kategorien_mit_Rezept_überprüfen() {
-    let vegan_angeklickt = 0, vegetarisch_angeklickt = 0, mit_Fleisch_angeklickt = 0,cheat_meals_angeklickt = 0, proteinreich_angeklickt = 0, kalorienarm_angeklickt = 0
-    let vegan_akzeptiert =[], vegetarisch_akzeptiert = [], mit_Fleisch_akzeptiert = [], cheat_meals_akzeptiert = [], proteinreich_akzeptiert = [], kalorienarm_akzeptiert = []
+function Kategorien_mit_Rezept_überprüfen_Essgewohnheit() {
     if(required_categories.length != 0){ //schaut wieder ob es überhaupt ausgewählte Kategorien gibt die nachgefragt werden
         for (let i = 0; i < required_categories.length; i++) { //geht jedes Element aus der Liste durch
             if (required_categories[i] === "vegan"){
                 for(let j = 0; j < vegane_Rezepte.length; j++){ //falls eben vegan, durchläuft er alle elemente von den vegetarischen Rezepten
-                    if (!gefilterte_Rezepte_Kategorien.includes(vegane_Rezepte[j])){ //falls es noch nicht in der aktuellen gefilterte_Rezepte_Kategorien vorhanden ist, fügt er es hinzu, falls nicht überprüft er das nächste Objekt
-                        gefilterte_Rezepte_Kategorien.push(vegane_Rezepte[j])
+                    if (!gefilterte_Rezepte_Kategorien_Essgewohnheit.includes(vegane_Rezepte[j])){ //falls es noch nicht in der aktuellen gefilterte_Rezepte_Kategorien_Essgewohnheit vorhanden ist, fügt er es hinzu, falls nicht überprüft er das nächste Objekt
+                        gefilterte_Rezepte_Kategorien_Essgewohnheit.push(vegane_Rezepte[j])
                     }
                 }
             }
             else if (required_categories[i] === "vegetarisch"){
                 for(let j = 0; j < vegetarische_Rezepte.length; j++){ //falls eben vegetarisch, durchläuft er alle elemente von den vegetarischen Rezepten
-                    if (!gefilterte_Rezepte_Kategorien.includes(vegetarische_Rezepte[j])){ //falls es noch nicht in der aktuellen gefilterte_Rezepte_Kategorien vorhanden ist, fügt er es hinzu, falls nicht überprüft er das nächste Objekt
-                        gefilterte_Rezepte_Kategorien.push(vegetarische_Rezepte[j])
+                    if (!gefilterte_Rezepte_Kategorien_Essgewohnheit.includes(vegetarische_Rezepte[j])){ //falls es noch nicht in der aktuellen gefilterte_Rezepte_Kategorien_Essgewohnheit vorhanden ist, fügt er es hinzu, falls nicht überprüft er das nächste Objekt
+                        gefilterte_Rezepte_Kategorien_Essgewohnheit.push(vegetarische_Rezepte[j])
                     }
                 }
             }
             else if (required_categories[i] === "mit Fleisch"){
                 for(let j = 0; j < Fleisch_Rezepte.length; j++){ //das gleiche wie bei vegetarisch ...
-                    if (!gefilterte_Rezepte_Kategorien.includes(Fleisch_Rezepte[j])){
-                        gefilterte_Rezepte_Kategorien.push(Fleisch_Rezepte[j])
-                    }
-                }
-            }
-            else if (required_categories[i] === "proteinreich"){
-                for(let j = 0; j < proteinreicheRezepte.length; j++){
-                    if (!gefilterte_Rezepte_Kategorien.includes(proteinreicheRezepte[j])){
-                        gefilterte_Rezepte_Kategorien.push(proteinreicheRezepte[j])
-                    }
-                }
-            }
-            else if (required_categories[i] === "kalorienarm"){
-                for(let j = 0; j < kalorienarmeRezepte.length; j++){
-                    if (!gefilterte_Rezepte_Kategorien.includes(kalorienarmeRezepte[j])){
-                        gefilterte_Rezepte_Kategorien.push(kalorienarmeRezepte[j])
-                    }
-                }
-            }
-            else if (required_categories[i] === "für den Cheat-Day"){
-                for(let j = 0; j < cheatmeals_Liste.length; j++){
-                    if (!gefilterte_Rezepte_Kategorien.includes(cheatmeals_Liste[j])){
-                        gefilterte_Rezepte_Kategorien.push(cheatmeals_Liste[j])
+                    if (!gefilterte_Rezepte_Kategorien_Essgewohnheit.includes(Fleisch_Rezepte[j])){
+                        gefilterte_Rezepte_Kategorien_Essgewohnheit.push(Fleisch_Rezepte[j])
                     }
                 }
             }
         }
-        if (gefilterte_Rezepte_Nährwerte.length === 0){
-            gefilterte_Rezepte_fertig = gefilterte_Rezepte_Kategorien
-        }
-        for (let i = 0; i < gefilterte_Rezepte_Nährwerte.length; i++) //Beide listen werden miteinander verbunden und überprüft. Wenn diese ein gleiches Element haben, dann wird es in die endgültige Liste geschrieben
-            if (gefilterte_Rezepte_Kategorien.includes(gefilterte_Rezepte_Nährwerte[i])){
-                gefilterte_Rezepte_fertig.push(gefilterte_Rezepte_Nährwerte[i])
-        }
+        Kategorien_mit_Rezept_überprüfen_voreingestellte_Nährwerte ()
     }
     else{ //Falls es keine einschränkungen gibt, dann werden einfach die Nährwert einschränkungen übernommen
-        gefilterte_Rezepte_fertig = gefilterte_Rezepte_Nährwerte
+        gefilterte_Rezepte_Kategorien_Essgewohnheit = alle_Rezept_IDs
+        Kategorien_mit_Rezept_überprüfen_voreingestellte_Nährwerte ()
+    }
+}
+
+
+function Kategorien_mit_Rezept_überprüfen_voreingestellte_Nährwerte () {
+    gefilterte_Rezepte_Kategorien_voreingestellte_Nährwerte = alle_Rezept_IDs
+    if (required_categories.length != 0) { //schaut wieder ob es überhaupt ausgewählte Kategorien gibt die nachgefragt werden
+        for (let i = 0; i < required_categories.length; i++) { //geht jedes Element aus der Liste durch
+            if (required_categories[i] === "proteinreich") {
+                gefilterte_Rezepte_Kategorien_voreingestellte_Nährwerte = gefilterte_Rezepte_Kategorien_voreingestellte_Nährwerte.filter(id => proteinreicheRezepte.includes(id))
+            }
+            else if (required_categories[i] === "kalorienarm") {
+                gefilterte_Rezepte_Kategorien_voreingestellte_Nährwerte = gefilterte_Rezepte_Kategorien_voreingestellte_Nährwerte.filter(id => kalorienarmeRezepte.includes(id))
+            }
+            else if (required_categories[i] === "für den Cheat-Day") {
+                gefilterte_Rezepte_Kategorien_voreingestellte_Nährwerte = gefilterte_Rezepte_Kategorien_voreingestellte_Nährwerte.filter(id => cheatmeals_Liste.includes(id))
+            }
+        }
+    }
+    gefilterte_Rezepte_zusammenführen()
+}
+
+
+
+function gefilterte_Rezepte_zusammenführen(){
+    console.log("Funktion aufgerufen")
+    gefilterte_Rezepte_fertig.length = 0
+    gefilterte_Rezepte_halb_fertig.length = 0
+    for (let i = 0; i < gefilterte_Rezepte_Nährwerte.length; i++) {//Beide listen werden miteinander verbunden und überprüft. Wenn diese ein gleiches Element haben, dann wird es in die endgültige Liste geschrieben
+        if (gefilterte_Rezepte_Kategorien_Essgewohnheit.includes(gefilterte_Rezepte_Nährwerte[i])) {
+            gefilterte_Rezepte_halb_fertig.push(gefilterte_Rezepte_Nährwerte[i])
+        }
+    }
+    for (let i = 0; i < gefilterte_Rezepte_halb_fertig.length; i++){
+        if(gefilterte_Rezepte_Kategorien_voreingestellte_Nährwerte.includes(gefilterte_Rezepte_halb_fertig[i])){
+            gefilterte_Rezepte_fertig.push(gefilterte_Rezepte_halb_fertig[i])
+        }
     }
     console.log(required_categories + " Ausgewählte kategorien")
-    console.log(gefilterte_Rezepte_Kategorien + "ka")
+    console.log(gefilterte_Rezepte_Kategorien_Essgewohnheit + " kategorien Essgewohnheiten")
     console.log(gefilterte_Rezepte_Nährwerte + "nä")
     console.log(gefilterte_Rezepte_fertig + "fertig")
 }
+
+
 
 function finished_db() {
     // wird bei set_db_variables() am Ende aufgerufen
