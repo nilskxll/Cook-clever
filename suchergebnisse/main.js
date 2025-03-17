@@ -36,13 +36,13 @@ function insert_search_information() {
 
         if (Array.isArray(required_nutrients[0])) { // wenn nach mehr als einem Nährwert gefiltert wird, muss eine Matrix formatiert werden
             for (let i = 0; i < required_nutrients.length; i++) {
-                nutrients_text += `${required_nutrients[i][0]}: `
-                nutrients_text += `${required_nutrients[i][1]} g\u00A0\u00A0` // zwei geschützte Leerzeichen, dass die von HTML nicht zu einem zusammengefasst werden
+                nutrients_text += `${required_nutrients[i][0]}:`
+                nutrients_text += `\u00A0\u00A0${required_nutrients[i][1]} g\u00A0\u00A0` // zwei geschützte Leerzeichen, dass die von HTML nicht zu einem zusammengefasst werden
                 nutrients_text += `(${required_nutrients[i][2]})\n`
             }
         } else { // wenn nach genau einem Nährwert gefiltert wird, muss ein normales Array formatiert werden
-            nutrients_text += `${required_nutrients[0]}: `
-            nutrients_text += `${required_nutrients[1]} g\u00A0\u00A0`
+            nutrients_text += `${required_nutrients[0]}:`
+            nutrients_text += `\u00A0\u00A0${required_nutrients[1]} g\u00A0\u00A0`
             nutrients_text += `(${required_nutrients[2]})`
         }
         search_criteria_text += nutrients_text

@@ -3,6 +3,7 @@ let show_results_button = document.getElementById("show-results-button")
 let required_categories = []
 let required_nutrients = []
 let valid_nutrients_ids = []
+let valid_category_ids = []
 let valid_ids = []
 let alle_Rezept_IDs = []
 
@@ -130,15 +131,19 @@ function extract_categories () {
 
 // Suchangaben ausgeben
 function show_results () {
+    console.log("---------------------------------------")
+    console.log("Suche starten")
+    // Listen leer machen
+    valid_nutrients_ids.length = 0
+    valid_category_ids.length = 0
+    valid_ids.length = 0
+    required_categories.length = 0
+    required_nutrients.length = 0
+
     alle_Rezept_IDs.length = 0
     for (let i = 0; i < Nährwerte.length; i++) {
         alle_Rezept_IDs.push(Nährwerte[i].Rezept_ID)
     }
-    // Listen leer machen
-    valid_nutrients_ids.length = 0
-    valid_ids.length = 0
-    required_categories.length = 0
-    required_nutrients.length = 0
 
     // Kategorien
     required_categories = extract_categories()
@@ -149,25 +154,65 @@ function show_results () {
     required_nutrients = extract_nutrients()
     sessionStorage.setItem("required_nutrients", JSON.stringify(required_nutrients))
 
-    console.log("suche Nährwerte:")
+    console.log("suche in Nährwerten:")
     console.log(required_nutrients)
-
     console.log("suche in kategorien:")
     console.log(required_categories)
-    console.log(Nährwerte)
-    console.log(Rezepte)
+
+    // console.log("Nährwert-Matrix:", Nährwerte)
+    // console.log("Rezepte-Matrix:", Rezepte)
+
+    // filtern (Funktionen rufen sich nacheinander auf)
     filter_recipes_nutrients()
     setTimeout(function(){
         sessionStorage.setItem("valid_IDs", JSON.stringify(valid_ids))
         window.location.href = "../suchergebnisse"
-        }, 5000)
+        }, 2000)
 }
 
 //Nährwerte checken und schauen auf welche Rezepte die aktuell ausgewählten Nährwerte Anforderungen passen:
 
 function filter_recipes_nutrients() {
-    valid_nutrients_ids = alle_Rezept_IDs //hier wird erstmal die Liste voll mit allen
-    let Kalorien_akzeptiert = [], Protein_akzeptiert = [], Fett_akzeptiert = [], Kohlenhydrate_akzeptiert = [],
+    let nutrient_map = { // nötig, da die Namen der Nährwerte in required_nutrients-Liste anders als in der Nährwerte-Matrix sind
+        "Energie": "Kalorien",
+        "Eiweiß": "Protein",
+        "Fett": "Fett",
+        "Kohlenhydrate": "Kohlenhydrate",
+        "zuges. Zucker": "zugesetzer_Zucker",
+        "Ballaststoffe": "Ballaststoffe"
+    }
+    valid_nutrients_ids = alle_Rezept_IDs // alle Rezept-IDs hinzufügen, dass hiernach aussortiert werden kann
+
+    // Aufbau der Matrix required_nutrients: [[nutrient_name, value, min/max], [nutrient_name, value, min/max], ...]
+    if (required_nutrients.length !== 0) { // nur wenn auch nach Nährwerten gefiltert wird
+        Rezepte.forEach((recipe) => { // jedes Rezept überprüfen
+            let recipe_id = recipe.Rezept_ID
+            let recipe_nutrients = Nährwerte[recipe_id-1] // Nährwerte des aktuellen Rezepts
+            for (let i = 0; i < required_nutrients.length; i++) { // alle Nährwerte der Sucheingabe überprüfen
+                let nutrient = nutrient_map[required_nutrients[i][0]]
+                let value = required_nutrients[i][1]
+                let type = required_nutrients[i][2]
+                if (type === "min") {
+                    if (recipe_nutrients[nutrient] < value) { // wenn der Wert weniger als die Suchvorgabe ist
+                        // console.log("eigenschaft schlecht:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
+                        // console.log("id zum rausschmeißen:", recipe_id)
+                        valid_nutrients_ids = valid_nutrients_ids.filter(id => id !== recipe_id) // aktuelle ID aus valid_nutrient_ids entfernen, weil min nicht erfüllt ist
+                    } // else {console.log("eigenschaft gut:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)}
+                } else {
+                    if (recipe_nutrients[nutrient] > value) { // wenn der Wert höher als die Suchvorgabe ist
+                        // console.log("eigenschaft schlecht:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
+                        // console.log("id zum rausschmeißen:", recipe_id)
+                        valid_nutrients_ids = valid_nutrients_ids.filter(id => id !== recipe_id) // aktuelle ID aus valid_nutrient_ids entfernen, weil max nicht erfüllt ist
+                    } // else {console.log("eigenschaft gut:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)}
+                }
+            }
+        })
+    }
+
+    // fortfahren mit Kategorien Filtern
+    filter_recipes_categories()
+
+    /*let Kalorien_akzeptiert = [], Protein_akzeptiert = [], Fett_akzeptiert = [], Kohlenhydrate_akzeptiert = [],
         zugesetzer_Zucker_akzeptiert = [], Ballaststoffe_akzeptiert = []
     let Kalorien_angeklickt = 0, Protein_angeklickt = 0, Fett_angeklickt = 0, Kohlenhydrate_angeklickt = 0,
         zugesetzer_Zucker_angeklickt = 0, Ballaststoffe_angeklickt = 0
@@ -301,14 +346,11 @@ function filter_recipes_nutrients() {
     else{
         // valid_nutrients_ids = alle_Rezept_IDs
         filter_recipes_categories()
-    }
+    }*/
 
 }
 
 function filter_recipes_categories() {
-    let valid_category_ids = []
-    valid_category_ids.length = 0
-
     let required_categories_eating_habits = []
     required_categories_eating_habits.length = 0
 
@@ -328,7 +370,7 @@ function filter_recipes_categories() {
 
     // console.log("gesuchte essgewohnheiten:", required_categories_eating_habits)
     // console.log("gesuchte restliche kategorien:", required_categories_others)
-    
+
     // Rezepte nach Essgewohnheiten filtern
     if (required_categories_eating_habits.length === 0) { // wenn Essgewohnheiten egal sind
         valid_category_ids = alle_Rezept_IDs
@@ -354,13 +396,11 @@ function filter_recipes_categories() {
     if (required_categories_others.includes("für den Cheat-Day")) {
         valid_category_ids = valid_category_ids.filter(id => cheatmeals_Liste.includes(id))
     }
-
-    // console.log("von nährwerten gut:", valid_nutrients_ids)
-    // console.log("von kategorien gut:", valid_category_ids)
     
     // nur die IDs übernehmen, wo die Nährwerte und Kategorien passen
     valid_ids = valid_nutrients_ids.filter(id => valid_category_ids.includes(id))
-    
+    console.log("gefilterte nutrient ids:",valid_nutrients_ids)
+    console.log("gefilterte category IDs:", valid_category_ids)
     console.log("insgesamt passende IDs:", valid_ids)
 }
 
@@ -372,13 +412,79 @@ function finished_db() {
     sessionStorage.setItem("search_term", JSON.stringify(""))
     sessionStorage.setItem("required_categories", JSON.stringify(""))
     sessionStorage.setItem("required_nutrients", JSON.stringify(""))
+        
+        
+    /*required_nutrients = [["Energie", 4, "min"], ["Eiweiß", 44, "max"]]
+    let nutrient_map = { // nötig, da die Namen der Nährwerte in required_nutrients-Liste anders als in der Nährwerte-Matrix sind
+        "Energie": "Kalorien",
+        "Eiweiß": "Protein",
+        "Fett": "Fett",
+        "Kohlenhydrate": "Kohlenhydrate",
+        "zuges. Zucker": "zugesetzer_Zucker",
+        "Ballaststoffe": "Ballaststoffe"
+    }
+
+    valid_nutrients_ids = alle_Rezept_IDs
+    if (required_nutrients.length !== 0) {
+        Rezepte.forEach((recipe) => { // jedes Rezept überprüfen
+            let recipe_id = recipe.Rezept_ID
+            let recipe_nutrients = Nährwerte[recipe_id-1] // Nährwerte des aktuellen Rezepts
+            for (let i = 0; i < required_nutrients.length; i++) { // alle Nährwerte der Sucheingabe überprüfen
+                let nutrient = nutrient_map[required_nutrients[i][0]]
+                let value = required_nutrients[i][1]
+                let type = required_nutrients[i][2]
+                if (type === "min") {
+                    if (recipe_nutrients[nutrient] < value) { // wenn der Wert weniger als die Suchvorgabe ist
+                        console.log("eigenschaft schlecht:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
+                        console.log("id zum rausschmeißen:", recipe_id)
+                        valid_nutrients_ids = valid_nutrients_ids.filter(id => id !== recipe_id) // aktuelle ID aus valid_nutrient_ids entfernen, weil min nicht erfüllt ist
+                    } else {
+                        console.log("eigenschaft gut:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
+                    }
+                } else {
+                    if (recipe_nutrients[nutrient] > value) { // wenn der Wert höher als die Suchvorgabe ist
+                        console.log("eigenschaft schlecht:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
+                        console.log("id zum rausschmeißen:", recipe_id)
+                        valid_nutrients_ids = valid_nutrients_ids.filter(id => id !== recipe_id) // aktuelle ID aus valid_nutrient_ids entfernen, weil max nicht erfüllt ist
+                    } else {
+                        console.log("eigenschaft gut:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
+                    }
+                }
+
+
+            }
+        })
+        console.log("gefilterte nutrient ids:",valid_nutrients_ids)
+    }*/
+
+    
+    
+    /*let suche = ["Kalorien", "Fett"]
+    let suchwerte = [10, 10]
+    let suchtyp = ["min", "min"]
+    Rezepte.forEach((recipe) => {
+        let testwert = Nährwerte[recipe.Rezept_ID-1]
+        for (let i = 0; i < suche.length; i++) {
+            if (suchtyp[i] === "min") {
+                if (testwert[suche[i]] >= suchwerte[i]) {
+                    console.log("eigenschaft gut:",suche[i], "Wert:", testwert[suche[i]], "Typ", suchtyp[i])
+                } else {
+                    console.log("eigenschaft schlecht:",suche[i], "Wert:", testwert[suche[i]], "Typ", suchtyp[i])
+                }
+            } else {
+                if (testwert[suche[i]] <= suchwerte[i]) {
+                    console.log("eigenschaft gut:",suche[i], "Wert:", testwert[suche[i]], "Typ", suchtyp[i])
+                } else {
+                    console.log("eigenschaft schlecht:",suche[i], "Wert:", testwert[suche[i]], "Typ", suchtyp[i])
+                }
+            }
+
+
+        }
+        //console.log(testwert[suche])
+    })*/
 }
 
 
 
-// TODO: Rezeptefinder sucht nicht richtig
-// TODO: steht vegan nicht als erstes in der required_categories liste, wird nicht nach den Kategorien gesucht, die davor stehen (ja steht aber immer an erster stelle wenn angeklickt)
-
-
-
-// TODO: setTimeout entfernen, wenn Rezeptefinder fertig ist
+// TODO: setTimeout entfernen, wenn Rezeptefinder fertig ist (geht der überhaupt zu entfernen? weil vllt ist die Funktion vorher nicht fertig)
