@@ -162,12 +162,14 @@ function show_results () {
     // console.log("Nährwert-Matrix:", Nährwerte)
     // console.log("Rezepte-Matrix:", Rezepte)
 
-    // filtern (Funktionen rufen sich nacheinander auf)
+    // filtern (Funktionen sollten normalerweise nacheinander ablaufen, da keine von denen asynchron abläuft)
     filter_recipes_nutrients()
-    setTimeout(function(){
-        sessionStorage.setItem("valid_IDs", JSON.stringify(valid_ids))
-        window.location.href = "../suchergebnisse"
-        }, 2000)
+    filter_recipes_categories()
+    combine_filter_recipes()
+
+    // Suchergebnisse-Seite öffnen
+    sessionStorage.setItem("valid_IDs", JSON.stringify(valid_ids))
+    window.location.href = "../suchergebnisse"
 }
 
 //Nährwerte checken und schauen auf welche Rezepte die aktuell ausgewählten Nährwerte Anforderungen passen:
@@ -209,8 +211,7 @@ function filter_recipes_nutrients() {
         })
     }
 
-    // fortfahren mit Kategorien Filtern
-    filter_recipes_categories()
+
 
     /*let Kalorien_akzeptiert = [], Protein_akzeptiert = [], Fett_akzeptiert = [], Kohlenhydrate_akzeptiert = [],
         zugesetzer_Zucker_akzeptiert = [], Ballaststoffe_akzeptiert = []
@@ -396,7 +397,9 @@ function filter_recipes_categories() {
     if (required_categories_others.includes("für den Cheat-Day")) {
         valid_category_ids = valid_category_ids.filter(id => cheatmeals_Liste.includes(id))
     }
-    
+}
+
+function combine_filter_recipes() {
     // nur die IDs übernehmen, wo die Nährwerte und Kategorien passen
     valid_ids = valid_nutrients_ids.filter(id => valid_category_ids.includes(id))
     console.log("gefilterte nutrient ids:",valid_nutrients_ids)
@@ -488,3 +491,4 @@ function finished_db() {
 
 
 // TODO: setTimeout entfernen, wenn Rezeptefinder fertig ist (geht der überhaupt zu entfernen? weil vllt ist die Funktion vorher nicht fertig)
+// TODO: alten (auskommentierten) Rezeptefinder entfernen?
