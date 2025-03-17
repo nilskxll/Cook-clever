@@ -65,7 +65,7 @@ ist auskommentiert, da wir auf kleineren Geräten die Website herausgezoomt dars
     display: inline-flex;
     align-items: flex-start;
     padding: 16px 0px 0px 0px;
-    gap: 5px;
+    gap: 10px;
     position: relative;
     flex: 0 0 auto;
 }
