@@ -1,7 +1,18 @@
+/* Viel HTML und CSS ist vom Figma Anima Plugin. Einiges musste ich anpassen, dass es wie gewollt aussieht. */
+
+/* Reset-CSS-Datei
+entfernt Standard-Styles von HTML-Elementen (z. B. Margins, Paddings, Borders)
+sorgt für konsistente Darstellung in verschiedenen Browsern */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
 * {
     -webkit-font-smoothing: antialiased;
+    /* Verändert die Berechnung der Breite (width) und Höhe (height) von Elementen.
+    Standardmäßig (box-sizing: content-box;) ist width und height nur der Inhalt, Padding und Border machen die Elemente größer als eigentlich vorgesehen.
+    Durch border-box ist width und height die gesamte Breite bzw. Höhe, also Inhalt, Padding und Border ist in den Werten mit inbegriffen. (Inhalt kann automatisch kleiner werden also width bzw. height) */
     box-sizing: border-box;
+    /* Verbessert die Darstellung von Schriftarten auf macOS und iOS (Safari, Chrome).
+    Reduziert die "pixelige" oder "fettgedruckte" Darstellung von Schriften. */
 }
 
 html,
@@ -11,11 +22,16 @@ body {
     scroll-behavior: smooth;
 }
 
-/* a blue color as a generic focus style */
-/* keine Ahnung, was das bringt (kommt von Figma Anima) */
 button:focus-visible {
-    outline: 2px solid #4a90e2 !important;
-    outline: -webkit-focus-ring-color auto 5px !important;
+    outline: 2px solid var(--black) !important;
+    border-radius: 4px;
+    /* Definiert einen Fokus-Stil für Buttons, der angezeigt wird, wenn das Element mit der Tastatur (z. B. Tab) fokussiert wird.
+    -visible sagt, dass nur durch die Tastatur die Outline kommt*/
+}
+
+a:focus-visible {
+    outline: 2px solid var(--black) !important;
+    border-radius: 4px;
 }
 
 a {
@@ -245,6 +261,7 @@ ist auskommentiert, da wir auf kleineren Geräten die Website herausgezoomt dars
     all: unset;
     position: relative;
     width: fit-content;
+    padding: 0px 2px;
     font-family: "Space Grotesk", Helvetica;
     font-weight: 400;
     color: var(--black);
@@ -253,6 +270,7 @@ ist auskommentiert, da wir auf kleineren Geräten die Website herausgezoomt dars
     line-height: 28px;
     white-space: nowrap;
     cursor: pointer;
+    border-radius: 4px; /* für wenn man mit tab auswählt */
 }
 
 .header-big .button {
@@ -269,6 +287,15 @@ ist auskommentiert, da wir auf kleineren Geräten die Website herausgezoomt dars
     border-color: var(--black);
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
+
+    font-family: "Space Grotesk", Helvetica;
+    font-weight: 400;
+    color: var(--black);
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 28px;
+    white-space: nowrap;
 }
 
 .header-big .button:hover, .header-small .button:hover {
@@ -413,6 +440,7 @@ ist auskommentiert, da wir auf kleineren Geräten die Website herausgezoomt dars
     all: unset;
     position: relative;
     width: fit-content;
+    padding: 0px 2px;
     font-family: "Space Grotesk", Helvetica;
     font-weight: 400;
     color: var(--black);
@@ -421,6 +449,7 @@ ist auskommentiert, da wir auf kleineren Geräten die Website herausgezoomt dars
     line-height: 28px;
     white-space: nowrap;
     cursor: pointer;
+    border-radius: 4px; /* für wenn man mit tab auswählt */
 }
 
 .header-small .button {
