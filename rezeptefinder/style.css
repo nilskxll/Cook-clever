@@ -181,6 +181,76 @@ ist auskommentiert, da wir auf kleineren Geräten die Website herausgezoomt dars
     border-radius: 7px;
 }
 
+.filters-block .help-container {
+    display: flex;
+    align-self: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 15px;
+    position: absolute;
+    left: 22px;
+}
+
+.filters-block .question-mark-box {
+    display: flex;
+    position: relative;
+    top: 7px;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height: 24px;
+    width: 24px;
+    border-radius: 12px;
+    border: black 2px solid;
+    cursor: pointer;
+}
+
+.filters-block .question-mark {
+    position: relative;
+    width: fit-content;
+    font-family: var(--h-4-font-family);
+    font-weight: var(--h-4-font-weight);
+    color: var(--black);
+    font-size: var(--h-4-font-size);
+    letter-spacing: var(--h-4-letter-spacing);
+    line-height: var(--h-4-line-height);
+    font-style: var(--h-4-font-style);
+}
+
+.filters-block .help-text-box {
+    display: flex;
+    position: relative;
+    z-index: 0;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12px;
+    background-color: white;
+    border-radius: 10px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s, z-index 0s 0.3s; /* visibility wird mit 0,3s Verzögerung angewandt, dass genug Zeit für die opacity-Transition ist */
+}
+.filters-block .help-text-box.active {
+    visibility: visible;
+    opacity: 1;
+    z-index: 2;
+    transition: opacity 0.3s ease-in-out, visibility 0s, z-index 0s; /* visibility wird sofort angewandt */
+}
+
+
+.filters-block .help-text {
+    position: relative;
+    width: fit-content;
+    font-family: var(--h-4-font-family);
+    font-weight: var(--h-4-font-weight);
+    color: var(--black);
+    font-size: var(--h-4-font-size);
+    letter-spacing: var(--h-4-letter-spacing);
+    line-height: var(--h-4-line-height);
+    font-style: var(--h-4-font-style);
+}
+
 .filters-block .text-wrapper {
     position: relative;
     width: fit-content;

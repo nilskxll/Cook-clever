@@ -73,6 +73,8 @@ function suchFeld(big_small_header) {
     // console.log(Rezepte_Suchanfrage_Liste_ID); // Testausgabe der gefundenen Rezept-IDs
     sessionStorage.setItem("valid_IDs", JSON.stringify(Rezepte_Suchanfrage_Liste_ID)) // sessionStorage, dann Werte an Suchergebnisse-Seite übergeben werden können
     sessionStorage.setItem("search_term", JSON.stringify(input))
+    sessionStorage.setItem("required_categories", JSON.stringify([]))
+    sessionStorage.setItem("required_nutrients", JSON.stringify([]))
     window.location.href = "../suchergebnisse"
 }
 
@@ -121,7 +123,7 @@ function set_db_variables() {
 
 // Informationen der Datenbank in Matrizen speichern
 function daten_aus_db() {
-    fetch('/cgi-bin/db_connection.php')
+    fetch('/cgi-bin/db_connection.php') // fetch lässt daten_aus_db() asychron ablaufen, deshalb müssen wir immer am Ende der Funktion die nächste Funktion aufrufen, anstatt alle nacheinander im "Fließcode" aufzurufen
         .then(response => response.json())
         .then(daten => {
             //Daten aus der PHP Datei in die Matrizen einfügen, damit man in JS damit arbeiten kann
