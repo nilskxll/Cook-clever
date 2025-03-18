@@ -91,9 +91,9 @@ function insert_recipe_card_information() {
         let recipe_name = recipe_cards[i].querySelector(".label-text")
         let image = recipe_cards[i].querySelector(".image")
 
-        recipe_name.textContent = Rezepte[list_IDs[i] - 1].Rezeptname // 1. Zeile (Index 0) von Rezepte hat die Rezepte-ID 1 --> der Index in Rezepte ist also immer eins tiefer als dessen Rezepte-ID
+        recipe_name.textContent = Rezepte[list_IDs[i]].Rezeptname
         // console.log("Rezeptename: " + recipe_name.textContent)
-        image.src = `../img/recipes/${list_IDs[i]}/${Rezepte[list_IDs[i] - 1].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
+        image.src = `../img/recipes/${list_IDs[i]}/${Rezepte[list_IDs[i]].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
         // console.log("Bildquelle: " + image.srcText)
     }
 }

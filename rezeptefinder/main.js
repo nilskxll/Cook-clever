@@ -189,7 +189,7 @@ function filter_recipes_nutrients() {
     if (required_nutrients.length !== 0) { // nur wenn auch nach Nährwerten gefiltert wird
         Rezepte.forEach((recipe) => { // jedes Rezept überprüfen
             let recipe_id = recipe.Rezept_ID
-            let recipe_nutrients = Nährwerte[recipe_id-1] // Nährwerte des aktuellen Rezepts
+            let recipe_nutrients = Nährwerte[recipe_id] // Nährwerte des aktuellen Rezepts
             for (let i = 0; i < required_nutrients.length; i++) { // alle Nährwerte der Sucheingabe überprüfen
                 let nutrient = nutrient_map[required_nutrients[i][0]]
                 let value = required_nutrients[i][1]
@@ -415,80 +415,8 @@ function finished_db() {
     sessionStorage.setItem("search_term", JSON.stringify(""))
     sessionStorage.setItem("required_categories", JSON.stringify(""))
     sessionStorage.setItem("required_nutrients", JSON.stringify(""))
-        
-        
-    /*required_nutrients = [["Energie", 4, "min"], ["Eiweiß", 44, "max"]]
-    let nutrient_map = { // nötig, da die Namen der Nährwerte in required_nutrients-Liste anders als in der Nährwerte-Matrix sind
-        "Energie": "Kalorien",
-        "Eiweiß": "Protein",
-        "Fett": "Fett",
-        "Kohlenhydrate": "Kohlenhydrate",
-        "zuges. Zucker": "zugesetzer_Zucker",
-        "Ballaststoffe": "Ballaststoffe"
-    }
-
-    valid_nutrients_ids = alle_Rezept_IDs
-    if (required_nutrients.length !== 0) {
-        Rezepte.forEach((recipe) => { // jedes Rezept überprüfen
-            let recipe_id = recipe.Rezept_ID
-            let recipe_nutrients = Nährwerte[recipe_id-1] // Nährwerte des aktuellen Rezepts
-            for (let i = 0; i < required_nutrients.length; i++) { // alle Nährwerte der Sucheingabe überprüfen
-                let nutrient = nutrient_map[required_nutrients[i][0]]
-                let value = required_nutrients[i][1]
-                let type = required_nutrients[i][2]
-                if (type === "min") {
-                    if (recipe_nutrients[nutrient] < value) { // wenn der Wert weniger als die Suchvorgabe ist
-                        console.log("eigenschaft schlecht:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
-                        console.log("id zum rausschmeißen:", recipe_id)
-                        valid_nutrients_ids = valid_nutrients_ids.filter(id => id !== recipe_id) // aktuelle ID aus valid_nutrient_ids entfernen, weil min nicht erfüllt ist
-                    } else {
-                        console.log("eigenschaft gut:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
-                    }
-                } else {
-                    if (recipe_nutrients[nutrient] > value) { // wenn der Wert höher als die Suchvorgabe ist
-                        console.log("eigenschaft schlecht:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
-                        console.log("id zum rausschmeißen:", recipe_id)
-                        valid_nutrients_ids = valid_nutrients_ids.filter(id => id !== recipe_id) // aktuelle ID aus valid_nutrient_ids entfernen, weil max nicht erfüllt ist
-                    } else {
-                        console.log("eigenschaft gut:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
-                    }
-                }
-
-
-            }
-        })
-        console.log("gefilterte nutrient ids:",valid_nutrients_ids)
-    }*/
-
-    
-    
-    /*let suche = ["Kalorien", "Fett"]
-    let suchwerte = [10, 10]
-    let suchtyp = ["min", "min"]
-    Rezepte.forEach((recipe) => {
-        let testwert = Nährwerte[recipe.Rezept_ID-1]
-        for (let i = 0; i < suche.length; i++) {
-            if (suchtyp[i] === "min") {
-                if (testwert[suche[i]] >= suchwerte[i]) {
-                    console.log("eigenschaft gut:",suche[i], "Wert:", testwert[suche[i]], "Typ", suchtyp[i])
-                } else {
-                    console.log("eigenschaft schlecht:",suche[i], "Wert:", testwert[suche[i]], "Typ", suchtyp[i])
-                }
-            } else {
-                if (testwert[suche[i]] <= suchwerte[i]) {
-                    console.log("eigenschaft gut:",suche[i], "Wert:", testwert[suche[i]], "Typ", suchtyp[i])
-                } else {
-                    console.log("eigenschaft schlecht:",suche[i], "Wert:", testwert[suche[i]], "Typ", suchtyp[i])
-                }
-            }
-
-
-        }
-        //console.log(testwert[suche])
-    })*/
 }
 
 
 
-// TODO: setTimeout entfernen, wenn Rezeptefinder fertig ist (geht der überhaupt zu entfernen? weil vllt ist die Funktion vorher nicht fertig)
 // TODO: alten (auskommentierten) Rezeptefinder entfernen?

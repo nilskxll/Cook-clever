@@ -48,10 +48,10 @@ function set_recipe_ID() {
 
 // Rezept Werte zuweisen (Nährwerte, Name, Essgewohnheit Zeiten, Anleitung)
 function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit variable "aktuell" übergeben, wird in die einzelnen Variablen definiert, um diese dann in folgenden Schritten aufrufen zu können
-    if (aktuell <= Rezepte.length) { //überprüfen ob Rezept überhaupt vorhanden (eventuell unnötig)
-        aktuelle_Nährwerte = Nährwerte[aktuell - 1] // Wir bei 1 anfangen und Computer bei 0 deshalb minus 1. Allgemein wird in den Zeilen einfach nur eine Zeile (mit Rezept_ID === aktuell) den jeweiligen Listen zugewiesen
-        aktuelles_Rezept = Rezepte[aktuell - 1]
-        aktuelle_Zutaten = Zutaten[aktuell - 1]
+    if (aktuell <= Rezepte.length) { //überprüfen, ob Rezept überhaupt vorhanden (eventuell unnötig)
+        aktuelle_Nährwerte = Nährwerte[aktuell] // Allgemein wird in den Zeilen einfach nur eine Zeile (mit Rezept_ID === aktuell) den jeweiligen Listen zugewiesen
+        aktuelles_Rezept = Rezepte[aktuell]
+        aktuelle_Zutaten = Zutaten[aktuell]
 
         aktuell_Liste_Nährwerte.push(aktuelle_Nährwerte.Kalorien) // in den folgenden Zeilen wird dann aus der eben Definierten Liste, verschiedene Objekte definiert (damit besser abrufbar)
         aktuell_Liste_Nährwerte.push(aktuelle_Nährwerte.Protein)
@@ -207,7 +207,7 @@ function insert_categories_names() {
 // Bild einfügen
 function insert_picture() {
     let picture = document.querySelector(".block-bild-details .bild")
-    picture.src = `../img/recipes/${recipe_id}/${Rezepte[recipe_id - 1].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
+    picture.src = `../img/recipes/${recipe_id}/${Rezepte[recipe_id].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
 }
 
 // Zeiten einfügen
@@ -311,7 +311,7 @@ function insert_recipe() {
     insert_ingredients()
 
     // Bildhöhe an die Höhe der Details daneben anpassen
-    setTimeout(adjust_picture_height,100)
+    adjust_picture_height()
 }
 
 
@@ -345,8 +345,5 @@ function finished_db() {
 set_db_variables()
 
 
-// TODO: Sind die Bilder auf dieser Seite unscharf oder bilde ich mir das ein?
-
-// TODO: in DB ein Rezept mit id=0 einfügen, dass man bei der bildquelle nicht mehr "id - 1" braucht
 
 // TODO: wenn wir mal mehr als 3 Kategorien pro Rezept haben, dann die Kategoriennamen 2 Stück nebeneinander machen
