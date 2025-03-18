@@ -80,4 +80,7 @@ function finished_db() {
 
 set_db_variables()
 
+// TODO: unten Button einfügen, alle Rezepte ansehen
+// TODO: unten Button einfügen, neue Vorschläge laden (evtl einfach Seite neu laden)
+
 // TODO: ganz am Ende internal_path.php aus strato entfernen

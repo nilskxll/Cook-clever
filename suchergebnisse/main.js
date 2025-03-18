@@ -129,4 +129,6 @@ function finished_db() {
 }
 
 
-// TODO: evtl die erste recipe-row aus der Startseite importieren (dass Änderungen auf der Startseite direkt übernommen werden)
+// TODO: evtl die erste recipe-row aus der Startseite importieren (wenn ich recipe-row auf der Startseite HTML bearbeite, dass diese Änderungen direkt übernommen werden)
+
+// TODO: falls wir mal viele Rezepte haben nur eine bestimmte Anzahl anzeigen und einen Button einfügen, mit dem man weitere lädt

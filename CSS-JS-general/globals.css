@@ -7,12 +7,12 @@ sorgt für konsistente Darstellung in verschiedenen Browsern */
 
 * {
     -webkit-font-smoothing: antialiased;
+    /* Verbessert die Darstellung von Schriftarten auf macOS und iOS (Safari, Chrome).
+    Reduziert die "pixelige" oder "fettgedruckte" Darstellung von Schriften. */
+    box-sizing: border-box;
     /* Verändert die Berechnung der Breite (width) und Höhe (height) von Elementen.
     Standardmäßig (box-sizing: content-box;) ist width und height nur der Inhalt, Padding und Border machen die Elemente größer als eigentlich vorgesehen.
     Durch border-box ist width und height die gesamte Breite bzw. Höhe, also Inhalt, Padding und Border ist in den Werten mit inbegriffen. (Inhalt kann automatisch kleiner werden also width bzw. height) */
-    box-sizing: border-box;
-    /* Verbessert die Darstellung von Schriftarten auf macOS und iOS (Safari, Chrome).
-    Reduziert die "pixelige" oder "fettgedruckte" Darstellung von Schriften. */
 }
 
 html,
