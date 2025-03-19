@@ -71,3 +71,61 @@ ist auskommentiert, da wir auf kleineren Geräten die Website herausgezoomt dars
     line-height: var(--h-4-line-height);
     font-style: var(--h-4-font-style);
 }
+
+.heading-subheading .link-reload-suggestions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 10px;
+    background-color: var(--beige);
+    padding: 2px;
+    border-radius: 7px;
+}
+
+.heading-subheading .reload-icon {
+    height: 30px;
+    width: 30px;
+}
+
+.block-show-all-recipes {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 1440px;
+    padding: 0px 100px;
+    gap: 40px;
+    flex: 0 0 auto;
+}
+
+.block-show-all-recipes .show-all-recipes-frame {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 9px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--beige);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.block-show-all-recipes .label {
+    width: fit-content;
+    font-family: var(--p-font-family);
+    font-weight: var(--p-font-weight);
+    font-size: 19px;
+    line-height: 28px;
+    white-space: nowrap;
+    position: relative;
+    color: var(--black);
+    letter-spacing: 0;
+}
+
+.block-show-all-recipes .list-icon {
+    position: relative;
+    flex: 0 0 auto;
+    height: 23px;
+    /* position x, position y, blur, color*/
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.3));
+}

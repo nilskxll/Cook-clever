@@ -1,6 +1,22 @@
 let number_of_recipes = 10
 let number_of_recipe_blocks = Math.round(number_of_recipes / 2)
+let button_show_all_recipes = document.querySelector(".block-show-all-recipes .show-all-recipes-frame")
 
+button_show_all_recipes.addEventListener("click", () => show_all_recipes())
+
+// alle Rezepte anzeigen
+function show_all_recipes() {
+    let valid_ids = []
+    valid_ids.length = 0
+    Rezepte.forEach((recipe) => {
+        valid_ids.push(recipe.Rezept_ID)
+    })
+    sessionStorage.setItem("valid_IDs", JSON.stringify(valid_ids)) // sessionStorage, dann Werte an Suchergebnisse-Seite übergeben werden können
+    sessionStorage.setItem("search_term", JSON.stringify(""))
+    sessionStorage.setItem("required_categories", JSON.stringify([]))
+    sessionStorage.setItem("required_nutrients", JSON.stringify([]))
+    window.location.href = "suchergebnisse"
+}
 
 // Rezepte-Rows (nach gewünschter Anzahl) erstellen
 function insert_recipes_blocks() {
@@ -80,7 +96,5 @@ function finished_db() {
 
 set_db_variables()
 
-// TODO: unten Button einfügen, alle Rezepte ansehen
-// TODO: unten Button einfügen, neue Vorschläge laden (evtl einfach Seite neu laden)
 
 // TODO: ganz am Ende internal_path.php aus strato entfernen
