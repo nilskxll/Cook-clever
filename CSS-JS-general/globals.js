@@ -113,10 +113,10 @@ function set_db_variables() {
     })
     // Ist die DB geladen, wird im Programm fortgefahren, sonst wird sie erst geladen und dann fortgefahren.
     if (db_is_loaded) {
-        console.log("Datenbank ist schon fertig geladen.")
+        // console.log("Datenbank ist schon fertig geladen.")
         finished_db()
     } else {
-        console.log("Datenbank ist noch nicht geladen.")
+        // console.log("Datenbank ist noch nicht geladen.")
         daten_aus_db()
     }
 }
@@ -136,7 +136,7 @@ function daten_aus_db() {
             sessionStorage.setItem("Zutaten", JSON.stringify(Zutaten))
             sessionStorage.setItem("Einheiten", JSON.stringify(Einheiten))
 
-            console.log("daten geladen")
+            // console.log("daten geladen")
             einkategorisieren()
 
         })
@@ -185,11 +185,11 @@ function einkategorisieren (){
     sessionStorage.setItem("vegetarische_Rezepte", JSON.stringify(vegetarische_Rezepte))
     sessionStorage.setItem("vegane_Rezepte", JSON.stringify(vegane_Rezepte))
     sessionStorage.setItem("Fleisch_Rezepte", JSON.stringify(Fleisch_Rezepte))
-    console.log("cheatmeal" + cheatmeals_Liste)
-    console.log("kalorienarm" + kalorienarmeRezepte)
-    console.log("protein " + proteinreicheRezepte)
-    console.log("vegetarisch" + vegetarische_Rezepte)
-    console.log("vagan " + vegane_Rezepte)
-    console.log("fleisch " + Fleisch_Rezepte)
+    // console.log("cheatmeal" + cheatmeals_Liste)
+    // console.log("kalorienarm" + kalorienarmeRezepte)
+    // console.log("protein " + proteinreicheRezepte)
+    // console.log("vegetarisch" + vegetarische_Rezepte)
+    // console.log("vagan " + vegane_Rezepte)
+    // console.log("fleisch " + Fleisch_Rezepte)
     finished_db()
 }

@@ -95,6 +95,3 @@ function finished_db() {
 }
 
 set_db_variables()
-
-
-// TODO: ganz am Ende internal_path.php aus strato entfernen

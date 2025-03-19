@@ -131,8 +131,8 @@ function extract_categories () {
 
 // Suchangaben ausgeben
 function show_results () {
-    console.log("---------------------------------------")
-    console.log("Suche starten")
+    // console.log("---------------------------------------")
+    // console.log("Suche starten")
     // Listen leer machen
     valid_nutrients_ids.length = 0
     valid_category_ids.length = 0
@@ -154,10 +154,10 @@ function show_results () {
     required_nutrients = extract_nutrients()
     sessionStorage.setItem("required_nutrients", JSON.stringify(required_nutrients))
 
-    console.log("suche in Nährwerten:")
-    console.log(required_nutrients)
-    console.log("suche in kategorien:")
-    console.log(required_categories)
+    // console.log("suche in Nährwerten:")
+    // console.log(required_nutrients)
+    // console.log("suche in kategorien:")
+    // console.log(required_categories)
 
     // console.log("Nährwert-Matrix:", Nährwerte)
     // console.log("Rezepte-Matrix:", Rezepte)
@@ -210,145 +210,6 @@ function filter_recipes_nutrients() {
             }
         })
     }
-
-
-
-    /*let Kalorien_akzeptiert = [], Protein_akzeptiert = [], Fett_akzeptiert = [], Kohlenhydrate_akzeptiert = [],
-        zugesetzer_Zucker_akzeptiert = [], Ballaststoffe_akzeptiert = []
-    let Kalorien_angeklickt = 0, Protein_angeklickt = 0, Fett_angeklickt = 0, Kohlenhydrate_angeklickt = 0,
-        zugesetzer_Zucker_angeklickt = 0, Ballaststoffe_angeklickt = 0
-
-    console.log("fertig mit aLLEN ids" + alle_Rezept_IDs)
-    if (required_nutrients.length != 0) { //wenn die Null ist kann der ganze Teil übersprungen werden, da keine Einschränkung für Nährwerte gegeben wurde
-        for (let i = 0; i < required_nutrients.length; i++) {
-            if (required_nutrients[i][0] === "Energie") { //wenn der User Energie angeklickt hat, dann wird das überprüft
-                Kalorien_angeklickt = 1 //zeigt für den Schluss an, ob eben diese Nährwertangabe mit Energie angeklickt wurde oder eben nicht
-                if (required_nutrients[i][2] === "min") { //geschaut, ob eben min oder max gefragt falls max macht er das selbe nur bei der else schleife
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Kalorien >= required_nutrients[i][1]) { //dann nach den Anforderungen die jeweiligen Objekte in der DB durchgehen
-                            Kalorien_akzeptiert.push(Nährwerte[j].Rezept_ID); //wenn alles passt, kommt es in eine Liste die dann unten noch weiter überprüft wird
-                        }
-                    }
-                } //das Ganze wird einfach für jeden Nährwert durchgeführt und jeweils immer in eine separate Liste gepushed
-                else {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Kalorien <= required_nutrients[i][1]) {
-                            Kalorien_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                }
-            } else if (required_nutrients[i][0] === "Eiweiß") {
-                Protein_angeklickt = 1
-                if (required_nutrients[i][2] === "min") {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Protein >= required_nutrients[i][1]) {
-                            Protein_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                } else {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Protein <= required_nutrients[i][1]) {
-                            Protein_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                }
-            } else if (required_nutrients[i][0] === "Fett") {
-                Fett_angeklickt = 1
-                if (required_nutrients[i][2] === "min") {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Fett >= required_nutrients[i][1]) {
-                            Fett_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                } else {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Fett <= required_nutrients[i][1]) {
-                            Fett_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                }
-            } else if (required_nutrients[i][0] === "Kohlenhydrate") {
-                Kohlenhydrate_angeklickt = 1
-                if (required_nutrients[i][2] === "min") {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Kohlenhydrate >= required_nutrients[i][1]) {
-                            Kohlenhydrate_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                } else {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Kohlenhydrate <= required_nutrients[i][1]) {
-                            Kohlenhydrate_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                }
-            } else if (required_nutrients[i][0] === "zuges. Zucker") {
-                zugesetzer_Zucker_angeklickt = 1
-                if (required_nutrients[i][2] === "min") {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].zugesetzer_Zucker >= required_nutrients[i][1]) {
-                            zugesetzer_Zucker_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                } else {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].zugesetzer_Zucker <= required_nutrients[i][1]) {
-                            zugesetzer_Zucker_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                }
-            } else if (required_nutrients[i][0] === "Ballaststoffe") {
-                Ballaststoffe_angeklickt = 1
-                if (required_nutrients[i][2] === "min") {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Ballaststoffe >= required_nutrients[i][1]) {
-                            Ballaststoffe_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                } else {
-                    for (let j = 0; j < Nährwerte.length; j++) {
-                        if (Nährwerte[j].Ballaststoffe <= required_nutrients[i][1]) {
-                            Ballaststoffe_akzeptiert.push(Nährwerte[j].Rezept_ID);
-                        }
-                    }
-                }
-            }
-        }
-        if (Kalorien_akzeptiert.length === 0 && Kalorien_angeklickt === 0) { //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden) (falls leer, weil nicht angeklickt, werden denen alle Rezept_IDs zugewiesen.
-            Kalorien_akzeptiert = alle_Rezept_IDs.slice()
-        }
-        if (Protein_akzeptiert.length === 0 && Protein_angeklickt === 0) { //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
-            Protein_akzeptiert = alle_Rezept_IDs.slice()
-        }
-        if (Fett_akzeptiert.length === 0 && Fett_angeklickt === 0) { //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
-            Fett_akzeptiert = alle_Rezept_IDs.slice()
-        }
-        if (Kohlenhydrate_akzeptiert.length === 0 && Kohlenhydrate_angeklickt === 0) { //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
-            Kohlenhydrate_akzeptiert = alle_Rezept_IDs.slice()
-        }
-        if (zugesetzer_Zucker_akzeptiert.length === 0 && zugesetzer_Zucker_angeklickt === 0) { //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
-            zugesetzer_Zucker_akzeptiert = alle_Rezept_IDs.slice()
-        }
-        if (Ballaststoffe_akzeptiert.length === 0 && Ballaststoffe_angeklickt === 0) { //hier alle Listen durchgehen, ob sie leer sind und aus welchem Grund sie leer sind (nicht abgefragt oder kein rezept gefunden)
-            Ballaststoffe_akzeptiert = alle_Rezept_IDs.slice()
-        }
-        //Hier die jeweiligen Listen miteinander Vergleichen. Die ID die in der jeder Liste vorhanden ist, kann in eine (halb) Finale Liste mit denen die der Suche entsprechen
-
-        // valid_nutrients_ids = alle_Rezept_IDs //hier wird erstmal die Liste voll mit allen
-        valid_nutrients_ids = valid_nutrients_ids.filter(id => Kalorien_akzeptiert.includes(id)) //in den folgenden Zeilen wird geschaut ob eben valid_nutrients_ids und Kalorien_akzeptiert gleiche Elemente haben. Die werden dann wieder in der valid_nutrients_ids geschrieben und mit der nächsten Liste verglichen
-        valid_nutrients_ids = valid_nutrients_ids.filter(id => Protein_akzeptiert.includes(id))
-        valid_nutrients_ids = valid_nutrients_ids.filter(id => Fett_akzeptiert.includes(id))
-        valid_nutrients_ids = valid_nutrients_ids.filter(id => Kohlenhydrate_akzeptiert.includes(id))
-        valid_nutrients_ids = valid_nutrients_ids.filter(id => zugesetzer_Zucker_akzeptiert.includes(id))
-        valid_nutrients_ids = valid_nutrients_ids.filter(id => Ballaststoffe_akzeptiert.includes(id))
-        console.log(valid_nutrients_ids)
-        filter_recipes_categories() //nun ist er hiermit fertig und soll die Kategorien überprüfen
-    }
-    else{
-        // valid_nutrients_ids = alle_Rezept_IDs
-        filter_recipes_categories()
-    }*/
-
 }
 
 function filter_recipes_categories() {
@@ -402,9 +263,9 @@ function filter_recipes_categories() {
 function combine_filter_recipes() {
     // nur die IDs übernehmen, wo die Nährwerte und Kategorien passen
     valid_ids = valid_nutrients_ids.filter(id => valid_category_ids.includes(id))
-    console.log("gefilterte nutrient ids:",valid_nutrients_ids)
-    console.log("gefilterte category IDs:", valid_category_ids)
-    console.log("insgesamt passende IDs:", valid_ids)
+    // console.log("gefilterte nutrient ids:",valid_nutrients_ids)
+    // console.log("gefilterte category IDs:", valid_category_ids)
+    // console.log("insgesamt passende IDs:", valid_ids)
 }
 
 
@@ -416,7 +277,3 @@ function finished_db() {
     sessionStorage.setItem("required_categories", JSON.stringify(""))
     sessionStorage.setItem("required_nutrients", JSON.stringify(""))
 }
-
-
-
-// TODO: alten (auskommentierten) Rezeptefinder entfernen?

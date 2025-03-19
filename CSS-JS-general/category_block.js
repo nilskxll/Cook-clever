@@ -21,7 +21,7 @@ cheat_day_button.addEventListener("click", show_cheat_day_recipes)
 // angezeigte Kategorien wechseln, beim Klicken auf den Pfeil links bzw. rechts
 function move_category_block() {
     // console.log("Kategorie swap gedrückt")
-    console.log("länge " + category_cards.length)
+    // console.log("länge " + category_cards.length)
     // auf die zwei categorie-cards container die Klasse togglen
     for (let i = 0; i < category_cards.length; i++) {
         category_cards[i].classList.toggle("second-page")
