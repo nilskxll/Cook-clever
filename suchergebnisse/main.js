@@ -5,7 +5,7 @@ let number_of_recipes = valid_IDs.length
 let number_of_recipe_blocks = Math.round(number_of_recipes / 2)
 
 
-// anzeigen, nach was gesucht wurde
+// anzeigen, wonach gesucht wurde
 function insert_search_information() {
     let subheading = document.querySelector(".heading-subheading .subheading")
     let search_criteria = document.querySelector(".heading-subheading .filters")
@@ -92,7 +92,7 @@ function insert_recipe_card_information() {
         let image = recipe_cards[i].querySelector(".image")
 
         recipe_name.textContent = Rezepte[list_IDs[i]].Rezeptname
-        // console.log("Rezeptename: " + recipe_name.textContent)
+        // console.log("Rezeptname: " + recipe_name.textContent)
         image.src = `../img/recipes/${list_IDs[i]}/${Rezepte[list_IDs[i]].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
         // console.log("Bildquelle: " + image.srcText)
     }

@@ -182,7 +182,7 @@ function filter_recipes_nutrients() {
         "Kohlenhydrate": "Kohlenhydrate",
         "zuges. Zucker": "zugesetzer_Zucker",
         "Ballaststoffe": "Ballaststoffe"
-    }
+    } // Rechtschreibfehler bei zugesetzer_Zucker ist richtig so, der ist in der Datenbank genauso vorhanden
     valid_nutrients_ids = alle_Rezept_IDs // alle Rezept-IDs hinzufügen, dass hiernach aussortiert werden kann
 
     // Aufbau der Matrix required_nutrients: [[nutrient_name, value, min/max], [nutrient_name, value, min/max], ...]
@@ -196,13 +196,13 @@ function filter_recipes_nutrients() {
                 let type = required_nutrients[i][2]
                 if (type === "min") {
                     if (recipe_nutrients[nutrient] < value) { // wenn der Wert weniger als die Suchvorgabe ist
-                        // console.log("eigenschaft schlecht:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
+                        // console.log("eigenschaft schlecht:", nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
                         // console.log("id zum rausschmeißen:", recipe_id)
                         valid_nutrients_ids = valid_nutrients_ids.filter(id => id !== recipe_id) // aktuelle ID aus valid_nutrient_ids entfernen, weil min nicht erfüllt ist
                     } // else {console.log("eigenschaft gut:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)}
                 } else {
                     if (recipe_nutrients[nutrient] > value) { // wenn der Wert höher als die Suchvorgabe ist
-                        // console.log("eigenschaft schlecht:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
+                        // console.log("eigenschaft schlecht:", nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)
                         // console.log("id zum rausschmeißen:", recipe_id)
                         valid_nutrients_ids = valid_nutrients_ids.filter(id => id !== recipe_id) // aktuelle ID aus valid_nutrient_ids entfernen, weil max nicht erfüllt ist
                     } // else {console.log("eigenschaft gut:",nutrient, "Wert:", recipe_nutrients[nutrient], "Typ", type)}

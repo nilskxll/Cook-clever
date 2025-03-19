@@ -71,7 +71,7 @@ function suchFeld(big_small_header) {
         }
     }
     // console.log(Rezepte_Suchanfrage_Liste_ID); // Testausgabe der gefundenen Rezept-IDs
-    sessionStorage.setItem("valid_IDs", JSON.stringify(Rezepte_Suchanfrage_Liste_ID)) // sessionStorage, dann Werte an Suchergebnisse-Seite übergeben werden können
+    sessionStorage.setItem("valid_IDs", JSON.stringify(Rezepte_Suchanfrage_Liste_ID)) // sessionStorage, dass Werte an Suchergebnisse-Seite übergeben werden können
     sessionStorage.setItem("search_term", JSON.stringify(input))
     sessionStorage.setItem("required_categories", JSON.stringify([]))
     sessionStorage.setItem("required_nutrients", JSON.stringify([]))
@@ -81,7 +81,7 @@ function suchFeld(big_small_header) {
 
 // Informationen der Datenbank in Matrizen speichern
 function set_db_variables() {
-    // Datenbank aus dem sessionStorage abrufen (wenn die DB nich geladen ist, steht überalle null drin)
+    // Datenbank aus dem sessionStorage abrufen (wenn die DB nicht geladen ist, steht überall null drin)
     Rezepte = JSON.parse(sessionStorage.getItem("Rezepte"))
     Nährwerte = JSON.parse(sessionStorage.getItem("Nährwerte"))
     Zutaten = JSON.parse(sessionStorage.getItem("Zutaten"))
@@ -163,7 +163,7 @@ function einkategorisieren (){
         if(Rezept_überprüfung.Kalorien <= 300) {                //Hier kann man einstellen, ab wann es eben zu den Kalorienarmen gehört
             kalorienarmeRezepte.push(Rezept_überprüfung.Rezept_ID)
         }
-        if (Rezept_überprüfung.Protein >= 40){                   //Hier kann man einstellen, ab wann es eben zu den Eiweiß reichen Rezepten gehört
+        if (Rezept_überprüfung.Protein >= 40){                   //Hier kann man einstellen, ab wann es eben zu den eiweißreichen Rezepten gehört
             proteinreicheRezepte.push(Rezept_überprüfung.Rezept_ID)
         }
     }
@@ -185,11 +185,11 @@ function einkategorisieren (){
     sessionStorage.setItem("vegetarische_Rezepte", JSON.stringify(vegetarische_Rezepte))
     sessionStorage.setItem("vegane_Rezepte", JSON.stringify(vegane_Rezepte))
     sessionStorage.setItem("Fleisch_Rezepte", JSON.stringify(Fleisch_Rezepte))
-    // console.log("cheatmeal" + cheatmeals_Liste)
-    // console.log("kalorienarm" + kalorienarmeRezepte)
+    // console.log("cheatmeals " + cheatmeals_Liste)
+    // console.log("kalorienarm " + kalorienarmeRezepte)
     // console.log("protein " + proteinreicheRezepte)
-    // console.log("vegetarisch" + vegetarische_Rezepte)
-    // console.log("vagan " + vegane_Rezepte)
+    // console.log("vegetarisch " + vegetarische_Rezepte)
+    // console.log("vegan " + vegane_Rezepte)
     // console.log("fleisch " + Fleisch_Rezepte)
     finished_db()
 }

@@ -11,7 +11,7 @@ function show_all_recipes() {
     Rezepte.forEach((recipe) => {
         valid_ids.push(recipe.Rezept_ID)
     })
-    sessionStorage.setItem("valid_IDs", JSON.stringify(valid_ids)) // sessionStorage, dann Werte an Suchergebnisse-Seite übergeben werden können
+    sessionStorage.setItem("valid_IDs", JSON.stringify(valid_ids)) // sessionStorage, dass Werte an Suchergebnisse-Seite übergeben werden können
     sessionStorage.setItem("search_term", JSON.stringify(""))
     sessionStorage.setItem("required_categories", JSON.stringify([]))
     sessionStorage.setItem("required_nutrients", JSON.stringify([]))
@@ -38,7 +38,7 @@ function insert_recipes_blocks() {
 // zufällige Rezepte IDs auswählen (für die Vorschläge)
 function Rezepte_auswählen (){
     let Rezepte_IDs = []
-    let Zufalls_Rezept_IDs = [] //endgültige Liste, in der am ende alle zufällig ausgewählten rezepte drin sind
+    let Zufalls_Rezept_IDs = [] //endgültige Liste, in der am Ende alle zufällig ausgewählten rezepte drin sind
     for (let i = 0; i < Rezepte.length; i++) { //hier werden alle Rezept_Ids erstmal in eine vollständige Liste eingefügt
         Rezepte_IDs.push(Rezepte[i].Rezept_ID)
     }
@@ -61,7 +61,7 @@ function insert_recipe_card_information() {
         let image = recipe_cards[i].querySelector(".image")
 
         recipe_name.textContent = Rezepte[list_IDs[i]].Rezeptname
-        // console.log("Rezeptename: " + recipe_name.textContent)
+        // console.log("Rezeptname: " + recipe_name.textContent)
         image.src = `img/recipes/${list_IDs[i]}/${Rezepte[list_IDs[i]].Bilder}` // hier anpassen, wenn wir mehrere Bilder in Rezepte.Bilder rein machen
         // console.log("Bildquelle: " + image.srcText)
     }

@@ -8,13 +8,13 @@ plus_button.addEventListener("click", function() {change_number_of_portions("up"
 share_button.addEventListener("click", copy_link_to_clipboard)
 
 let aktuell_Liste_Nährwerte = []
-let aktuelle_Nährwerte, aktuelle_Zutaten, aktuelles_Rezept // ist das aktuelle Rezept welches ausgewählt ist. Sozusagen dann eine Liste mit eben allen Informationen zu diesem einen konkreten rezept. So zu sagen jedes von denen hat dann eine Zeile der Tabelle aus der Db (da mehrere Tabellen, werden auch mehrere Variablen benötigt
+let aktuelle_Nährwerte, aktuelle_Zutaten, aktuelles_Rezept // ist das aktuelle Rezept, welches ausgewählt ist. Sozusagen dann eine Liste mit eben allen Informationen zu diesem einen konkreten rezept. So zu sagen jedes von denen hat dann eine Zeile der Tabelle aus der Db (da mehrere Tabellen, werden auch mehrere Variablen benötigt
 let aktueller_Rezept_Name, aktuelle_Anleitung, aktuelle_Essgewohnheit // werden die grundlegenden Informationen des Rezeptes ausgegeben
 let aktuelle_Arbeitszeit, aktuelle_Kochzeit, aktuelle_Gesamtzeit // Wird die Zeit für das aktuell ausgewählte Rezept gespeichert
 let aktuelle_Kategorien = []
-let Kochzeit_h, Kochzeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
-let Arbeitszeit_h, Arbeitszeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
-let Gesamtzeit_h, Gesamtzeit_min //geteilt in einmal Minuten und Stunden (je nach dem was vorhanden)
+let Kochzeit_h, Kochzeit_min //geteilt in einmal Minuten und Stunden (je nachdem was vorhanden)
+let Arbeitszeit_h, Arbeitszeit_min //geteilt in einmal Minuten und Stunden (je nachdem was vorhanden)
+let Gesamtzeit_h, Gesamtzeit_min //geteilt in einmal Minuten und Stunden (je nachdem was vorhanden)
 let zutatenListe = [], mengenListe = [], einheitenListe = [] //
 let number_of_ingredients
 let recipe_id
@@ -53,7 +53,7 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit 
         aktuelles_Rezept = Rezepte[aktuell]
         aktuelle_Zutaten = Zutaten[aktuell]
 
-        aktuell_Liste_Nährwerte.push(aktuelle_Nährwerte.Kalorien) // in den folgenden Zeilen wird dann aus der eben Definierten Liste, verschiedene Objekte definiert (damit besser abrufbar)
+        aktuell_Liste_Nährwerte.push(aktuelle_Nährwerte.Kalorien) // in den folgenden Zeilen wird dann aus der eben definierten Liste, verschiedene Objekte definiert (damit besser abrufbar)
         aktuell_Liste_Nährwerte.push(aktuelle_Nährwerte.Protein)
         aktuell_Liste_Nährwerte.push(aktuelle_Nährwerte.Fett)
         aktuell_Liste_Nährwerte.push(aktuelle_Nährwerte.Kohlenhydrate)
@@ -92,12 +92,12 @@ function aktuelles_Rezept_Werte_zuweisen(aktuell) { //ausgewähltes Rezept (mit 
 
 // Zutaten-Listen erstellen
 function Zutaten_in_Listen_umwandeln(){
-    zutatenListe.length = 0 //wichtig das die Listen sobald man von einem rezept aufs nächste klickt auch die Listen wieder leer sind
+    zutatenListe.length = 0 //wichtig, dass die Listen, sobald man von einem rezept aufs nächste klickt, auch die Listen wieder leer sind
     mengenListe.length = 0
     einheitenListe.length = 0
     for (let i in aktuelle_Zutaten){ // jede Zutat wird einmal durchgegangen
-        let menge = aktuelle_Zutaten[i] // die menge (wie viel von einer Zutat) wird gespeichert in "menge")
-        if (menge !== null && i !== "Rezept_ID"){ // wenn die menge dann "Null" ist, dann ist diese Zutat nicht in diesem Rezept vorhanden (nur in anderen) und wird herausgefiltert. Natürlich Rezept_ID auch keine Zutat, deshalb auch rausgefiltert.
+        let menge = aktuelle_Zutaten[i] // die menge (wie viel von einer Zutat) wird gespeichert in "menge"
+        if (menge !== null && i !== "Rezept_ID"){ // wenn die menge dann "Null" ist, dann ist diese Zutat nicht in diesem Rezept vorhanden (nur in anderen) und wird herausgefiltert. Natürlich ist Rezept_ID auch keine Zutat, deshalb auch herausgefiltert.
             zutatenListe.push(i) // falls aber alles passt, wird es in die Listen hinein gepushed (in richtiger Reihenfolge (Also wie in DB und nicht Alphabetisch (macht für uns keinen Unterschied))
 
             //das Gleiche mit der Menge
