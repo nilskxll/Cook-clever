@@ -195,7 +195,7 @@ ist auskommentiert, da wir auf kleineren Geräten die Website herausgezoomt dars
     display: flex;
     position: relative;
     top: 7px;
-    z-index: 1000;
+    /*z-index: 1000;*/ /*weiß nicht, warum ich den z-index so gesetzt hatte*/
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
